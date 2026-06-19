@@ -355,15 +355,19 @@
             box-shadow: 0 8px 20px rgba(227, 24, 24, 0.3);
         }
 
-        /* Widget Khung Chat Thông Minh */
-        .chat-widget {
+        /* ---------------------------------------------------- */
+        /* HỆ THỐNG GIAO DIỆN CHATBOX AI ĐỘC QUYỀN (MỚI THÊM) */
+        /* ---------------------------------------------------- */
+        .chat-widget-container {
             position: fixed;
             bottom: 35px;
             right: 35px;
             z-index: 2000;
+            font-family: sans-serif;
         }
 
-        .chat-btn {
+        /* Nút tròn kích hoạt chat */
+        .chat-btn-toggle {
             width: 60px;
             height: 60px;
             background-color: var(--dol-red);
@@ -378,10 +382,132 @@
             transition: var(--transition);
         }
 
-        .chat-btn:hover {
+        .chat-btn-toggle:hover {
             transform: scale(1.05) translateY(-3px);
             background-color: var(--dol-red-hover);
         }
+
+        /* Khung Cửa Sổ Chat */
+        .chat-window {
+            position: absolute;
+            bottom: 75px;
+            right: 0;
+            width: 350px;
+            height: 460px;
+            background-color: #FFFFFF;
+            border-radius: var(--radius-md);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border: 1px solid var(--dol-border);
+            display: none; /* Mặc định ẩn, bật bằng JS */
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Đầu khung chat */
+        .chat-header {
+            background-color: var(--dol-red);
+            color: #FFFFFF;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .chat-header .close-btn {
+            cursor: pointer;
+            font-size: 18px;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .chat-header .close-btn:hover {
+            opacity: 1;
+        }
+
+        /* Thân hiển thị tin nhắn */
+        .chat-messages-box {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: var(--dol-gray-bg);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Bong bóng tin nhắn */
+        .msg-bubble {
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.4;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        /* Tin nhắn từ Bot DOL */
+        .msg-bubble.bot {
+            background-color: #FFFFFF;
+            color: var(--dol-dark);
+            align-self: flex-start;
+            border: 1px solid var(--dol-border);
+            border-top-left-radius: 4px;
+        }
+
+        /* Tin nhắn từ Người dùng */
+        .msg-bubble.user {
+            background-color: var(--dol-red);
+            color: #FFFFFF;
+            align-self: flex-end;
+            border-top-right-radius: 4px;
+            box-shadow: 0 4px 10px rgba(227, 24, 24, 0.15);
+        }
+
+        /* Chân khung chat (Ô nhập liệu) */
+        .chat-footer-input {
+            display: flex;
+            padding: 12px;
+            background-color: #FFFFFF;
+            border-top: 1px solid var(--dol-border);
+            align-items: center;
+        }
+
+        .chat-footer-input input {
+            flex: 1;
+            border: none;
+            padding: 10px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            outline: none;
+            background-color: var(--dol-gray-bg);
+            border-radius: 10px;
+        }
+
+        .chat-footer-input button {
+            background: none;
+            border: none;
+            color: var(--dol-red);
+            font-weight: 700;
+            padding: 0 14px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .chat-footer-input button:hover {
+            color: var(--dol-red-hover);
+        }
+
+        /* ---------------------------------------------------- */
 
         /* Footer */
         footer {
@@ -424,8 +550,6 @@
         </div>
         <nav>
             <div class="nav-item"><a href="#">Về DOL</a></div>
-            
-            <!-- Khóa học Dropdown -->
             <div class="nav-item">
                 <a href="#">Khóa học ▼</a>
                 <div class="dropdown">
@@ -435,8 +559,6 @@
                     <a href="#">Khóa học TOEIC Đột Phá</a>
                 </div>
             </div>
-            
-            <!-- Phương pháp Dropdown -->
             <div class="nav-item">
                 <a href="#">Linearthinking ▼</a>
                 <div class="dropdown">
@@ -445,7 +567,6 @@
                     <a href="#">Sách bản quyền độc quyền</a>
                 </div>
             </div>
-
             <div class="nav-item"><a href="#">Lịch khai giảng</a></div>
             <div class="nav-item"><a href="#">Đội ngũ giáo viên</a></div>
         </nav>
@@ -475,12 +596,10 @@
         </div>
     </section>
 
-    <!-- Bento Grid - Giá Trị Học Thuật Độc Quyền -->
+    <!-- Bento Grid -->
     <section class="bento-section">
         <div class="section-title">Hệ sinh thái học thuật <span>thông minh</span></div>
         <div class="bento-grid">
-            
-            <!-- Khối lớn -->
             <div class="bento-card double-width">
                 <h3>Phương pháp Linearthinking bản quyền</h3>
                 <p>Giải pháp loại bỏ hoàn toàn thói quen dịch thô word-by-word, học vẹt bài mẫu. Tư duy cụ thể hóa cấu trúc trục câu cốt lõi giúp tối ưu hóa điểm số Writing và Reading vượt trội.</p>
@@ -490,29 +609,22 @@
                     <span class="tag-item">Chứng nhận quốc tế</span>
                 </div>
             </div>
-
-            <!-- Khối nhỏ -->
             <div class="bento-card">
                 <h3>App thông minh Super LMS</h3>
                 <p>Nền tảng ứng dụng độc quyền tích hợp trí tuệ nhân tạo (AI) hỗ trợ tự động chấm chữa bài tập về nhà chính xác, theo dõi tiến độ chi tiết.</p>
             </div>
-
-            <!-- Khối nhỏ -->
             <div class="bento-card">
                 <h3>Đội ngũ giáo viên Đỉnh Cao</h3>
                 <p>100% giảng viên tại DOL sở hữu chứng chỉ IELTS từ 8.0 - 8.5, xuất thân từ các trường đại học danh tiếng hàng đầu, tận tâm đồng hành sát sao.</p>
             </div>
-
-            <!-- Khối lớn -->
             <div class="bento-card double-width">
                 <h3>Lộ trình cá nhân hóa tinh gọn</h3>
                 <p>Xây dựng kế hoạch học tập độc bản dựa trên kết quả kiểm tra năng lực đầu vào đầu tiên một cách chính xác, bám sát mục tiêu của từng học viên.</p>
             </div>
-
         </div>
     </section>
 
-    <!-- Biểu Mẫu Nhận Lộ Trình -->
+    <!-- Biểu Mẫu Đăng Ký -->
     <section class="register-section">
         <div class="section-title">Nhận <span>lộ trình tối ưu</span> miễn phí</div>
         <div class="form-container">
@@ -525,9 +637,25 @@
         </div>
     </section>
 
-    <!-- Widget Chat Cố Định -->
-    <div class="chat-widget">
-        <div class="chat-btn">💬</div>
+    <!-- KHUNG CHATBOX AI TỰ ĐỘNG ĐỘC QUYỀN (MỚI THÊM) -->
+    <div class="chat-widget-container">
+        <div class="chat-btn-toggle" id="chatToggleBtn">💬</div>
+        
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <span>Trợ lý Đào tạo DOL AI</span>
+                <span class="close-btn" id="chatCloseBtn">✖</span>
+            </div>
+            <div class="chat-messages-box" id="chatMessagesBox">
+                <div class="msg-bubble bot">
+                    Xin chào! Mình là trợ lý AI thông minh của học viện DOL English. Bạn đang cần tư vấn lộ trình học IELTS, SAT hay phương pháp Linearthinking độc quyền ạ?
+                </div>
+            </div>
+            <div class="chat-footer-input">
+                <input type="text" id="chatInputField" placeholder="Nhập câu hỏi của bạn...">
+                <button id="chatSendBtn">Gửi</button>
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->
@@ -535,5 +663,64 @@
         <p>© 2026 DOL English - Đình Lực. Học Viện Tiếng Anh Tư Duy Đầu Tiên Tại Việt Nam. Bảo lưu mọi quyền.</p>
     </footer>
 
+    <!-- LOGIC JAVASCRIPT XỬ LÝ CHATBOX -->
+    <script>
+        const chatToggleBtn = document.getElementById('chatToggleBtn');
+        const chatWindow = document.getElementById('chatWindow');
+        const chatCloseBtn = document.getElementById('closeChatBtn'); // Dự phòng hoặc gán trực tiếp dưới
+        const chatSendBtn = document.getElementById('chatSendBtn');
+        const chatInputField = document.getElementById('chatInputField');
+        const chatMessagesBox = document.getElementById('chatMessagesBox');
+
+        // Bật / Tắt Khung Chat
+        chatToggleBtn.addEventListener('click', () => {
+            if (chatWindow.style.display === 'flex') {
+                chatWindow.style.display = 'none';
+            } else {
+                chatWindow.style.display = 'flex';
+                chatInputField.focus();
+            }
+        });
+
+        // Nút Đóng Khung Chat nhanh
+        document.getElementById('chatCloseBtn').addEventListener('click', () => {
+            chatWindow.style.display = 'none';
+        });
+
+        // Hàm xử lý gửi tin nhắn
+        function handleSendMessage() {
+            const userText = chatInputField.value.trim();
+            if (userText === "") return;
+
+            // 1. Hiển thị tin nhắn của người dùng lên màn hình
+            const userBubble = document.createElement('div');
+            userBubble.className = 'msg-bubble user';
+            userBubble.innerText = userText;
+            chatMessagesBox.appendChild(userBubble);
+
+            // Xóa rỗng ô nhập liệu và cuộn xuống cuối cùng
+            chatInputField.value = "";
+            chatMessagesBox.scrollTop = chatMessagesBox.scrollHeight;
+
+            // 2. Phản hồi tự động của Robot DOL AI sau 1 giây
+            setTimeout(() => {
+                const botBubble = document.createElement('div');
+                botBubble.className = 'msg-bubble bot';
+                botBubble.innerText = "Cảm ơn bạn đã kết nối với DOL! Câu hỏi của bạn đã được chuyển đến bộ phận cố vấn học vụ. Bạn vui lòng để lại số điện thoại tại form đăng ký phía bên trái trang web để thầy cô inbox gọi điện tư vấn lộ trình Linearthinking phù hợp nhất cho mình nhé! ✨";
+                chatMessagesBox.appendChild(botBubble);
+                chatMessagesBox.scrollTop = chatMessagesBox.scrollHeight;
+            }, 1000);
+        }
+
+        // Kích hoạt khi bấm nút Gửi
+        chatSendBtn.addEventListener('click', handleSendMessage);
+
+        // Kích hoạt khi nhấn phím Enter trên bàn phím
+        chatInputField.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleSendMessage();
+            }
+        });
+    </script>
 </body>
 </html>
