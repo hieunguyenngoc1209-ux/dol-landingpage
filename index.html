@@ -154,7 +154,7 @@
         }
 
         .hero-content {
-            flex: 12;
+            flex: 1.2;
             min-width: 320px;
         }
 
@@ -190,17 +190,44 @@
             max-width: 540px;
         }
 
+        /* Nút Cuộn Xuống Test */
+        .hero-actions {
+            display: flex;
+            gap: 15px;
+        }
+        .btn-test-scroll {
+            background-color: #1E293B;
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+        .btn-test-scroll:hover {
+            background-color: #0F172A;
+            transform: translateY(-2px);
+        }
+
         .hero-visual {
             flex: 1;
             min-width: 380px;
             text-align: center;
         }
 
-        .hero-visual img {
+        /* Khung chứa ảnh Banner chính xịn sò */
+        .hero-visual .banner-img {
             width: 100%;
             max-width: 540px;
             border-radius: var(--radius-lg);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            box-shadow: 0 20px 50px rgba(227, 24, 24, 0.08);
+            border: 2px solid var(--dol-border);
+            transition: var(--transition);
+        }
+        .hero-visual .banner-img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 60px rgba(227, 24, 24, 0.15);
         }
 
         /* Khối Thống Kê Sáng Tạo */
@@ -223,6 +250,87 @@
             color: var(--text-secondary);
             font-size: 14px;
             font-weight: 600;
+        }
+
+        /* CHỨC NĂNG 1: KHUNG ỨNG DỤNG TRẮC NGHIỆM TEST NHANH 45s (MỚI THÊM) */
+        .quick-test-section {
+            background-color: #FFF5F5;
+            padding: 90px 8%;
+            text-align: center;
+            border-top: 1px solid #FFE0E0;
+            border-bottom: 1px solid #FFE0E0;
+        }
+        .test-app-container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border-radius: var(--radius-lg);
+            border: 2px solid var(--dol-border);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            padding: 40px;
+            text-align: left;
+        }
+        .test-progress {
+            height: 6px;
+            background-color: var(--dol-gray-bg);
+            border-radius: 100px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        .test-progress-bar {
+            height: 100%;
+            width: 33.33%;
+            background-color: var(--dol-red);
+            transition: var(--transition);
+        }
+        .question-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .option-item {
+            background: var(--dol-gray-bg);
+            border: 2px solid var(--dol-border);
+            padding: 16px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .option-item:hover {
+            border-color: var(--dol-red);
+            background-color: #FFF0F0;
+        }
+        .option-item.correct {
+            border-color: #28a745;
+            background-color: #e6f4ea;
+            color: #137333;
+        }
+        .option-item.wrong {
+            border-color: var(--dol-red);
+            background-color: #fce8e6;
+            color: #c5221f;
+        }
+        .test-result-box {
+            display: none;
+            text-align: center;
+            animation: slideUp 0.4s ease;
+        }
+        .test-result-box h4 {
+            font-size: 26px;
+            font-weight: 900;
+            color: #28a745;
+            margin-bottom: 12px;
         }
 
         /* Bento Grid Layout - Học thuật & Linearthinking */
@@ -300,10 +408,73 @@
             color: var(--dol-dark);
         }
 
+        /* CHỨC NĂNG 2: KHUNG CHẠY TỰ ĐỘNG NGANG ĐỘC ĐÁO FEEDBACK HỌC VIÊN (MỚI THÊM) */
+        .marquee-section {
+            padding: 80px 0;
+            background-color: #FFFFFF;
+            overflow: hidden;
+            position: relative;
+        }
+        .marquee-wrapper {
+            display: flex;
+            gap: 30px;
+            width: max-content;
+            animation: marqueeContinuous 30s linear infinite;
+        }
+        .marquee-wrapper:hover {
+            animation-play-state: paused; /* Dừng chạy khi hover chuột vào xem */
+        }
+        .fb-marquee-card {
+            background: var(--dol-gray-bg);
+            border: 1px solid var(--dol-border);
+            border-radius: var(--radius-md);
+            padding: 30px;
+            width: 360px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.01);
+            transition: var(--transition);
+        }
+        .fb-marquee-card:hover {
+            border-color: var(--dol-red);
+            background: #fff;
+        }
+        .fb-user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .fb-avatar {
+            width: 45px;
+            height: 45px;
+            background-color: var(--dol-red);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 15px;
+        }
+        .fb-details h5 {
+            font-size: 15px;
+            font-weight: 800;
+        }
+        .fb-details span {
+            font-size: 12px;
+            color: var(--dol-red);
+            font-weight: 700;
+        }
+
+        @keyframes marqueeContinuous {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
         /* Khối Đăng Ký Tư Vấn Thang Điểm */
         .register-section {
             padding: 100px 8%;
             text-align: center;
+            background-color: var(--dol-gray-bg);
         }
 
         .form-container {
@@ -355,9 +526,7 @@
             box-shadow: 0 8px 20px rgba(227, 24, 24, 0.3);
         }
 
-        /* ---------------------------------------------------- */
-        /* HỆ THỐNG GIAO DIỆN CHATBOX AI ĐỘC QUYỀN (MỚI THÊM) */
-        /* ---------------------------------------------------- */
+        /* HỆ THỐNG GIAO DIỆN CHATBOX AI ĐỘC QUYỀN */
         .chat-widget-container {
             position: fixed;
             bottom: 35px;
@@ -366,7 +535,6 @@
             font-family: sans-serif;
         }
 
-        /* Nút tròn kích hoạt chat */
         .chat-btn-toggle {
             width: 60px;
             height: 60px;
@@ -387,7 +555,6 @@
             background-color: var(--dol-red-hover);
         }
 
-        /* Khung Cửa Sổ Chat */
         .chat-window {
             position: absolute;
             bottom: 75px;
@@ -398,7 +565,7 @@
             border-radius: var(--radius-md);
             box-shadow: 0 15px 40px rgba(0,0,0,0.15);
             border: 1px solid var(--dol-border);
-            display: none; /* Mặc định ẩn, bật bằng JS */
+            display: none;
             flex-direction: column;
             overflow: hidden;
             animation: slideUp 0.3s ease-out;
@@ -409,7 +576,6 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
-        /* Đầu khung chat */
         .chat-header {
             background-color: var(--dol-red);
             color: #FFFFFF;
@@ -432,7 +598,6 @@
             opacity: 1;
         }
 
-        /* Thân hiển thị tin nhắn */
         .chat-messages-box {
             flex: 1;
             padding: 20px;
@@ -443,7 +608,6 @@
             gap: 12px;
         }
 
-        /* Bong bóng tin nhắn */
         .msg-bubble {
             padding: 12px 16px;
             border-radius: 14px;
@@ -454,7 +618,6 @@
             word-wrap: break-word;
         }
 
-        /* Tin nhắn từ Bot DOL */
         .msg-bubble.bot {
             background-color: #FFFFFF;
             color: var(--dol-dark);
@@ -463,7 +626,6 @@
             border-top-left-radius: 4px;
         }
 
-        /* Tin nhắn từ Người dùng */
         .msg-bubble.user {
             background-color: var(--dol-red);
             color: #FFFFFF;
@@ -472,7 +634,6 @@
             box-shadow: 0 4px 10px rgba(227, 24, 24, 0.15);
         }
 
-        /* Chân khung chat (Ô nhập liệu) */
         .chat-footer-input {
             display: flex;
             padding: 12px;
@@ -507,8 +668,6 @@
             color: var(--dol-red-hover);
         }
 
-        /* ---------------------------------------------------- */
-
         /* Footer */
         footer {
             background-color: var(--dol-dark);
@@ -524,7 +683,6 @@
             opacity: 0.7;
         }
 
-        /* Responsive Mobile */
         @media (max-width: 968px) {
             .hero-section { padding: 40px 5%; text-align: center; }
             .hero-content h1 { font-size: 38px; }
@@ -533,6 +691,7 @@
             .bento-grid { grid-template-columns: 1fr; }
             .bento-card.double-width { grid-column: span 1; }
             header nav { display: none; }
+            .hero-actions { justify-content: center; }
         }
     </style>
 </head>
@@ -570,7 +729,7 @@
             <div class="nav-item"><a href="#">Lịch khai giảng</a></div>
             <div class="nav-item"><a href="#">Đội ngũ giáo viên</a></div>
         </nav>
-        <a href="#" class="cta-header-btn">Tư vấn lộ trình</a>
+        <a href="#registerSection" class="cta-header-btn">Tư vấn lộ trình</a>
     </header>
 
     <!-- Hero Section -->
@@ -580,6 +739,11 @@
             <h1>Học viện Tiếng Anh<br>Tư Duy <span>DOL English</span></h1>
             <p>Hệ thống phương pháp học tiếng Anh tư duy logic toán học giúp rút ngắn 1/2 thời gian ôn luyện, cam kết bứt phá band điểm tối ưu.</p>
             
+            <div class="hero-actions">
+                <a href="#registerSection" class="cta-header-btn">Đăng Ký Học Ngay</a>
+                <a href="#quickTestSection" class="btn-test-scroll">🎮 Thử Thách Trắc Nghiệm</a>
+            </div>
+
             <div class="stats-grid">
                 <div class="stat-card">
                     <strong>4,000+</strong>
@@ -592,11 +756,42 @@
             </div>
         </div>
         <div class="hero-visual">
-            <img src="https://images.squarespace-cdn.com/content/v1/5e7300f2e043186fa884be5e/1601362624508-41K0B36Y72WOKT2YAGY8/LOGO+DOL+IELTS+DINH+LUC+RGB+01.png" alt="DOL Graphic">
+            <!-- Vị trí Ảnh Banner cấu trúc cao cấp đầy chuyên nghiệp -->
+            <img src="https://images.squarespace-cdn.com/content/v1/5e7300f2e043186fa884be5e/1601362624508-41K0B36Y72WOKT2YAGY8/LOGO+DOL+IELTS+DINH+LUC+RGB+01.png" alt="DOL Main Banner" class="banner-img">
         </div>
     </section>
 
-    <!-- Bento Grid -->
+    <!-- CHUC NANG 1: APP MINI TRAC NGHIEM TEST NHANH MIEN PHI -->
+    <section class="quick-test-section" id="quickTestSection">
+        <div class="section-title">⚡ Kiểm tra nhanh <span>Tư Duy Anh Ngữ</span></div>
+        <div class="test-app-container">
+            <div class="test-progress">
+                <div class="test-progress-bar" id="testProgressBar"></div>
+            </div>
+            
+            <div id="testQuestionBox">
+                <div class="question-title" id="qTitle">Câu hỏi 1: Đâu là thói quen khiến bạn mất nhiều thời gian nhất khi làm bài Reading?</div>
+                <div class="options-list">
+                    <div class="option-item" onclick="submitQuizAnswer(this, false, 'Dịch từng từ sẽ làm bạn cạn kiệt thời gian! Hãy áp dụng Linearthinking để đơn giản cấu trúc câu.')">
+                        <span>A. Dịch word-by-word từng từ đơn lẻ sang tiếng Việt</span>
+                        <span>❌</span>
+                    </div>
+                    <div class="option-item" onclick="submitQuizAnswer(this, true, 'Chuẩn xác! Tìm cấu trúc trục S-V-O của Linearthinking giúp bạn hiểu đúng 100% ý chính câu dài mà không cần dịch hết.')">
+                        <span>B. Tìm cấu trúc cốt lõi (Chủ ngữ - Động từ) của câu</span>
+                        <span>✨</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="test-result-box" id="testResultBox">
+                <h4>🎉 Chúc mừng bạn hoàn thành thử thách!</h4>
+                <p style="color: var(--text-secondary); font-weight: 600; margin-bottom: 20px;" id="resultExplanationText"></p>
+                <a href="#registerSection" class="cta-header-btn" style="display:inline-block;">Nhận Quà & Lộ Trình Chi Tiết</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bento Grid Layout -->
     <section class="bento-section">
         <div class="section-title">Hệ sinh thái học thuật <span>thông minh</span></div>
         <div class="bento-grid">
@@ -624,8 +819,77 @@
         </div>
     </section>
 
+    <!-- CHUC NANG 2: KHUNG CHAY NGANG TU DONG FEEDBACK SINH VIEN -->
+    <section class="marquee-section">
+        <div class="section-title">Bảng Vàng <span>Vinh Danh</span> Học Viên Xuất Sắc</div>
+        <div class="marquee-wrapper">
+            <!-- Cụm thẻ gốc -->
+            <div class="fb-marquee-card">
+                <div class="fb-user-info">
+                    <div class="fb-avatar">HA</div>
+                    <div class="fb-details">
+                        <h5>Nguyễn Hoàng Anh</h5>
+                        <span>Đạt 8.0 IELTS</span>
+                    </div>
+                </div>
+                <p style="font-size:14px; color:var(--text-secondary); font-weight:500;">"Nhờ Linearthinking giúp mình quản lý cấu trúc bài Writing siêu đỉnh, không còn bơi trong đống từ vựng nữa!"</p>
+            </div>
+            <div class="fb-marquee-card">
+                <div class="fb-user-info">
+                    <div class="fb-avatar">MT</div>
+                    <div class="fb-details">
+                        <h5>Lê Minh Triết</h5>
+                        <span>Đạt 7.5 IELTS</span>
+                    </div>
+                </div>
+                <p style="font-size:14px; color:var(--text-secondary); font-weight:500;">"App Super LMS chấm bài AI siêu tiện. Sửa lỗi sai tư duy Reading cực sâu, tiết kiệm được một nửa thời gian học."</p>
+            </div>
+            <div class="fb-marquee-card">
+                <div class="fb-user-info">
+                    <div class="fb-avatar">NK</div>
+                    <div class="fb-details">
+                        <h5>Phạm Ngọc Khánh</h5>
+                        <span>Đạt 8.5 IELTS</span>
+                    </div>
+                </div>
+                <p style="font-size:14px; color:var(--text-secondary); font-weight:500;">"Phương pháp tư duy logic toán của thầy Lực chuẩn không cần chỉnh. Giúp mình tư duy câu ngắn gọn mạch lạc!"</p>
+            </div>
+            <!-- Nhân bản cụm thẻ để tạo hiệu ứng chạy vòng lặp vô tận không vết ghép -->
+            <div class="fb-marquee-card">
+                <div class="fb-user-info">
+                    <div class="fb-avatar">HA</div>
+                    <div class="fb-details">
+                        <h5>Nguyễn Hoàng Anh</h5>
+                        <span>Đạt 8.0 IELTS</span>
+                    </div>
+                </div>
+                <p style="font-size:14px; color:var(--text-secondary); font-weight:500;">"Nhờ Linearthinking giúp mình quản lý cấu trúc bài Writing siêu đỉnh, không còn bơi trong đống từ vựng nữa!"</p>
+            </div>
+            <div class="fb-marquee-card">
+                <div class="fb-user-info">
+                    <div class="fb-avatar">MT</div>
+                    <div class="fb-details">
+                        <h5>Lê Minh Triết</h5>
+                        <span>Đạt 7.5 IELTS</span>
+                    </div>
+                </div>
+                <p style="font-size:14px; color:var(--text-secondary); font-weight:500;">"App Super LMS chấm bài AI siêu tiện. Sửa lỗi sai tư duy Reading cực sâu, tiết kiệm được một nửa thời gian học."</p>
+            </div>
+            <div class="fb-marquee-card">
+                <div class="fb-user-info">
+                    <div class="fb-avatar">NK</div>
+                    <div class="fb-details">
+                        <h5>Phạm Ngọc Khánh</h5>
+                        <span>Đạt 8.5 IELTS</span>
+                    </div>
+                </div>
+                <p style="font-size:14px; color:var(--text-secondary); font-weight:500;">"Phương pháp tư duy logic toán của thầy Lực chuẩn không cần chỉnh. Giúp mình tư duy câu ngắn gọn mạch lạc!"</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Biểu Mẫu Đăng Ký -->
-    <section class="register-section">
+    <section class="register-section" id="registerSection">
         <div class="section-title">Nhận <span>lộ trình tối ưu</span> miễn phí</div>
         <div class="form-container">
             <form action="#" method="POST">
@@ -637,7 +901,7 @@
         </div>
     </section>
 
-    <!-- KHUNG CHATBOX AI TỰ ĐỘNG ĐỘC QUYỀN (MỚI THÊM) -->
+    <!-- KHUNG CHATBOX AI TỰ ĐỘNG ĐỘC QUYỀN -->
     <div class="chat-widget-container">
         <div class="chat-btn-toggle" id="chatToggleBtn">💬</div>
         
@@ -663,16 +927,36 @@
         <p>© 2026 DOL English - Đình Lực. Học Viện Tiếng Anh Tư Duy Đầu Tiên Tại Việt Nam. Bảo lưu mọi quyền.</p>
     </footer>
 
-    <!-- LOGIC JAVASCRIPT XỬ LÝ CHATBOX -->
+    <!-- LOGIC JAVASCRIPT XỬ LÝ CHATBOX & TRẮC NGHIỆM -->
     <script>
+        // LOGIC TRẮC NGHIỆM
+        function submitQuizAnswer(element, isCorrect, explanation) {
+            // Vô hiệu hóa việc bấm lại
+            const options = element.parentElement.querySelectorAll('.option-item');
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+
+            if (isCorrect) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('wrong');
+            }
+
+            setTimeout(() => {
+                document.getElementById('testProgressBar').style.width = '100%';
+                document.getElementById('testQuestionBox').style.display = 'none';
+                document.getElementById('testResultBox').style.display = 'block';
+                document.getElementById('resultExplanationText').innerText = explanation;
+            }, 1000);
+        }
+
+        // LOGIC CHATBOX
         const chatToggleBtn = document.getElementById('chatToggleBtn');
         const chatWindow = document.getElementById('chatWindow');
-        const chatCloseBtn = document.getElementById('closeChatBtn'); // Dự phòng hoặc gán trực tiếp dưới
+        const chatCloseBtn = document.getElementById('chatCloseBtn');
         const chatSendBtn = document.getElementById('chatSendBtn');
         const chatInputField = document.getElementById('chatInputField');
         const chatMessagesBox = document.getElementById('chatMessagesBox');
 
-        // Bật / Tắt Khung Chat
         chatToggleBtn.addEventListener('click', () => {
             if (chatWindow.style.display === 'flex') {
                 chatWindow.style.display = 'none';
@@ -682,40 +966,32 @@
             }
         });
 
-        // Nút Đóng Khung Chat nhanh
-        document.getElementById('chatCloseBtn').addEventListener('click', () => {
+        chatCloseBtn.addEventListener('click', () => {
             chatWindow.style.display = 'none';
         });
 
-        // Hàm xử lý gửi tin nhắn
         function handleSendMessage() {
             const userText = chatInputField.value.trim();
             if (userText === "") return;
 
-            // 1. Hiển thị tin nhắn của người dùng lên màn hình
             const userBubble = document.createElement('div');
             userBubble.className = 'msg-bubble user';
             userBubble.innerText = userText;
             chatMessagesBox.appendChild(userBubble);
 
-            // Xóa rỗng ô nhập liệu và cuộn xuống cuối cùng
             chatInputField.value = "";
             chatMessagesBox.scrollTop = chatMessagesBox.scrollHeight;
 
-            // 2. Phản hồi tự động của Robot DOL AI sau 1 giây
             setTimeout(() => {
                 const botBubble = document.createElement('div');
                 botBubble.className = 'msg-bubble bot';
-                botBubble.innerText = "Cảm ơn bạn đã kết nối với DOL! Câu hỏi của bạn đã được chuyển đến bộ phận cố vấn học vụ. Bạn vui lòng để lại số điện thoại tại form đăng ký phía bên trái trang web để thầy cô inbox gọi điện tư vấn lộ trình Linearthinking phù hợp nhất cho mình nhé! ✨";
+                botBubble.innerText = "Cảm ơn bạn đã kết nối với DOL! Câu hỏi của bạn đã được chuyển đến bộ phận cố vấn học vụ. Bạn vui lòng để lại số điện thoại tại form đăng ký phía bên dưới trang web để thầy cô inbox gọi điện tư vấn lộ trình Linearthinking phù hợp nhất cho mình nhé! ✨";
                 chatMessagesBox.appendChild(botBubble);
                 chatMessagesBox.scrollTop = chatMessagesBox.scrollHeight;
             }, 1000);
         }
 
-        // Kích hoạt khi bấm nút Gửi
         chatSendBtn.addEventListener('click', handleSendMessage);
-
-        // Kích hoạt khi nhấn phím Enter trên bàn phím
         chatInputField.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 handleSendMessage();
