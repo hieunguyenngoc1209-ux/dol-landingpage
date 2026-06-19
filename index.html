@@ -3,58 +3,404 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOL Đình Lực - Học Tiếng Anh Tư Duy Linearthinking</title>
+    <title>DOL English - Học Viện Tiếng Anh Tư Duy Linearthinking</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f9f9f9; color: #333; text-align: center; }
-        header { background-color: #e67e22; color: white; padding: 40px 20px; }
-        header h1 { margin: 0; font-size: 2.5em; }
-        header p { font-size: 1.2em; margin-top: 10px; }
-        .container { max-width: 800px; margin: 40px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .feature { display: flex; justify-content: space-around; margin: 30px 0; }
-        .feature-item { flex: 1; padding: 15px; margin: 0 10px; background: #fff5eb; border-radius: 6px; }
-        .feature-item h3 { color: #e67e22; }
-        form { display: flex; flex-direction: column; max-width: 400px; margin: 20px auto; }
-        input { padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
-        button { padding: 12px; background-color: #e67e22; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; font-weight: bold; }
-        button:hover { background-color: #d35400; }
-        footer { margin-top: 40px; padding: 20px; background: #333; color: #fff; font-size: 14px; }
+        :root {
+            --primary-color: #e31818;
+            --dark-color: #1a1a1a;
+            --light-bg: #f8f9fa;
+            --text-muted: #666;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--dark-color);
+            background-color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Header Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 10%;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo img {
+            height: 45px;
+            vertical-align: middle;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .btn-inbox {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 22px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-inbox:hover {
+            background-color: #b31212;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 60px 20px;
+            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(249,249,249,1) 100%);
+        }
+        .badge-container {
+            margin-bottom: 20px;
+        }
+        .badge {
+            background: #fff0f0;
+            color: var(--primary-color);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            margin: 0 5px;
+            border: 1px solid rgba(227,24,24,0.1);
+        }
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 800;
+            margin: 10px 0;
+        }
+        .hero h1 span {
+            color: var(--primary-color);
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        .stat-item strong {
+            font-size: 28px;
+            color: var(--dark-color);
+            display: block;
+            font-weight: 700;
+        }
+        .stat-item span {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Section Global */
+        section {
+            padding: 70px 10%;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+        .section-title span {
+            color: var(--primary-color);
+        }
+
+        /* Academic Value (Linearthinking) */
+        .academic-box {
+            background: var(--light-bg);
+            border-radius: 16px;
+            padding: 40px;
+            border-left: 5px solid var(--primary-color);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+        .academic-content h3 {
+            font-size: 26px;
+            margin-top: 0;
+        }
+        .academic-features {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            border-top: 1px solid #ddd;
+            padding-top: 25px;
+        }
+        .academic-item {
+            flex: 1;
+            text-align: center;
+            padding: 0 10px;
+        }
+        .academic-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        /* Test Free Section */
+        .test-free {
+            background: linear-gradient(135deg, #fff 0%, #fff5f5 100%);
+            text-align: center;
+        }
+        .test-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .test-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            width: 250px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+        .test-card:hover {
+            transform: translateY(-5px);
+        }
+        .test-card h4 {
+            margin: 15px 0 8px 0;
+            font-size: 18px;
+        }
+
+        /* Feedback Section */
+        .feedback-section {
+            background: var(--light-bg);
+        }
+        .feedback-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .feedback-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            flex: 1;
+            border-top: 3px solid var(--primary-color);
+        }
+        .student-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .student-avatar {
+            width: 45px;
+            height: 45px;
+            background: #ddd;
+            border-radius: 50%;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #fff;
+            background-color: var(--primary-color);
+        }
+        .student-name h5 {
+            margin: 0;
+            font-size: 16px;
+        }
+        .student-name span {
+            font-size: 12px;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* Form Container */
+        .cta-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+        }
+        .cta-form input {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+        .cta-form button {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        .cta-form button:hover {
+            background-color: #b31212;
+        }
+
+        footer {
+            background: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
 
+    <!-- Header Navigation -->
     <header>
-        <h1>DOL ĐÌNH LỰC</h1>
-        <p>Học Tiếng Anh Tư Duy Nhờ Phương Pháp Linearthinking Bản Quyền</p>
+        <div class="logo">
+            <!-- Sử dụng trực tiếp phôi ảnh logo chuẩn từ hệ thống -->
+            <img src="https://images.squarespace-cdn.com/content/v1/5e7300f2e043186fa884be5e/1601362624508-41K0B36Y72WOKT2YAGY8/LOGO+DOL+IELTS+DINH+LUC+RGB+01.png" alt="DOL IELTS Đình Lực">
+        </div>
+        <nav>
+            <a href="#">Về DOL</a>
+            <a href="#">Linearthinking</a>
+            <a href="#">Khóa học</a>
+            <a href="#">Lịch khai giảng</a>
+        </nav>
+        <a href="#" class="btn-inbox">Inbox DOL</a>
     </header>
 
-    <div class="container">
-        <h2>Tại sao nên chọn DOL Đình Lực?</h2>
-        <div class="feature">
-            <div class="feature-item">
-                <h3>Linearthinking</h3>
-                <p>Hệ thống tư duy toán học giúp rút ngắn 1/2 thời gian học IELTS/TOEIC.</p>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="badge-container">
+            <span class="badge">IELTS</span>
+            <span class="badge">THCS</span>
+            <span class="badge">Flyers</span>
+        </div>
+        <h1>Học viện Tiếng Anh Tư Duy<br><span>DOL English</span></h1>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <strong>Linearthinking</strong>
+                <span>Tiếng Anh Tư Duy</span>
             </div>
-            <div class="feature-item">
-                <h3>Đội Ngũ Sáng Tạo</h3>
-                <p>Giảng viên chất lượng cao, tận tâm đồng hành cùng học viên.</p>
+            <div class="stat-item">
+                <strong>4,000+</strong>
+                <span>Học viên đạt 7.0+ IELTS</span>
+            </div>
+            <div class="stat-item">
+                <strong>20,000+</strong>
+                <span>Tâm tình học viên</span>
             </div>
         </div>
-
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
-
-        <h2>Đăng Ký Nhận Tư Vấn Lộ Trình Miễn Phí</h2>
-        <p>Để lại thông tin, DOL sẽ liên hệ ngay với bạn trong 24h!</p>
-        
-        <form action="#" method="POST">
-            <input type="text" placeholder="Họ và tên của bạn" required>
-            <input type="email" placeholder="Địa chỉ Email" required>
-            <input type="tel" placeholder="Số điện thoại" required>
-            <button type="submit">ĐĂNG KÝ NGAY</button>
-        </form>
     </div>
 
+    <!-- Academic Value -->
+    <section>
+        <div class="section-title">Giá trị <span>học thuật</span> khác biệt</div>
+        <div class="academic-box">
+            <div class="academic-content">
+                <h3>Phương pháp Linearthinking</h3>
+                <p style="color: var(--text-muted); font-size: 16px; max-width: 600px;">
+                    Phương pháp giúp học Tiếng Anh logic và bản chất do DOL sáng tạo ra, được chứng nhận đa quốc gia tại Hoa Kỳ, Ấn Độ và Việt Nam.
+                </p>
+            </div>
+            <div class="academic-features">
+                <div class="academic-item">
+                    <h4>Linearthinking</h4>
+                    <p style="font-size:13px; color:var(--text-muted);">Phương pháp độc quyền</p>
+                </div>
+                <div class="academic-item">
+                    <h4>Nền tảng Super LMS</h4>
+                    <p style="font-size:13px; color:var(--text-muted);">Công nghệ độc quyền</p>
+                </div>
+                <div class="academic-item">
+                    <h4>Sách giáo trình</h4>
+                    <p style="font-size:13px; color:var(--text-muted);">Tự biên soạn, độc quyền</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Section -->
+    <section class="test-free">
+        <div class="section-title">Test đầu vào <span>miễn phí</span></div>
+        <p style="color: var(--text-muted); margin-top: -20px; margin-bottom: 30px;">10,000+ học viên đã tìm đúng lộ trình sau khi test tại DOL</p>
+        <div class="test-grid">
+            <div class="test-card">
+                <div style="font-size: 24px;">💬</div>
+                <h4>Nhấn Facebook</h4>
+                <p style="font-size: 13px; color: var(--text-muted);">Click để inbox DOL và nhận tư vấn ngay</p>
+            </div>
+            <div class="test-card">
+                <div style="font-size: 24px;">📞</div>
+                <h4>1800 96 96 39</h4>
+                <p style="font-size: 13px; color: var(--text-muted);">Click để gọi hotline miễn phí tư vấn</p>
+            </div>
+            <div class="test-card">
+                <div style="font-size: 24px;">📍</div>
+                <h4>13+ cơ sở DOL</h4>
+                <p style="font-size: 13px; color: var(--text-muted);">Click để xem địa chỉ cơ sở DOL gần bạn</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section class="feedback-section">
+        <div class="section-title">Cảm nhận từ <span>Học Viên</span> xuất sắc</div>
+        <div class="feedback-grid">
+            <div class="feedback-card">
+                <div class="student-info">
+                    <div class="student-avatar">AN</div>
+                    <div class="student-name">
+                        <h5>Nguyễn Hoàng Anh</h5>
+                        <span>Đạt 8.0 IELTS</span>
+                    </div>
+                </div>
+                <p style="font-size: 14px; color: #555; text-align: left;">
+                    "Nhờ Linearthinking mà mình không còn bị bí ý tưởng khi viết bài Writing nữa. Phương pháp học siêu logic giúp mình tư duy câu ngắn gọn nhưng cực kỳ hiệu quả!"
+                </p>
+            </div>
+            <div class="feedback-card">
+                <div class="student-info">
+                    <div class="student-avatar">TM</div>
+                    <div class="student-name">
+                        <h5>Trần Minh Tuấn</h5>
+                        <span>Đạt 7.5 IELTS</span>
+                    </div>
+                </div>
+                <p style="font-size: 14px; color: #555; text-align: left;">
+                    "App Super LMS của trung tâm hỗ trợ làm bài tập về nhà rất thông minh. Mình biết rõ lỗi sai ở đâu để sửa ngay lập tức, tiết kiệm được rất nhiều thời gian học."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Register Form -->
+    <section>
+        <div class="section-title">Đăng Ký Nhận <span>Tư Vấn Lộ Trình</span> Bản Quyền</div>
+        <div class="cta-form">
+            <form action="#" method="POST">
+                <input type="text" placeholder="Họ và tên của bạn" required>
+                <input type="email" placeholder="Địa chỉ Email của bạn" required>
+                <input type="tel" placeholder="Số điện thoại liên hệ" required>
+                <button type="submit">NHẬN TƯ VẤN MIỄN PHÍ NGAY</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>© 2026 DOL Đình Lực. Học Viện Tiếng Anh Tư Duy Đầu Tiên Tại Việt Nam.</p>
+        <p>© 2026 DOL English - Đình Lực. Học Viện Tiếng Anh Tư Duy Đầu Tiên Tại Việt Nam.</p>
     </footer>
 
 </body>
