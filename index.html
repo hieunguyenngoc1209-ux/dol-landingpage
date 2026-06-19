@@ -3,61 +3,537 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOL English - Học Viện Tiếng Anh Tư Duy</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>DOL English - Học Viện Tiếng Anh Tư Duy Đầu Tiên Tại Việt Nam</title>
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        :root {
+            --dol-red: #E31818;
+            --dol-red-hover: #C91212;
+            --dol-dark: #1E293B;
+            --dol-gray-bg: #F8FAFC;
+            --dol-border: #E2E8F0;
+            --text-secondary: #64748B;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: var(--dol-dark);
+            background-color: #FFFFFF;
+            overflow-x: hidden;
+        }
+
+        /* Top Bar Thông Báo */
+        .top-notification {
+            background-color: #FFF0F0;
+            color: var(--dol-red);
+            text-align: center;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 700;
+            border-bottom: 1px solid #FFE0E0;
+        }
+
+        /* Header & Dropdown */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--dol-border);
+        }
+
+        .logo img {
+            height: 40px;
+            vertical-align: middle;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+            margin: 0 16px;
+        }
+
+        .nav-item > a {
+            text-decoration: none;
+            color: var(--dol-dark);
+            font-weight: 700;
+            font-size: 15px;
+            padding: 10px 0;
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        .nav-item:hover > a {
+            color: var(--dol-red);
+        }
+
+        /* Mega Dropdown Menu */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(15px);
+            background: #FFFFFF;
+            min-width: 260px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-radius: var(--radius-md);
+            padding: 15px 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            border: 1px solid var(--dol-border);
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 12px 24px;
+            color: var(--dol-dark);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .dropdown a:hover {
+            background: var(--dol-gray-bg);
+            color: var(--dol-red);
+            padding-left: 30px;
+        }
+
+        .cta-header-btn {
+            background-color: var(--dol-red);
+            color: #FFFFFF;
+            padding: 12px 26px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(227, 24, 24, 0.15);
+        }
+
+        .cta-header-btn:hover {
+            background-color: var(--dol-red-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(227, 24, 24, 0.25);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 8%;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 12;
+            min-width: 320px;
+        }
+
+        .hero-badge {
+            background-color: #FFF0F0;
+            color: var(--dol-red);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 800;
+            display: inline-block;
+            margin-bottom: 24px;
+            border: 1px solid #FFE0E0;
+        }
+
+        .hero-content h1 {
+            font-size: 52px;
+            font-weight: 900;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            margin-bottom: 24px;
+        }
+
+        .hero-content h1 span {
+            color: var(--dol-red);
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-weight: 500;
+            max-width: 540px;
+        }
+
+        .hero-visual {
+            flex: 1;
+            min-width: 380px;
+            text-align: center;
+        }
+
+        .hero-visual img {
+            width: 100%;
+            max-width: 540px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+        }
+
+        /* Khối Thống Kê Sáng Tạo */
+        .stats-grid {
+            display: flex;
+            gap: 40px;
+            margin-top: 50px;
+            border-top: 1px solid var(--dol-border);
+            padding-top: 30px;
+        }
+
+        .stat-card strong {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--dol-dark);
+            display: block;
+        }
+
+        .stat-card span {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Bento Grid Layout - Học thuật & Linearthinking */
+        .bento-section {
+            background-color: var(--dol-gray-bg);
+            padding: 100px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 38px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 60px;
+        }
+
+        .section-title span {
+            color: var(--dol-red);
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 11fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .bento-card {
+            background: #FFFFFF;
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            border: 1px solid var(--dol-border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            transition: var(--transition);
+        }
+
+        .bento-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            border-color: rgba(227, 24, 24, 0.2);
+        }
+
+        .bento-card.double-width {
+            grid-column: span 2;
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F5 100%);
+        }
+
+        .bento-card h3 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .bento-card p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .tag-item {
+            background: #FFFFFF;
+            border: 1px solid var(--dol-border);
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--dol-dark);
+        }
+
+        /* Khối Đăng Ký Tư Vấn Thang Điểm */
+        .register-section {
+            padding: 100px 8%;
+            text-align: center;
+        }
+
+        .form-container {
+            max-width: 540px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            padding: 50px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--dol-border);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.05);
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            border: 1px solid var(--dol-border);
+            border-radius: var(--radius-md);
+            font-size: 15px;
+            font-weight: 600;
+            transition: var(--transition);
+            background-color: var(--dol-gray-bg);
+        }
+
+        .form-container input:focus {
+            outline: none;
+            border-color: var(--dol-red);
+            background-color: #FFFFFF;
+            box-shadow: 0 0 0 4px rgba(227, 24, 24, 0.1);
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 16px;
+            background-color: var(--dol-red);
+            color: #FFFFFF;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(227, 24, 24, 0.2);
+        }
+
+        .form-container button:hover {
+            background-color: var(--dol-red-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(227, 24, 24, 0.3);
+        }
+
+        /* Widget Khung Chat Thông Minh */
+        .chat-widget {
+            position: fixed;
+            bottom: 35px;
+            right: 35px;
+            z-index: 2000;
+        }
+
+        .chat-btn {
+            width: 60px;
+            height: 60px;
+            background-color: var(--dol-red);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 26px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(227, 24, 24, 0.3);
+            transition: var(--transition);
+        }
+
+        .chat-btn:hover {
+            transform: scale(1.05) translateY(-3px);
+            background-color: var(--dol-red-hover);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dol-dark);
+            color: #FFFFFF;
+            padding: 60px 8%;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            border-top: 5px solid var(--dol-red);
+        }
+
+        footer p {
+            opacity: 0.7;
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 968px) {
+            .hero-section { padding: 40px 5%; text-align: center; }
+            .hero-content h1 { font-size: 38px; }
+            .hero-content p { margin: 0 auto 30px auto; }
+            .stats-grid { justify-content: center; gap: 20px; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .bento-card.double-width { grid-column: span 1; }
+            header nav { display: none; }
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body>
 
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <span class="text-2xl font-black text-blue-600 tracking-wider">DOL<span class="text-orange-500">ENGLISH</span></span>
-            </div>
-            
-            <nav class="hidden md:flex space-x-8 font-medium">
-                <a href="#" class="text-blue-600 border-b-2 border-blue-600 pb-1">Trang chủ</a>
-                <a href="#khoa-hoc" class="text-gray-600 hover:text-blue-600 transition">Khóa học</a>
-                <a href="#" class="text-gray-600 hover:text-blue-600 transition">Phương pháp Linearthinking</a>
-                <a href="#" class="text-gray-600 hover:text-blue-600 transition">Đội ngũ giáo viên</a>
-                <a href="#" class="text-gray-600 hover:text-blue-600 transition">Tin tức</a>
-            </nav>
+    <!-- Top Bar -->
+    <div class="top-notification">
+        🎉 Đã có lịch khai giảng khóa học IELTS tháng mới với ưu đãi đặc biệt. Đăng ký test trình độ ngay!
+    </div>
 
-            <div class="hidden md:block">
-                <a href="#tu-van" class="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-full font-semibold transition shadow-md">
-                    Tư vấn miễn phí
-                </a>
-            </div>
-
-            <button class="md:hidden text-gray-600 text-2xl focus:outline-none">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo">
+            <img src="https://images.squarespace-cdn.com/content/v1/5e7300f2e043186fa884be5e/1601362624508-41K0B36Y72WOKT2YAGY8/LOGO+DOL+IELTS+DINH+LUC+RGB+01.png" alt="DOL English">
         </div>
-    </header>
-
-    <section class="bg-gradient-to-r align-middle from-blue-900 to-blue-700 text-white py-16 md:py-24">
-        <div class="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-            <div class="space-y-6">
-                <span class="bg-orange-500 text-white text-xs font-bold uppercase px-3 py-1 rounded-full">Phương pháp độc quyền</span>
-                <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
-                    Học Tiếng Anh Tư Duy <br><span class="text-orange-400">Linearthinking</span> Đột Phá
-                </h1>
-                <p class="text-lg text-blue-100 max-w-lg">
-                    Rút ngắn 1/2 thời gian học, không học vẹt, không học mẹo. Giúp bạn làm chủ IELTS/TOEIC và tiếng Anh giao tiếp một cách logic nhất.
-                </p>
-                <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-2">
-                    <a href="#khoa-hoc" class="bg-white text-blue-900 text-center font-bold px-6 py-3 rounded-lg hover:bg-gray-100 transition shadow-lg">
-                        Khám phá khóa học
-                    </a>
-                    <a href="#" class="border border-white text-center font-bold px-6 py-3 rounded-lg hover:bg-white/10 transition">
-                        Thi thử IELTS miễn phí
-                    </a>
+        <nav>
+            <div class="nav-item"><a href="#">Về DOL</a></div>
+            
+            <!-- Khóa học Dropdown -->
+            <div class="nav-item">
+                <a href="#">Khóa học ▼</a>
+                <div class="dropdown">
+                    <a href="#">IELTS Người Lớn</a>
+                    <a href="#">IELTS Học Sinh Cấp 2-3</a>
+                    <a href="#">Khóa học SAT Tư Duy</a>
+                    <a href="#">Khóa học TOEIC Đột Phá</a>
                 </div>
             </div>
-            <div class="relative flex justify-center">
-                <div class="w-full h-64 md:h-80 bg-blue-800/50 border-2 border-blue-400/30 rounded-2xl flex items-center justify-center backdrop-blur-sm shadow-2xl">
-                    <i class="fa-regular fa-circle-play text-6
+            
+            <!-- Phương pháp Dropdown -->
+            <div class="nav-item">
+                <a href="#">Linearthinking ▼</a>
+                <div class="dropdown">
+                    <a href="#">Hệ thống phương pháp độc quyền</a>
+                    <a href="#">Chứng nhận quốc tế (Mỹ & Ấn Độ)</a>
+                    <a href="#">Sách bản quyền độc quyền</a>
+                </div>
+            </div>
+
+            <div class="nav-item"><a href="#">Lịch khai giảng</a></div>
+            <div class="nav-item"><a href="#">Đội ngũ giáo viên</a></div>
+        </nav>
+        <a href="#" class="cta-header-btn">Tư vấn lộ trình</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-badge">⚡ ĐỘC QUYỀN LINEARTHINKING</div>
+            <h1>Học viện Tiếng Anh<br>Tư Duy <span>DOL English</span></h1>
+            <p>Hệ thống phương pháp học tiếng Anh tư duy logic toán học giúp rút ngắn 1/2 thời gian ôn luyện, cam kết bứt phá band điểm tối ưu.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <strong>4,000+</strong>
+                    <span>Học viên đạt 7.0+ IELTS</span>
+                </div>
+                <div class="stat-card">
+                    <strong>13+</strong>
+                    <span>Cơ sở hiện đại toàn quốc</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <img src="https://images.squarespace-cdn.com/content/v1/5e7300f2e043186fa884be5e/1601362624508-41K0B36Y72WOKT2YAGY8/LOGO+DOL+IELTS+DINH+LUC+RGB+01.png" alt="DOL Graphic">
+        </div>
+    </section>
+
+    <!-- Bento Grid - Giá Trị Học Thuật Độc Quyền -->
+    <section class="bento-section">
+        <div class="section-title">Hệ sinh thái học thuật <span>thông minh</span></div>
+        <div class="bento-grid">
+            
+            <!-- Khối lớn -->
+            <div class="bento-card double-width">
+                <h3>Phương pháp Linearthinking bản quyền</h3>
+                <p>Giải pháp loại bỏ hoàn toàn thói quen dịch thô word-by-word, học vẹt bài mẫu. Tư duy cụ thể hóa cấu trúc trục câu cốt lõi giúp tối ưu hóa điểm số Writing và Reading vượt trội.</p>
+                <div class="tag-list">
+                    <span class="tag-item">Cấu trúc S-V-O</span>
+                    <span class="tag-item">Logic liên kết</span>
+                    <span class="tag-item">Chứng nhận quốc tế</span>
+                </div>
+            </div>
+
+            <!-- Khối nhỏ -->
+            <div class="bento-card">
+                <h3>App thông minh Super LMS</h3>
+                <p>Nền tảng ứng dụng độc quyền tích hợp trí tuệ nhân tạo (AI) hỗ trợ tự động chấm chữa bài tập về nhà chính xác, theo dõi tiến độ chi tiết.</p>
+            </div>
+
+            <!-- Khối nhỏ -->
+            <div class="bento-card">
+                <h3>Đội ngũ giáo viên Đỉnh Cao</h3>
+                <p>100% giảng viên tại DOL sở hữu chứng chỉ IELTS từ 8.0 - 8.5, xuất thân từ các trường đại học danh tiếng hàng đầu, tận tâm đồng hành sát sao.</p>
+            </div>
+
+            <!-- Khối lớn -->
+            <div class="bento-card double-width">
+                <h3>Lộ trình cá nhân hóa tinh gọn</h3>
+                <p>Xây dựng kế hoạch học tập độc bản dựa trên kết quả kiểm tra năng lực đầu vào đầu tiên một cách chính xác, bám sát mục tiêu của từng học viên.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Biểu Mẫu Nhận Lộ Trình -->
+    <section class="register-section">
+        <div class="section-title">Nhận <span>lộ trình tối ưu</span> miễn phí</div>
+        <div class="form-container">
+            <form action="#" method="POST">
+                <input type="text" placeholder="Họ và tên học viên" required>
+                <input type="email" placeholder="Địa chỉ Email" required>
+                <input type="tel" placeholder="Số điện thoại liên hệ" required>
+                <button type="submit">ĐĂNG KÝ XẾP LỚP NGAY</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Widget Chat Cố Định -->
+    <div class="chat-widget">
+        <div class="chat-btn">💬</div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 DOL English - Đình Lực. Học Viện Tiếng Anh Tư Duy Đầu Tiên Tại Việt Nam. Bảo lưu mọi quyền.</p>
+    </footer>
+
+</body>
+</html>
