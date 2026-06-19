@@ -7,9 +7,12 @@
     <style>
         :root {
             --primary-color: #e31818;
+            --primary-hover: #b31212;
             --dark-color: #1a1a1a;
             --light-bg: #f8f9fa;
             --text-muted: #666;
+            --shadow: 0 4px 15px rgba(0,0,0,0.05);
+            --transition: all 0.3s ease;
         }
         
         body {
@@ -21,12 +24,12 @@
             line-height: 1.6;
         }
 
-        /* Header Navigation */
+        /* Header Navigation & Dropdowns */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 10%;
+            padding: 15px 8%;
             background: #fff;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             position: sticky;
@@ -34,16 +37,76 @@
             z-index: 1000;
         }
         .logo img {
-            height: 45px;
+            height: 42px;
             vertical-align: middle;
+            transition: var(--transition);
         }
-        nav a {
-            margin: 0 15px;
+        .logo img:hover {
+            transform: scale(1.05);
+        }
+        
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-item {
+            position: relative;
+            margin: 0 12px;
+            padding: 10px 0;
+        }
+        
+        .nav-item > a {
             text-decoration: none;
             color: var(--dark-color);
             font-weight: 600;
             font-size: 15px;
+            transition: var(--transition);
         }
+        
+        .nav-item:hover > a {
+            color: var(--primary-color);
+        }
+
+        /* Dropdown Menu CSS */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(15px);
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            border-top: 3px solid var(--primary-color);
+        }
+        
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        .dropdown a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--dark-color);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .dropdown a:hover {
+            background: #fff0f0;
+            color: var(--primary-color);
+            padding-left: 25px;
+        }
+
         .btn-inbox {
             background-color: var(--primary-color);
             color: white;
@@ -51,10 +114,13 @@
             border-radius: 6px;
             text-decoration: none;
             font-weight: bold;
-            transition: 0.3s;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(227,24,24,0.2);
         }
         .btn-inbox:hover {
-            background-color: #b31212;
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(227,24,24,0.3);
         }
 
         /* Hero Section */
@@ -75,26 +141,41 @@
             font-size: 14px;
             margin: 0 5px;
             border: 1px solid rgba(227,24,24,0.1);
+            transition: var(--transition);
+            display: inline-block;
+        }
+        .badge:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
         }
         .hero h1 {
-            font-size: 42px;
+            font-size: 45px;
             font-weight: 800;
             margin: 10px 0;
+            letter-spacing: -0.5px;
         }
         .hero h1 span {
             color: var(--primary-color);
         }
+        
         .hero-stats {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            margin-top: 30px;
+            gap: 50px;
+            margin-top: 40px;
+        }
+        .stat-item {
+            transition: var(--transition);
+        }
+        .stat-item:hover {
+            transform: scale(1.08);
         }
         .stat-item strong {
-            font-size: 28px;
+            font-size: 32px;
             color: var(--dark-color);
             display: block;
-            font-weight: 700;
+            font-weight: 800;
         }
         .stat-item span {
             color: var(--text-muted);
@@ -121,7 +202,12 @@
             border-radius: 16px;
             padding: 40px;
             border-left: 5px solid var(--primary-color);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .academic-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
         }
         .academic-content h3 {
             font-size: 26px;
@@ -137,7 +223,13 @@
         .academic-item {
             flex: 1;
             text-align: center;
-            padding: 0 10px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        .academic-item:hover {
+            background: #fff;
+            box-shadow: var(--shadow);
         }
         .academic-item h4 {
             color: var(--primary-color);
@@ -161,15 +253,22 @@
             padding: 30px;
             border-radius: 12px;
             width: 250px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            transition: 0.3s;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
         }
         .test-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(227,24,24,0.08);
+            border-bottom: 3px solid var(--primary-color);
         }
         .test-card h4 {
             margin: 15px 0 8px 0;
             font-size: 18px;
+            transition: var(--transition);
+        }
+        .test-card:hover h4 {
+            color: var(--primary-color);
         }
 
         /* Feedback Section */
@@ -179,15 +278,20 @@
         .feedback-grid {
             display: flex;
             justify-content: space-between;
-            gap: 20px;
+            gap: 25px;
         }
         .feedback-card {
             background: #fff;
-            padding: 25px;
+            padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            box-shadow: var(--shadow);
             flex: 1;
-            border-top: 3px solid var(--primary-color);
+            border-top: 4px solid var(--primary-color);
+            transition: var(--transition);
+        }
+        .feedback-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.08);
         }
         .student-info {
             display: flex;
@@ -195,9 +299,8 @@
             margin-bottom: 15px;
         }
         .student-avatar {
-            width: 45px;
-            height: 45px;
-            background: #ddd;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             margin-right: 12px;
             display: flex;
@@ -206,15 +309,56 @@
             font-weight: bold;
             color: #fff;
             background-color: var(--primary-color);
+            box-shadow: 0 4px 8px rgba(227,24,24,0.2);
         }
         .student-name h5 {
             margin: 0;
             font-size: 16px;
         }
         .student-name span {
-            font-size: 12px;
+            font-size: 13px;
             color: var(--primary-color);
             font-weight: bold;
+        }
+
+        /* Creative Contact Information Section */
+        .creative-contact {
+            background: #fff;
+        }
+        .contact-grid {
+            display: flex;
+            justify-content: space-between;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        .contact-box-item {
+            background: var(--light-bg);
+            flex: 1;
+            min-width: 220px;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: left;
+            transition: var(--transition);
+            border: 1px solid #eee;
+        }
+        .contact-box-item:hover {
+            background: #fff;
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow);
+            transform: translateY(-3px);
+        }
+        .contact-box-item h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .contact-box-item p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin: 5px 0;
         }
 
         /* Form Container */
@@ -224,7 +368,7 @@
             background: white;
             padding: 40px;
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
             border: 1px solid #f0f0f0;
         }
         .cta-form input {
@@ -235,6 +379,12 @@
             border-radius: 6px;
             font-size: 15px;
             box-sizing: border-box;
+            transition: var(--transition);
+        }
+        .cta-form input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 8px rgba(227,24,24,0.15);
         }
         .cta-form button {
             width: 100%;
@@ -247,10 +397,102 @@
             cursor: pointer;
             font-weight: bold;
             margin-top: 15px;
-            transition: 0.3s;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(227,24,24,0.2);
         }
         .cta-form button:hover {
-            background-color: #b31212;
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(227,24,24,0.3);
+        }
+
+        /* AI Chat Bot Widget Giao diện */
+        .ai-chatbot-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            font-family: sans-serif;
+        }
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 26px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(227,24,24,0.4);
+            transition: var(--transition);
+        }
+        .chat-button:hover {
+            transform: scale(1.1) rotate(5deg);
+            background: var(--primary-hover);
+        }
+        .chat-window {
+            position: absolute;
+            bottom: 75px;
+            right: 0;
+            width: 320px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            border: 1px solid #eee;
+            overflow: hidden;
+            display: none; /* Kịch bản ẩn/hiện */
+            flex-direction: column;
+        }
+        .chat-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-body {
+            padding: 15px;
+            height: 200px;
+            overflow-y: auto;
+            background: #f9f9f9;
+            font-size: 13px;
+        }
+        .chat-msg {
+            background: #e2e2e2;
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            max-width: 85%;
+            display: inline-block;
+        }
+        .chat-msg.bot {
+            background: #fff0f0;
+            color: var(--primary-color);
+            border-left: 3px solid var(--primary-color);
+        }
+        .chat-footer {
+            display: flex;
+            border-top: 1px solid #eee;
+        }
+        .chat-footer input {
+            flex: 1;
+            border: none;
+            padding: 12px;
+            outline: none;
+            font-size: 13px;
+        }
+        .chat-footer button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            cursor: pointer;
+            font-weight: bold;
         }
 
         footer {
@@ -264,17 +506,47 @@
 </head>
 <body>
 
-    <!-- Header Navigation -->
+    <!-- Header Navigation & Dropdowns -->
     <header>
         <div class="logo">
-            <!-- Sử dụng trực tiếp phôi ảnh logo chuẩn từ hệ thống -->
             <img src="https://images.squarespace-cdn.com/content/v1/5e7300f2e043186fa884be5e/1601362624508-41K0B36Y72WOKT2YAGY8/LOGO+DOL+IELTS+DINH+LUC+RGB+01.png" alt="DOL IELTS Đình Lực">
         </div>
         <nav>
-            <a href="#">Về DOL</a>
-            <a href="#">Linearthinking</a>
-            <a href="#">Khóa học</a>
-            <a href="#">Lịch khai giảng</a>
+            <div class="nav-item"><a href="#">Về DOL</a></div>
+            
+            <!-- Khóa học Dropdown -->
+            <div class="nav-item">
+                <a href="#">Khóa học ▼</a>
+                <div class="dropdown">
+                    <a href="#">Khóa học IELTS người lớn</a>
+                    <a href="#">Khóa học IELTS cho THCS</a>
+                    <a href="#">Khóa học SAT tư duy</a>
+                    <a href="#">Khóa học TOEIC cấp tốc</a>
+                    <a href="#">Khóa học DOL Kids (5-10 tuổi)</a>
+                </div>
+            </div>
+            
+            <!-- Lịch khai giảng Dropdown -->
+            <div class="nav-item">
+                <a href="#">Lịch khai giảng ▼</a>
+                <div class="dropdown">
+                    <a href="#">Lịch khai giảng Cơ sở Quận 1</a>
+                    <a href="#">Lịch khai giảng Cơ sở Bình Thạnh</a>
+                    <a href="#">Lịch khai giảng Cơ sở Hà Nội</a>
+                    <a href="#">Lớp trực tuyến qua Super LMS</a>
+                </div>
+            </div>
+            
+            <!-- Kiến thức IELTS Dropdown -->
+            <div class="nav-item">
+                <a href="#">Kiến thức IELTS ▼</a>
+                <div class="dropdown">
+                    <a href="#">Kinh nghiệm học IELTS từ 0 lên 7.5</a>
+                    <a href="#">Thư viện bài mẫu Writing & Speaking</a>
+                    <a href="#">Ứng dụng Linearthinking trong Reading</a>
+                    <a href="#">Phương pháp ghi nhớ từ vựng logic</a>
+                </div>
+            </div>
         </nav>
         <a href="#" class="btn-inbox">Inbox DOL</a>
     </header>
@@ -283,15 +555,16 @@
     <div class="hero">
         <div class="badge-container">
             <span class="badge">IELTS</span>
+            <span class="badge">SAT</span>
+            <span class="badge">TOEIC</span>
             <span class="badge">THCS</span>
-            <span class="badge">Flyers</span>
         </div>
         <h1>Học viện Tiếng Anh Tư Duy<br><span>DOL English</span></h1>
         
         <div class="hero-stats">
             <div class="stat-item">
                 <strong>Linearthinking</strong>
-                <span>Tiếng Anh Tư Duy</span>
+                <span>Hệ thống độc quyền</span>
             </div>
             <div class="stat-item">
                 <strong>4,000+</strong>
@@ -311,21 +584,21 @@
             <div class="academic-content">
                 <h3>Phương pháp Linearthinking</h3>
                 <p style="color: var(--text-muted); font-size: 16px; max-width: 600px;">
-                    Phương pháp giúp học Tiếng Anh logic và bản chất do DOL sáng tạo ra, được chứng nhận đa quốc gia tại Hoa Kỳ, Ấn Độ và Việt Nam.
+                    Phương pháp giúp học Tiếng Anh logic và bản chất do DOL sáng tạo ra, được chứng nhận bản quyền quốc tế tại Hoa Kỳ, Ấn Độ và Việt Nam.
                 </p>
             </div>
             <div class="academic-features">
                 <div class="academic-item">
                     <h4>Linearthinking</h4>
-                    <p style="font-size:13px; color:var(--text-muted);">Phương pháp độc quyền</p>
+                    <p style="font-size:13px; color:var(--text-muted);">Tư duy logic tinh gọn</p>
                 </div>
                 <div class="academic-item">
                     <h4>Nền tảng Super LMS</h4>
-                    <p style="font-size:13px; color:var(--text-muted);">Công nghệ độc quyền</p>
+                    <p style="font-size:13px; color:var(--text-muted);">Công nghệ AI chấm chữa độc quyền</p>
                 </div>
                 <div class="academic-item">
-                    <h4>Sách giáo trình</h4>
-                    <p style="font-size:13px; color:var(--text-muted);">Tự biên soạn, độc quyền</p>
+                    <h4>Hệ thống Sách</h4>
+                    <p style="font-size:13px; color:var(--text-muted);">Tự biên soạn chuyên sâu</p>
                 </div>
             </div>
         </div>
@@ -334,22 +607,22 @@
     <!-- Test Section -->
     <section class="test-free">
         <div class="section-title">Test đầu vào <span>miễn phí</span></div>
-        <p style="color: var(--text-muted); margin-top: -20px; margin-bottom: 30px;">10,000+ học viên đã tìm đúng lộ trình sau khi test tại DOL</p>
+        <p style="color: var(--text-muted); margin-top: -20px; margin-bottom: 30px;">Chọn một phương thức để DOL xây dựng lộ trình cá nhân hóa cho bạn</p>
         <div class="test-grid">
             <div class="test-card">
-                <div style="font-size: 24px;">💬</div>
+                <div style="font-size: 26px;">💬</div>
                 <h4>Nhấn Facebook</h4>
-                <p style="font-size: 13px; color: var(--text-muted);">Click để inbox DOL và nhận tư vấn ngay</p>
+                <p style="font-size: 13px; color: var(--text-muted);">Click để trò chuyện trực tiếp cùng đội ngũ tư vấn học thuật</p>
             </div>
             <div class="test-card">
-                <div style="font-size: 24px;">📞</div>
+                <div style="font-size: 26px;">📞</div>
                 <h4>1800 96 96 39</h4>
-                <p style="font-size: 13px; color: var(--text-muted);">Click để gọi hotline miễn phí tư vấn</p>
+                <p style="font-size: 13px; color: var(--text-muted);">Tổng đài Hotline miễn cước, hỗ trợ 24/7 giải đáp lộ trình</p>
             </div>
             <div class="test-card">
-                <div style="font-size: 24px;">📍</div>
-                <h4>13+ cơ sở DOL</h4>
-                <p style="font-size: 13px; color: var(--text-muted);">Click để xem địa chỉ cơ sở DOL gần bạn</p>
+                <div style="font-size: 26px;">📍</div>
+                <h4>13+ cơ sở hệ thống</h4>
+                <p style="font-size: 13px; color: var(--text-muted);">Ghé thăm không gian học tập chuẩn quốc tế gần bạn nhất</p>
             </div>
         </div>
     </section>
@@ -363,11 +636,11 @@
                     <div class="student-avatar">AN</div>
                     <div class="student-name">
                         <h5>Nguyễn Hoàng Anh</h5>
-                        <span>Đạt 8.0 IELTS</span>
+                        <span>Đạt 8.0 IELTS (Writing 7.5)</span>
                     </div>
                 </div>
                 <p style="font-size: 14px; color: #555; text-align: left;">
-                    "Nhờ Linearthinking mà mình không còn bị bí ý tưởng khi viết bài Writing nữa. Phương pháp học siêu logic giúp mình tư duy câu ngắn gọn nhưng cực kỳ hiệu quả!"
+                    "Nhờ Linearthinking mà mình không còn bị bí ý tưởng khi viết bài Writing nữa. Phương pháp học siêu logic của thầy Đình Lực giúp mình tư duy câu ngắn gọn nhưng cực kỳ chuẩn xác và mạch lạc!"
                 </p>
             </div>
             <div class="feedback-card">
@@ -375,19 +648,41 @@
                     <div class="student-avatar">TM</div>
                     <div class="student-name">
                         <h5>Trần Minh Tuấn</h5>
-                        <span>Đạt 7.5 IELTS</span>
+                        <span>Đạt 7.5 IELTS (Bứt phá từ 5.0)</span>
                     </div>
                 </div>
                 <p style="font-size: 14px; color: #555; text-align: left;">
-                    "App Super LMS của trung tâm hỗ trợ làm bài tập về nhà rất thông minh. Mình biết rõ lỗi sai ở đâu để sửa ngay lập tức, tiết kiệm được rất nhiều thời gian học."
+                    "App thông minh Super LMS của DOL hỗ trợ mình làm bài tập về nhà cực đỉnh. Hệ thống phân tích rõ lỗi sai tư duy để mình sửa ngay lập tức, tiết kiệm 1/2 thời gian ôn luyện."
                 </p>
             </div>
         </div>
     </section>
 
+    <!-- Creative Contact Information Section -->
+    <section class="creative-contact">
+        <div class="section-title">Thông tin <span>liên hệ đa kênh</span> cá nhân hóa</div>
+        <div class="contact-grid">
+            <div class="contact-box-item">
+                <h4>🏢 Trụ sở chính chính</h4>
+                <p><strong>Địa chỉ:</strong> 452-454 Nguyễn Tri Phương, Phường 9, Quận 10, TP.HCM</p>
+                <p><strong>Giờ làm việc:</strong> 8:00 - 21:30 (Mỗi ngày)</p>
+            </div>
+            <div class="contact-box-item">
+                <h4>✉️ Phòng đào tạo</h4>
+                <p><strong>Email giải đáp:</strong> academic@dolenglish.vn</p>
+                <p><strong>Hỗ trợ học viên:</strong> lms.support@dol.vn</p>
+            </div>
+            <div class="contact-box-item">
+                <h4>🌐 Mạng xã hội</h4>
+                <p><strong>Facebook:</strong> fb.com/dolenglish</p>
+                <p><strong>TikTok Học Thuật:</strong> @tienganhtuduydol</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Register Form -->
-    <section>
-        <div class="section-title">Đăng Ký Nhận <span>Tư Vấn Lộ Trình</span> Bản Quyền</div>
+    <section style="background: var(--light-bg)">
+        <div class="section-title">Đăng Ký Nhận <span>Tư Vấn Lộ Trình</span></div>
         <div class="cta-form">
             <form action="#" method="POST">
                 <input type="text" placeholder="Họ và tên của bạn" required>
@@ -398,10 +693,43 @@
         </div>
     </section>
 
+    <!-- AI Chat Bot Widget -->
+    <div class="ai-chatbot-widget">
+        <div class="chat-button" id="chatBtn">🤖</div>
+        <div class="chat-window" id="chatWin">
+            <div class="chat-header">
+                <span>DOL AI Assistant</span>
+                <span style="cursor:pointer;" id="closeChat">✖</span>
+            </div>
+            <div class="chat-body">
+                <div class="chat-msg bot">Xin chào! Mình là Trợ lý AI của DOL Đình Lực. Bạn cần tư vấn về phương pháp Linearthinking hay khóa học IELTS/SAT ạ?</div>
+            </div>
+            <div class="chat-footer">
+                <input type="text" placeholder="Nhập câu hỏi của bạn...">
+                <button>Gửi</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <p>© 2026 DOL English - Đình Lực. Học Viện Tiếng Anh Tư Duy Đầu Tiên Tại Việt Nam.</p>
     </footer>
+
+    <!-- Script điều khiển bật tắt cửa sổ chat bot đơn giản -->
+    <script>
+        const chatBtn = document.getElementById('chatBtn');
+        const chatWin = document.getElementById('chatWin');
+        const closeChat = document.getElementById('closeChat');
+
+        chatBtn.addEventListener('click', () => {
+            chatWin.style.display = chatWin.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        closeChat.addEventListener('click', () => {
+            chatWin.style.display = 'none';
+        });
+    </script>
 
 </body>
 </html>
