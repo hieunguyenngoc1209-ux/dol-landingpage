@@ -7,38 +7,42 @@
     <style>
         :root {
             --primary-color: #e31818;
-            --primary-hover: #b31212;
+            --primary-hover: #ff3333;
             --dark-color: #1a1a1a;
-            --light-bg: #f8f9fa;
-            --text-muted: #666;
-            --shadow: 0 4px 15px rgba(0,0,0,0.05);
-            --transition: all 0.3s ease;
+            --light-bg: #f9fbfd;
+            --card-bg: #ffffff;
+            --text-muted: #6e7e8c;
+            --border-radius: 20px;
+            --shadow-sm: 0 4px 0px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 8px 24px rgba(227, 24, 24, 0.06);
+            --shadow-btn: 0 4px 0px #b31212;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             margin: 0;
             padding: 0;
             color: var(--dark-color);
-            background-color: #fff;
+            background-color: var(--light-bg);
             line-height: 1.6;
         }
 
-        /* Header Navigation & Dropdowns */
+        /* Header Navigation xịn mịn */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 8%;
-            background: #fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #f0f3f6;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
         .logo img {
-            height: 42px;
-            vertical-align: middle;
+            height: 40px;
             transition: var(--transition);
         }
         .logo img:hover {
@@ -52,14 +56,14 @@
         
         .nav-item {
             position: relative;
-            margin: 0 12px;
+            margin: 0 14px;
             padding: 10px 0;
         }
         
         .nav-item > a {
             text-decoration: none;
-            color: var(--dark-color);
-            font-weight: 600;
+            color: #4a5568;
+            font-weight: 700;
             font-size: 15px;
             transition: var(--transition);
         }
@@ -68,21 +72,21 @@
             color: var(--primary-color);
         }
 
-        /* Dropdown Menu */
+        /* Dropdown Menu thiết kế bo tròn */
         .dropdown {
             position: absolute;
             top: 100%;
             left: 50%;
-            transform: translateX(-50%) translateY(15px);
+            transform: translateX(-50%) translateY(10px);
             background: white;
-            min-width: 240px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            padding: 10px 0;
+            min-width: 250px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            padding: 12px 0;
             opacity: 0;
             visibility: hidden;
             transition: var(--transition);
-            border-top: 3px solid var(--primary-color);
+            border: 2px solid #e2e8f0;
         }
         
         .nav-item:hover .dropdown {
@@ -93,16 +97,16 @@
         
         .dropdown a {
             display: block;
-            padding: 10px 20px;
+            padding: 12px 20px;
             color: var(--dark-color);
             text-decoration: none;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             transition: var(--transition);
         }
         
         .dropdown a:hover {
-            background: #fff0f0;
+            background: #fff5f5;
             color: var(--primary-color);
             padding-left: 25px;
         }
@@ -110,196 +114,250 @@
         .btn-inbox {
             background-color: var(--primary-color);
             color: white;
-            padding: 10px 22px;
-            border-radius: 6px;
+            padding: 12px 26px;
+            border-radius: 16px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 800;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             transition: var(--transition);
-            box-shadow: 0 4px 10px rgba(227,24,24,0.2);
+            box-shadow: var(--shadow-btn);
+            border: 2px solid #b31212;
         }
         .btn-inbox:hover {
             background-color: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 14px rgba(227,24,24,0.3);
+            transform: translateY(2px);
+            box-shadow: 0 2px 0px #b31212;
+        }
+        .btn-inbox:active {
+            transform: translateY(4px);
+            box-shadow: none;
         }
 
-        /* Hero Banner Section với nền thiết kế */
+        /* Hero Section phong cách Gamification mở rộng */
         .hero {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 80px 8%;
-            background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(249,249,249,1) 100%);
+            max-width: 1300px;
+            margin: 0 auto;
             flex-wrap: wrap;
-            gap: 30px;
+            gap: 50px;
         }
         .hero-text {
             flex: 1;
-            min-width: 300px;
+            min-width: 320px;
             text-align: left;
         }
         .badge-container {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         .badge {
             background: #fff0f0;
             color: var(--primary-color);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 14px;
-            margin-right: 8px;
-            border: 1px solid rgba(227,24,24,0.1);
+            padding: 8px 18px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 13px;
+            margin-right: 10px;
+            border: 2px solid #ffe0e0;
             transition: var(--transition);
             display: inline-block;
         }
         .badge:hover {
             background: var(--primary-color);
             color: white;
-            transform: translateY(-3px);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
         }
         .hero-text h1 {
-            font-size: 45px;
-            font-weight: 800;
-            margin: 10px 0;
-            line-height: 1.2;
+            font-size: 48px;
+            font-weight: 900;
+            margin: 10px 0 20px 0;
+            line-height: 1.15;
+            letter-spacing: -1px;
         }
         .hero-text h1 span {
             color: var(--primary-color);
+            position: relative;
+            display: inline-block;
         }
         .hero-text p {
             font-size: 18px;
-            color: var(--text-muted);
-            margin-bottom: 30px;
+            color: #4a5568;
+            margin-bottom: 35px;
+            font-weight: 500;
         }
         
-        /* Vị trí chèn Ảnh Siêu Banner */
+        /* Khung chứa Banner 3D */
         .hero-banner-holder {
             flex: 1;
-            min-width: 350px;
+            min-width: 380px;
             text-align: center;
         }
         .hero-banner-holder img {
             width: 100%;
-            max-width: 550px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            max-width: 540px;
+            border-radius: var(--border-radius);
+            border: 3px solid #e2e8f0;
+            box-shadow: 0 12px 0px #e2e8f0;
             transition: var(--transition);
+            background: #fff;
         }
         .hero-banner-holder img:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(227,24,24,0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 0px #cbd5e1;
         }
         
         .hero-stats {
             display: flex;
-            gap: 40px;
+            gap: 30px;
             margin-top: 40px;
+            background: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            border: 2px solid #e2e8f0;
+            box-shadow: var(--shadow-sm);
         }
         .stat-item strong {
-            font-size: 32px;
+            font-size: 28px;
             color: var(--dark-color);
             display: block;
-            font-weight: 800;
+            font-weight: 900;
         }
         .stat-item span {
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 13px;
+            font-weight: 600;
         }
 
         /* Section Global */
         section {
-            padding: 80px 8%;
+            padding: 90px 8%;
+            max-width: 1300px;
+            margin: 0 auto;
         }
         .section-title {
             text-align: center;
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 40px;
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 50px;
+            letter-spacing: -0.5px;
         }
         .section-title span {
             color: var(--primary-color);
         }
 
-        /* Academic Value & Video */
+        /* Academic & Video Layout thông minh */
         .academic-container {
             display: flex;
             gap: 40px;
-            align-items: center;
+            align-items: stretch;
             flex-wrap: wrap;
         }
         .academic-box {
             flex: 1;
-            min-width: 300px;
-            background: var(--light-bg);
-            border-radius: 16px;
+            min-width: 320px;
+            background: white;
+            border-radius: var(--border-radius);
             padding: 40px;
-            border-left: 5px solid var(--primary-color);
-            box-shadow: var(--shadow);
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 8px 0px #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .academic-box h3 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-top: 0;
         }
         .academic-features {
             margin-top: 30px;
-            border-top: 1px solid #ddd;
+            border-top: 2px dashed #e2e8f0;
             padding-top: 25px;
         }
         .academic-item {
+            background: var(--light-bg);
+            padding: 15px 20px;
+            border-radius: 12px;
             margin-bottom: 15px;
+            border: 2px solid #e2e8f0;
         }
         .academic-item h4 {
             color: var(--primary-color);
             margin: 0 0 5px 0;
             font-size: 16px;
+            font-weight: 800;
         }
         
-        /* Video Container */
         .video-holder {
             flex: 1;
-            min-width: 350px;
+            min-width: 380px;
         }
         .video-holder video {
             width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            border: 3px solid #e2e8f0;
+            box-shadow: 0 12px 0px #e2e8f0;
+            background: #fff;
         }
 
-        /* Test Free Section */
+        /* Test Section: Thẻ ô lưới thiết kế giống game nhiệm vụ */
         .test-free {
-            background: linear-gradient(135deg, #fff 0%, #fff5f5 100%);
             text-align: center;
         }
         .test-grid {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 25px;
             flex-wrap: wrap;
             margin-top: 40px;
         }
         .test-card {
             background: white;
-            padding: 30px;
-            border-radius: 12px;
+            padding: 35px 25px;
+            border-radius: var(--border-radius);
             width: 260px;
-            box-shadow: var(--shadow);
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 8px 0px #e2e8f0;
             transition: var(--transition);
             cursor: pointer;
+            position: relative;
         }
         .test-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(227,24,24,0.08);
-            border-bottom: 3px solid var(--primary-color);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 0px #cbd5e1;
+            border-color: var(--primary-color);
         }
-        .test-card h4 {
-            margin: 15px 0 8px 0;
-            font-size: 18px;
+        .test-card:active {
+            transform: translateY(4px);
+            box-shadow: 0 4px 0px #cbd5e1;
+        }
+        .test-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+            display: inline-block;
             transition: var(--transition);
         }
-        .test-card:hover h4 {
-            color: var(--primary-color);
+        .test-card:hover .test-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+        .test-card h4 {
+            margin: 10px 0;
+            font-size: 18px;
+            font-weight: 800;
         }
 
         /* Feedback Section */
         .feedback-section {
-            background: var(--light-bg);
+            background-color: #fff5f5;
+            border-radius: var(--border-radius);
+            margin: 40px auto;
         }
         .feedback-grid {
             display: flex;
@@ -310,16 +368,16 @@
         .feedback-card {
             background: #fff;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
+            border-radius: var(--border-radius);
+            border: 2px solid #f0e0e0;
+            box-shadow: 0 8px 0px #f0e0e0;
             flex: 1;
             min-width: 280px;
-            border-top: 4px solid var(--primary-color);
             transition: var(--transition);
         }
         .feedback-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 0px #e2c2c2;
         }
         .student-info {
             display: flex;
@@ -327,32 +385,30 @@
             margin-bottom: 15px;
         }
         .student-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
             margin-right: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 800;
             color: #fff;
             background-color: var(--primary-color);
-            box-shadow: 0 4px 8px rgba(227,24,24,0.2);
+            box-shadow: 0 4px 0px #b31212;
         }
         .student-name h5 {
             margin: 0;
             font-size: 16px;
+            font-weight: 800;
         }
         .student-name span {
             font-size: 13px;
             color: var(--primary-color);
-            font-weight: bold;
+            font-weight: 700;
         }
 
-        /* Creative Contact Section */
-        .creative-contact {
-            background: #fff;
-        }
+        /* Thông tin liên hệ đa kênh tinh gọn */
         .contact-grid {
             display: flex;
             justify-content: space-between;
@@ -360,73 +416,76 @@
             flex-wrap: wrap;
         }
         .contact-box-item {
-            background: var(--light-bg);
+            background: white;
             flex: 1;
             min-width: 260px;
-            padding: 25px;
-            border-radius: 12px;
-            text-align: left;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 8px 0px #e2e8f0;
             transition: var(--transition);
-            border: 1px solid #eee;
         }
         .contact-box-item:hover {
-            background: #fff;
             border-color: var(--primary-color);
-            box-shadow: var(--shadow);
-            transform: translateY(-3px);
+            box-shadow: 0 12px 0px #cbd5e1;
         }
         .contact-box-item h4 {
             margin-top: 0;
             color: var(--primary-color);
             font-size: 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-weight: 800;
         }
 
-        /* Form Container */
+        /* Form Đăng ký tối giản thông minh */
         .cta-form {
-            max-width: 500px;
+            max-width: 460px;
             margin: 0 auto;
             background: white;
             padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-            border: 1px solid #f0f0f0;
+            border-radius: var(--border-radius);
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 12px 0px #e2e8f0;
         }
         .cta-form input {
             width: 100%;
-            padding: 14px;
-            margin: 12px 0;
-            border: 1px solid #ddd;
-            border-radius: 6px;
+            padding: 14px 18px;
+            margin: 10px 0;
+            border: 2px solid #e2e8f0;
+            border-radius: 14px;
             font-size: 15px;
+            font-weight: 600;
             box-sizing: border-box;
+            background-color: var(--light-bg);
             transition: var(--transition);
         }
         .cta-form input:focus {
             border-color: var(--primary-color);
             outline: none;
-            box-shadow: 0 0 8px rgba(227,24,24,0.15);
+            background-color: #fff;
         }
         .cta-form button {
             width: 100%;
             padding: 14px;
             background-color: var(--primary-color);
             color: white;
-            border: none;
-            border-radius: 6px;
+            border: 2px solid #b31212;
+            border-radius: 14px;
             font-size: 16px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 800;
             margin-top: 15px;
+            box-shadow: var(--shadow-btn);
+            text-transform: uppercase;
             transition: var(--transition);
-            box-shadow: 0 4px 12px rgba(227,24,24,0.2);
         }
         .cta-form button:hover {
             background-color: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(227,24,24,0.3);
+            transform: translateY(2px);
+            box-shadow: 0 2px 0px #b31212;
+        }
+        .cta-form button:active {
+            transform: translateY(4px);
+            box-shadow: none;
         }
 
         /* AI Chat Bot Widget */
@@ -440,19 +499,19 @@
             width: 60px;
             height: 60px;
             background: var(--primary-color);
-            border-radius: 50%;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 26px;
+            font-size: 28px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(227,24,24,0.4);
+            box-shadow: var(--shadow-btn);
+            border: 2px solid #b31212;
             transition: var(--transition);
         }
         .chat-button:hover {
-            transform: scale(1.1) rotate(5deg);
-            background: var(--primary-hover);
+            transform: scale(1.05) translateY(-2px);
         }
         .chat-window {
             position: absolute;
@@ -460,9 +519,9 @@
             right: 0;
             width: 320px;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
-            border: 1px solid #eee;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border: 2px solid #e2e8f0;
             overflow: hidden;
             display: none;
             flex-direction: column;
@@ -471,59 +530,72 @@
             background: var(--primary-color);
             color: white;
             padding: 15px;
-            font-weight: bold;
+            font-weight: 800;
             font-size: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 2px solid #b31212;
         }
         .chat-body {
             padding: 15px;
             height: 220px;
             overflow-y: auto;
-            background: #f9f9f9;
+            background: var(--light-bg);
             font-size: 13px;
+            font-weight: 600;
         }
         .chat-msg {
-            background: #fff0f0;
-            color: var(--primary-color);
-            border-left: 3px solid var(--primary-color);
-            padding: 8px 12px;
-            border-radius: 8px;
+            background: #fff;
+            color: #333;
+            border: 2px solid #e2e8f0;
+            padding: 10px 14px;
+            border-radius: 14px;
             margin-bottom: 10px;
             max-width: 85%;
+            box-shadow: var(--shadow-sm);
+        }
+        .chat-msg.bot {
+            background: #fff0f0;
+            color: var(--primary-color);
+            border-color: #ffe0e0;
         }
         .chat-footer {
             display: flex;
-            border-top: 1px solid #eee;
+            border-top: 2px solid #e2e8f0;
+            background: white;
         }
         .chat-footer input {
             flex: 1;
             border: none;
-            padding: 12px;
+            padding: 14px;
             outline: none;
             font-size: 13px;
+            font-weight: 600;
         }
         .chat-footer button {
             background: var(--primary-color);
             color: white;
             border: none;
-            padding: 0 15px;
+            padding: 0 18px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 800;
         }
 
         footer {
             background: var(--dark-color);
             color: white;
             text-align: center;
-            padding: 30px;
+            padding: 35px;
             font-size: 14px;
+            font-weight: 600;
+            border-top: 4px solid #333;
         }
     </style>
 </head>
 <body>
 
+    <!-- Header Navigation -->
     <header>
         <div class="logo">
             <img src="https://images.squarespace-cdn.com/content/v1/5e7300f2e043186fa884be5e/1601362624508-41K0B36Y72WOKT2YAGY8/LOGO+DOL+IELTS+DINH+LUC+RGB+01.png" alt="DOL English">
@@ -548,7 +620,7 @@
                     <a href="#">Lịch cơ sở Quận 10 (TP.HCM)</a>
                     <a href="#">Lịch cơ sở Bình Thạnh (TP.HCM)</a>
                     <a href="#">Lịch cơ sở Đống Đa (Hà Nội)</a>
-                    <a href="#">Lớp học trực tuyến chất lượng cao</a>
+                    <a href="#">Lớp trực tuyến thông minh LMS</a>
                 </div>
             </div>
             
@@ -557,28 +629,28 @@
                 <div class="dropdown">
                     <a href="#">Kinh nghiệm tự học 0 lên 7.5</a>
                     <a href="#">Thư viện bài mẫu Writing & Speaking</a>
-                    <a href="#">Ứng dụng Linearthinking độc quyền</a>
-                    <a href="#">Bí kíp học từ vựng nhớ bản chất</a>
+                    <a href="#">Phương pháp Linearthinking độc quyền</a>
                 </div>
             </div>
         </nav>
         <a href="#" class="btn-inbox">Inbox DOL</a>
     </header>
 
+    <!-- Hero Section -->
     <div class="hero">
         <div class="hero-text">
             <div class="badge-container">
-                <span class="badge">IELTS</span>
-                <span class="badge">SAT</span>
-                <span class="badge">TOEIC</span>
+                <span class="badge">🔥 IELTS TƯ DUY</span>
+                <span class="badge">⚡ SAT</span>
+                <span class="badge">🚀 TOEIC</span>
             </div>
-            <h1>Học viện Tiếng Anh Tư Duy<br><span>DOL English</span></h1>
-            <p>Rút ngắn 1/2 thời gian học nhờ hệ thống Linearthinking thông minh bản quyền quốc tế.</p>
+            <h1>Học viện Tiếng Anh<br><span>DOL English</span></h1>
+            <p>Hệ thống học tiếng Anh tư duy Linearthinking tối giản giúp bứt phá điểm số thần tốc.</p>
             
             <div class="hero-stats">
                 <div class="stat-item">
                     <strong>Linearthinking</strong>
-                    <span>Phương pháp độc quyền</span>
+                    <span>Độc quyền quốc tế</span>
                 </div>
                 <div class="stat-item">
                     <strong>4,000+</strong>
@@ -588,24 +660,28 @@
         </div>
         
         <div class="hero-banner-holder">
-            <img src="https://images.squarespace-cdn.com/content/v1/5e7300f2e043186fa884be5e/1601362624508-41K0B36Y72WOKT2YAGY8/LOGO+DOL+IELTS+DINH+LUC+RGB+01.png" alt="DOL Banner" id="mainBanner">
+            <!-- Sau khi tạo ảnh banner xịn bằng Siêu Prompt, bạn chèn link ảnh vào đây nhé -->
+            <img src="https://images.squarespace-cdn.com/content/v1/5e7300f2e043186fa884be5e/1601362624508-41K0B36Y72WOKT2YAGY8/LOGO+DOL+IELTS+DINH+LUC+RGB+01.png" alt="DOL Premium Banner">
         </div>
     </div>
 
+    <!-- Academic & Video Layout -->
     <section>
-        <div class="section-title">Giá trị <span>học thuật</span> khác biệt</div>
+        <div class="section-title">Giá trị <span>học thuật</span> thông minh</div>
         <div class="academic-container">
             <div class="academic-box">
-                <h3>Phương pháp Linearthinking</h3>
-                <p style="color: var(--text-muted);">Tư duy logic hệ thống toán học áp dụng vào ngôn ngữ, được chứng nhận tại Mỹ, Ấn Độ và Việt Nam.</p>
+                <div>
+                    <h3>Phương pháp Linearthinking</h3>
+                    <p style="color: var(--text-muted); font-weight: 500;">Tư duy toán học tinh gọn áp dụng vào Anh ngữ, khắc phục triệt để lỗi dịch thô, học vẹt bài mẫu.</p>
+                </div>
                 <div class="academic-features">
                     <div class="academic-item">
-                        <h4>Linearthinking</h4>
-                        <p style="font-size:13px; color:var(--text-muted); margin:0;">Tư duy logic tinh gọn, hạn chế dịch thô.</p>
+                        <h4>🎯 Cụ thể hóa ý tưởng</h4>
+                        <p style="font-size:13px; color:var(--text-muted); margin:0; font-weight:600;">Giúp học viên lập luận mạch lạc, viết bài logic chỉ trong 30 giây.</p>
                     </div>
                     <div class="academic-item">
-                        <h4>Nền tảng Super LMS</h4>
-                        <p style="font-size:13px; color:var(--text-muted); margin:0;">Hệ thống AI chấm chữa bài tập thông minh độc quyền.</p>
+                        <h4>💻 Nền tảng Super LMS</h4>
+                        <p style="font-size:13px; color:var(--text-muted); margin:0; font-weight:600;">Hệ thống ứng dụng chấm chữa bài bằng trí tuệ nhân tạo độc quyền.</p>
                     </div>
                 </div>
             </div>
@@ -613,97 +689,100 @@
             <div class="video-holder">
                 <video controls poster="https://images.squarespace-cdn.com/content/v1/5e7300f2e043186fa884be5e/1601362624508-41K0B36Y72WOKT2YAGY8/LOGO+DOL+IELTS+DINH+LUC+RGB+01.png">
                     <source src="intro.mp4" type="video/mp4">
-                    Trình duyệt của bạn không hỗ trợ phát video.
                 </video>
             </div>
         </div>
     </section>
 
+    <!-- Test Section dạng ô cửa bài tập của Duolingo -->
     <section class="test-free">
-        <div class="section-title">Test đầu vào <span>miễn phí</span></div>
-        <p style="color: var(--text-muted); margin-top: -20px;">10,000+ học viên đã xác định đúng lộ trình tối ưu tại DOL</p>
+        <div class="section-title">Đánh giá năng lực <span>Miễn Phí</span></div>
         <div class="test-grid">
             <div class="test-card">
-                <div style="font-size: 26px;">💬</div>
+                <span class="test-icon">💬</span>
                 <h4>Nhấn Facebook</h4>
-                <p style="font-size: 13px; color: var(--text-muted);">Kết nối và trò chuyện cùng ban cố vấn chuyên môn học thuật.</p>
+                <p style="font-size: 13px; color: var(--text-muted); font-weight: 500;">Kết nối 1-1 ngay cùng ban cố vấn chuyên môn học thuật.</p>
             </div>
             <div class="test-card">
-                <div style="font-size: 26px;">📞</div>
+                <span class="test-icon">📞</span>
                 <h4>1800 96 96 39</h4>
-                <p style="font-size: 13px; color: var(--text-muted);">Tổng đài Hotline miễn cước hỗ trợ tư vấn lộ trình 24/7.</p>
+                <p style="font-size: 13px; color: var(--text-muted); font-weight: 500;">Hotline miễn phí, tổng đài hỗ trợ phân tích lộ trình 24/7.</p>
             </div>
             <div class="test-card">
-                <div style="font-size: 26px;">📍</div>
-                <h4>13+ Cơ sở toàn quốc</h4>
-                <p style="font-size: 13px; color: var(--text-muted);">Trải nghiệm không gian học tập công nghệ cao gần bạn nhất.</p>
+                <span class="test-icon">🗺️</span>
+                <h4>13+ Cơ sở hệ thống</h4>
+                <p style="font-size: 13px; color: var(--text-muted); font-weight: 500;">Trải nghiệm không gian học tập công nghệ cao gần bạn nhất.</p>
             </div>
         </div>
     </section>
 
+    <!-- Feedback Section -->
     <section class="feedback-section">
-        <div class="section-title">Cảm nhận từ <span>Học Viên</span> xuất sắc</div>
+        <div class="section-title">Bảng vàng <span>Học Viên</span> xuất sắc</div>
         <div class="feedback-grid">
             <div class="feedback-card">
                 <div class="student-info">
-                    <div class="student-avatar">AN</div>
+                    <div class="student-avatar">HA</div>
                     <div class="student-name">
                         <h5>Nguyễn Hoàng Anh</h5>
                         <span>Đạt 8.0 IELTS (Writing bứt phá)</span>
                     </div>
                 </div>
-                <p style="font-size: 14px; color: #555; text-align: left; margin: 0;">
-                    "Linearthinking thực sự thay đổi cách mình tư duy khi làm bài Writing. Không còn học vẹt bài mẫu, mình biết cách xây dựng luận điểm siêu logic và chặt chẽ."
+                <p style="font-size: 14px; color: #4a5568; text-align: left; margin: 0; font-weight: 500;">
+                    "Linearthinking thực sự thay đổi cách mình làm bài. Không còn học vẹt bài mẫu, mình biết cách liên kết câu siêu logic và chặt chẽ như giải toán."
                 </p>
             </div>
             <div class="feedback-card">
                 <div class="student-info">
-                    <div class="student-avatar">TM</div>
+                    <div class="student-avatar">MT</div>
                     <div class="student-name">
                         <h5>Trần Minh Tuấn</h5>
-                        <span>Đạt 7.5 IELTS (Tăng từ nền tảng 4.5)</span>
+                        <span>Đạt 7.5 IELTS (Tăng từ nền 4.5)</span>
                     </div>
                 </div>
-                <p style="font-size: 14px; color: #555; text-align: left; margin: 0;">
-                    "Hệ thống Super LMS tự động lưu giữ và phân tích lỗi sai từ vựng rất đỉnh. Học tại DOL vừa công nghệ vừa tiết kiệm được cực kỳ nhiều thời gian tự ôn luyện."
+                <p style="font-size: 14px; color: #4a5568; text-align: left; margin: 0; font-weight: 500;">
+                    "App Super LMS tự động phân tích và chỉ ra các lỗi sai tư duy rất sâu. Học tại DOL giúp mình tiết kiệm được 1/2 thời gian tự ôn luyện."
                 </p>
             </div>
         </div>
     </section>
 
-    <section class="creative-contact">
-        <div class="section-title">Thông tin <span>liên hệ đa kênh</span> cá nhân hóa</div>
+    <!-- Creative Contact Section -->
+    <section>
+        <div class="section-title">Kết nối <span>Đa Kênh</span></div>
         <div class="contact-grid">
             <div class="contact-box-item">
-                <h4>🏢 Trụ sở chính</h4>
-                <p style="margin: 5px 0; font-size:14px;"><strong>Địa chỉ:</strong> 452-454 Nguyễn Tri Phương, Phường 9, Quận 10, TP.HCM</p>
-                <p style="margin: 5px 0; font-size:14px;"><strong>Thời gian:</strong> 08:00 - 21:30 toàn bộ các ngày trong tuần</p>
+                <h4>🏢 Học viện Trung tâm</h4>
+                <p style="margin: 5px 0; font-size:14px; font-weight: 600;"><strong>Địa chỉ:</strong> 452 Nguyễn Tri Phương, Quận 10, TP.HCM</p>
+                <p style="margin: 5px 0; font-size:14px; font-weight: 600;"><strong>Thời gian:</strong> 08:00 - 21:30 mỗi ngày</p>
             </div>
             <div class="contact-box-item">
-                <h4>✉️ Cổng hỗ trợ học vụ</h4>
-                <p style="margin: 5px 0; font-size:14px;"><strong>Email đào tạo:</strong> academic@dolenglish.vn</p>
-                <p style="margin: 5px 0; font-size:14px;"><strong>Support LMS:</strong> support.lms@dol.vn</p>
+                <h4>✉️ Phòng Học Vụ LMS</h4>
+                <p style="margin: 5px 0; font-size:14px; font-weight: 600;"><strong>Hỗ trợ học viên:</strong> academic@dolenglish.vn</p>
+                <p style="margin: 5px 0; font-size:14px; font-weight: 600;"><strong>Kỹ thuật hệ thống:</strong> support.lms@dol.vn</p>
             </div>
             <div class="contact-box-item">
-                <h4>🌐 Kênh truyền thông</h4>
-                <p style="margin: 5px 0; font-size:14px;"><strong>Fanpage:</strong> facebook.com/dolenglish</p>
-                <p style="margin: 5px 0; font-size:14px;"><strong>Kênh TikTok:</strong> @tienganhtuduydol</p>
+                <h4>✨ Cộng đồng mạng xã hội</h4>
+                <p style="margin: 5px 0; font-size:14px; font-weight: 600;"><strong>Fanpage:</strong> facebook.com/dolenglish</p>
+                <p style="margin: 5px 0; font-size:14px; font-weight: 600;"><strong>TikTok:</strong> @tienganhtuduydol</p>
             </div>
         </div>
     </section>
 
-    <section style="background: var(--light-bg)">
-        <div class="section-title">Đăng Ký Nhận <span>Tư Vấn Lộ Trình</span></div>
+    <!-- Register Form -->
+    <section style="background-color: #f0f4f8; border-radius: var(--border-radius); margin-bottom: 50px;">
+        <div class="section-title">Nhận <span>Lộ Trình Cá Nhân Hóa</span> Miễn Phí</div>
         <div class="cta-form">
             <form action="#" method="POST">
                 <input type="text" placeholder="Họ và tên của bạn" required>
-                <input type="email" placeholder="Địa chỉ Email của bạn" required>
+                <input type="email" placeholder="Địa chỉ Email" required>
                 <input type="tel" placeholder="Số điện thoại liên hệ" required>
-                <button type="submit">NHẬN TƯ VẤN MIỄN PHÍ NGAY</button>
+                <button type="submit">Bắt đầu ngay</button>
             </form>
         </div>
     </section>
 
+    <!-- AI Chat Bot Widget -->
     <div class="ai-chatbot-widget">
         <div class="chat-button" id="chatBtn">🤖</div>
         <div class="chat-window" id="chatWin">
@@ -712,19 +791,21 @@
                 <span style="cursor:pointer;" id="closeChat">✖</span>
             </div>
             <div class="chat-body" id="chatBody">
-                <div class="chat-msg">Xin chào! Mình là Trợ lý AI của học viện DOL Đình Lực. Bạn đang cần tư vấn lộ trình học IELTS, SAT hay phương pháp Linearthinking độc quyền ạ?</div>
+                <div class="chat-msg bot">Xin chào! Mình là Trợ lý AI của DOL English. Hôm nay mình có thể giúp bạn tìm hiểu về khóa học hay phương pháp Linearthinking ạ?</div>
             </div>
             <div class="chat-footer">
-                <input type="text" id="chatInput" placeholder="Nhập tin nhắn câu hỏi...">
+                <input type="text" id="chatInput" placeholder="Nhập câu hỏi của bạn...">
                 <button id="sendBtn">Gửi</button>
             </div>
         </div>
     </div>
 
+    <!-- Footer -->
     <footer>
         <p>© 2026 DOL English - Đình Lực. Học Viện Tiếng Anh Tư Duy Đầu Tiên Tại Việt Nam.</p>
     </footer>
 
+    <!-- Chatbot Script -->
     <script>
         const chatBtn = document.getElementById('chatBtn');
         const chatWin = document.getElementById('chatWin');
@@ -745,21 +826,20 @@
             if(chatInput.value.trim() !== "") {
                 let userMsg = document.createElement('div');
                 userMsg.className = 'chat-msg';
-                userMsg.style.background = '#e2e2e2';
-                userMsg.style.color = '#333';
-                userMsg.style.borderLeft = '3px solid #666';
                 userMsg.style.marginLeft = 'auto';
+                userMsg.style.backgroundColor = 'var(--primary-color)';
+                userMsg.style.color = 'white';
+                userMsg.style.borderColor = 'var(--primary-color)';
                 userMsg.innerText = chatInput.value;
                 chatBody.appendChild(userMsg);
                 
                 chatInput.value = "";
                 chatBody.scrollTop = chatBody.scrollHeight;
 
-                // Giả lập bot phản hồi sau 1 giây
                 setTimeout(() => {
                     let botMsg = document.createElement('div');
-                    botMsg.className = 'chat-msg';
-                    botMsg.innerText = "Cảm ơn bạn đã quan tâm! Chuyên viên tư vấn của DOL sẽ sớm inbox liên hệ trực tiếp hỗ trợ bạn qua số điện thoại nha.";
+                    botMsg.className = 'chat-msg bot';
+                    botMsg.innerText = "Cảm ơn thông tin từ bạn! Ban cố vấn học thuật của DOL sẽ liên hệ hỗ trợ bạn kiểm tra trình độ ngay nha.";
                     chatBody.appendChild(botMsg);
                     chatBody.scrollTop = chatBody.scrollHeight;
                 }, 1000);
