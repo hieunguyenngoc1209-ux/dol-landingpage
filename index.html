@@ -1,1002 +1,850 @@
 <!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOL English - Học Viện Tiếng Anh Tư Duy Đầu Tiên Tại Việt Nam</title>
-    <style>
-        :root {
-            --dol-red: #E31818;
-            --dol-red-hover: #C91212;
-            --dol-dark: #1E293B;
-            --dol-gray-bg: #F8FAFC;
-            --dol-border: #E2E8F0;
-            --text-secondary: #64748B;
-            --radius-lg: 24px;
-            --radius-md: 16px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            color: var(--dol-dark);
-            background-color: #FFFFFF;
-            overflow-x: hidden;
-        }
-
-        /* Top Bar Thông Báo */
-        .top-notification {
-            background-color: #FFF0F0;
-            color: var(--dol-red);
-            text-align: center;
-            padding: 10px 20px;
-            font-size: 14px;
-            font-weight: 700;
-            border-bottom: 1px solid #FFE0E0;
-        }
-
-        /* Header & Dropdown */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 8%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--dol-border);
-        }
-
-        .logo img {
-            height: 40px;
-            vertical-align: middle;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-item {
-            position: relative;
-            margin: 0 16px;
-        }
-
-        .nav-item > a {
-            text-decoration: none;
-            color: var(--dol-dark);
-            font-weight: 700;
-            font-size: 15px;
-            padding: 10px 0;
-            display: inline-block;
-            transition: var(--transition);
-        }
-
-        .nav-item:hover > a {
-            color: var(--dol-red);
-        }
-
-        /* Mega Dropdown Menu */
-        .dropdown {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%) translateY(15px);
-            background: #FFFFFF;
-            min-width: 260px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            border-radius: var(--radius-md);
-            padding: 15px 0;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            border: 1px solid var(--dol-border);
-        }
-
-        .nav-item:hover .dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .dropdown a {
-            display: block;
-            padding: 12px 24px;
-            color: var(--dol-dark);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .dropdown a:hover {
-            background: var(--dol-gray-bg);
-            color: var(--dol-red);
-            padding-left: 30px;
-        }
-
-        .cta-header-btn {
-            background-color: var(--dol-red);
-            color: #FFFFFF;
-            padding: 12px 26px;
-            border-radius: var(--radius-md);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
-            transition: var(--transition);
-            box-shadow: 0 4px 12px rgba(227, 24, 24, 0.15);
-        }
-
-        .cta-header-btn:hover {
-            background-color: var(--dol-red-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(227, 24, 24, 0.25);
-        }
-
-        /* Hero Section */
-        .hero-section {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 80px 8%;
-            max-width: 1400px;
-            margin: 0 auto;
-            gap: 60px;
-            flex-wrap: wrap;
-        }
-
-        .hero-content {
-            flex: 1.2;
-            min-width: 320px;
-        }
-
-        .hero-badge {
-            background-color: #FFF0F0;
-            color: var(--dol-red);
-            padding: 6px 16px;
-            border-radius: 100px;
-            font-size: 13px;
-            font-weight: 800;
-            display: inline-block;
-            margin-bottom: 24px;
-            border: 1px solid #FFE0E0;
-        }
-
-        .hero-content h1 {
-            font-size: 52px;
-            font-weight: 900;
-            line-height: 1.15;
-            letter-spacing: -1.5px;
-            margin-bottom: 24px;
-        }
-
-        .hero-content h1 span {
-            color: var(--dol-red);
-        }
-
-        .hero-content p {
-            font-size: 18px;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            font-weight: 500;
-            max-width: 540px;
-        }
-
-        /* Nút Cuộn Xuống Test */
-        .hero-actions {
-            display: flex;
-            gap: 15px;
-        }
-        .btn-test-scroll {
-            background-color: #1E293B;
-            color: #fff;
-            padding: 14px 28px;
-            border-radius: var(--radius-md);
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 15px;
-            transition: var(--transition);
-        }
-        .btn-test-scroll:hover {
-            background-color: #0F172A;
-            transform: translateY(-2px);
-        }
-
-        .hero-visual {
-            flex: 1;
-            min-width: 380px;
-            text-align: center;
-        }
-
-        /* Khung chứa ảnh Banner chính xịn sò */
-        .hero-visual .banner-img {
-            width: 100%;
-            max-width: 540px;
-            border-radius: var(--radius-lg);
-            box-shadow: 0 20px 50px rgba(227, 24, 24, 0.08);
-            border: 2px solid var(--dol-border);
-            transition: var(--transition);
-        }
-        .hero-visual .banner-img:hover {
-            transform: scale(1.02);
-            box-shadow: 0 25px 60px rgba(227, 24, 24, 0.15);
-        }
-
-        /* Khối Thống Kê Sáng Tạo */
-        .stats-grid {
-            display: flex;
-            gap: 40px;
-            margin-top: 50px;
-            border-top: 1px solid var(--dol-border);
-            padding-top: 30px;
-        }
-
-        .stat-card strong {
-            font-size: 36px;
-            font-weight: 900;
-            color: var(--dol-dark);
-            display: block;
-        }
-
-        .stat-card span {
-            color: var(--text-secondary);
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        /* CHỨC NĂNG 1: KHUNG ỨNG DỤNG TRẮC NGHIỆM TEST NHANH 45s (MỚI THÊM) */
-        .quick-test-section {
-            background-color: #FFF5F5;
-            padding: 90px 8%;
-            text-align: center;
-            border-top: 1px solid #FFE0E0;
-            border-bottom: 1px solid #FFE0E0;
-        }
-        .test-app-container {
-            max-width: 650px;
-            margin: 0 auto;
-            background: #FFFFFF;
-            border-radius: var(--radius-lg);
-            border: 2px solid var(--dol-border);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            padding: 40px;
-            text-align: left;
-        }
-        .test-progress {
-            height: 6px;
-            background-color: var(--dol-gray-bg);
-            border-radius: 100px;
-            margin-bottom: 25px;
-            overflow: hidden;
-        }
-        .test-progress-bar {
-            height: 100%;
-            width: 33.33%;
-            background-color: var(--dol-red);
-            transition: var(--transition);
-        }
-        .question-title {
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.4;
-        }
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .option-item {
-            background: var(--dol-gray-bg);
-            border: 2px solid var(--dol-border);
-            padding: 16px 20px;
-            border-radius: var(--radius-md);
-            font-weight: 700;
-            font-size: 15px;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .option-item:hover {
-            border-color: var(--dol-red);
-            background-color: #FFF0F0;
-        }
-        .option-item.correct {
-            border-color: #28a745;
-            background-color: #e6f4ea;
-            color: #137333;
-        }
-        .option-item.wrong {
-            border-color: var(--dol-red);
-            background-color: #fce8e6;
-            color: #c5221f;
-        }
-        .test-result-box {
-            display: none;
-            text-align: center;
-            animation: slideUp 0.4s ease;
-        }
-        .test-result-box h4 {
-            font-size: 26px;
-            font-weight: 900;
-            color: #28a745;
-            margin-bottom: 12px;
-        }
-
-        /* Bento Grid Layout - Học thuật & Linearthinking */
-        .bento-section {
-            background-color: var(--dol-gray-bg);
-            padding: 100px 8%;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 38px;
-            font-weight: 900;
-            letter-spacing: -1px;
-            margin-bottom: 60px;
-        }
-
-        .section-title span {
-            color: var(--dol-red);
-        }
-
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 11fr);
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .bento-card {
-            background: #FFFFFF;
-            border-radius: var(--radius-lg);
-            padding: 40px;
-            border: 1px solid var(--dol-border);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-            transition: var(--transition);
-        }
-
-        .bento-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
-            border-color: rgba(227, 24, 24, 0.2);
-        }
-
-        .bento-card.double-width {
-            grid-column: span 2;
-            background: linear-gradient(135deg, #FFFFFF 0%, #FFF5F5 100%);
-        }
-
-        .bento-card h3 {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 16px;
-        }
-
-        .bento-card p {
-            color: var(--text-secondary);
-            font-size: 15px;
-            font-weight: 500;
-        }
-
-        .tag-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 24px;
-        }
-
-        .tag-item {
-            background: #FFFFFF;
-            border: 1px solid var(--dol-border);
-            padding: 8px 16px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--dol-dark);
-        }
-
-        /* CHỨC NĂNG 2: KHUNG CHẠY TỰ ĐỘNG NGANG ĐỘC ĐÁO FEEDBACK HỌC VIÊN (MỚI THÊM) */
-        .marquee-section {
-            padding: 80px 0;
-            background-color: #FFFFFF;
-            overflow: hidden;
-            position: relative;
-        }
-        .marquee-wrapper {
-            display: flex;
-            gap: 30px;
-            width: max-content;
-            animation: marqueeContinuous 30s linear infinite;
-        }
-        .marquee-wrapper:hover {
-            animation-play-state: paused; /* Dừng chạy khi hover chuột vào xem */
-        }
-        .fb-marquee-card {
-            background: var(--dol-gray-bg);
-            border: 1px solid var(--dol-border);
-            border-radius: var(--radius-md);
-            padding: 30px;
-            width: 360px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.01);
-            transition: var(--transition);
-        }
-        .fb-marquee-card:hover {
-            border-color: var(--dol-red);
-            background: #fff;
-        }
-        .fb-user-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        .fb-avatar {
-            width: 45px;
-            height: 45px;
-            background-color: var(--dol-red);
-            color: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 15px;
-        }
-        .fb-details h5 {
-            font-size: 15px;
-            font-weight: 800;
-        }
-        .fb-details span {
-            font-size: 12px;
-            color: var(--dol-red);
-            font-weight: 700;
-        }
-
-        @keyframes marqueeContinuous {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* Khối Đăng Ký Tư Vấn Thang Điểm */
-        .register-section {
-            padding: 100px 8%;
-            text-align: center;
-            background-color: var(--dol-gray-bg);
-        }
-
-        .form-container {
-            max-width: 540px;
-            margin: 0 auto;
-            background: #FFFFFF;
-            padding: 50px;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--dol-border);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.05);
-        }
-
-        .form-container input {
-            width: 100%;
-            padding: 16px 20px;
-            margin-bottom: 16px;
-            border: 1px solid var(--dol-border);
-            border-radius: var(--radius-md);
-            font-size: 15px;
-            font-weight: 600;
-            transition: var(--transition);
-            background-color: var(--dol-gray-bg);
-        }
-
-        .form-container input:focus {
-            outline: none;
-            border-color: var(--dol-red);
-            background-color: #FFFFFF;
-            box-shadow: 0 0 0 4px rgba(227, 24, 24, 0.1);
-        }
-
-        .form-container button {
-            width: 100%;
-            padding: 16px;
-            background-color: var(--dol-red);
-            color: #FFFFFF;
-            border: none;
-            border-radius: var(--radius-md);
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 4px 12px rgba(227, 24, 24, 0.2);
-        }
-
-        .form-container button:hover {
-            background-color: var(--dol-red-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(227, 24, 24, 0.3);
-        }
-
-        /* HỆ THỐNG GIAO DIỆN CHATBOX AI ĐỘC QUYỀN */
-        .chat-widget-container {
-            position: fixed;
-            bottom: 35px;
-            right: 35px;
-            z-index: 2000;
-            font-family: sans-serif;
-        }
-
-        .chat-btn-toggle {
-            width: 60px;
-            height: 60px;
-            background-color: var(--dol-red);
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #FFFFFF;
-            font-size: 26px;
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(227, 24, 24, 0.3);
-            transition: var(--transition);
-        }
-
-        .chat-btn-toggle:hover {
-            transform: scale(1.05) translateY(-3px);
-            background-color: var(--dol-red-hover);
-        }
-
-        .chat-window {
-            position: absolute;
-            bottom: 75px;
-            right: 0;
-            width: 350px;
-            height: 460px;
-            background-color: #FFFFFF;
-            border-radius: var(--radius-md);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-            border: 1px solid var(--dol-border);
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-            animation: slideUp 0.3s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .chat-header {
-            background-color: var(--dol-red);
-            color: #FFFFFF;
-            padding: 16px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 700;
-            font-size: 15px;
-        }
-
-        .chat-header .close-btn {
-            cursor: pointer;
-            font-size: 18px;
-            opacity: 0.8;
-            transition: var(--transition);
-        }
-
-        .chat-header .close-btn:hover {
-            opacity: 1;
-        }
-
-        .chat-messages-box {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            background-color: var(--dol-gray-bg);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .msg-bubble {
-            padding: 12px 16px;
-            border-radius: 14px;
-            font-size: 14px;
-            font-weight: 500;
-            line-height: 1.4;
-            max-width: 80%;
-            word-wrap: break-word;
-        }
-
-        .msg-bubble.bot {
-            background-color: #FFFFFF;
-            color: var(--dol-dark);
-            align-self: flex-start;
-            border: 1px solid var(--dol-border);
-            border-top-left-radius: 4px;
-        }
-
-        .msg-bubble.user {
-            background-color: var(--dol-red);
-            color: #FFFFFF;
-            align-self: flex-end;
-            border-top-right-radius: 4px;
-            box-shadow: 0 4px 10px rgba(227, 24, 24, 0.15);
-        }
-
-        .chat-footer-input {
-            display: flex;
-            padding: 12px;
-            background-color: #FFFFFF;
-            border-top: 1px solid var(--dol-border);
-            align-items: center;
-        }
-
-        .chat-footer-input input {
-            flex: 1;
-            border: none;
-            padding: 10px 14px;
-            font-size: 14px;
-            font-weight: 600;
-            outline: none;
-            background-color: var(--dol-gray-bg);
-            border-radius: 10px;
-        }
-
-        .chat-footer-input button {
-            background: none;
-            border: none;
-            color: var(--dol-red);
-            font-weight: 700;
-            padding: 0 14px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: var(--transition);
-        }
-
-        .chat-footer-input button:hover {
-            color: var(--dol-red-hover);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--dol-dark);
-            color: #FFFFFF;
-            padding: 60px 8%;
-            text-align: center;
-            font-size: 14px;
-            font-weight: 500;
-            border-top: 5px solid var(--dol-red);
-        }
-
-        footer p {
-            opacity: 0.7;
-        }
-
-        @media (max-width: 968px) {
-            .hero-section { padding: 40px 5%; text-align: center; }
-            .hero-content h1 { font-size: 38px; }
-            .hero-content p { margin: 0 auto 30px auto; }
-            .stats-grid { justify-content: center; gap: 20px; }
-            .bento-grid { grid-template-columns: 1fr; }
-            .bento-card.double-width { grid-column: span 1; }
-            header nav { display: none; }
-            .hero-actions { justify-content: center; }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Top Bar -->
-    <div class="top-notification">
-        🎉 Đã có lịch khai giảng khóa học IELTS tháng mới với ưu đãi đặc biệt. Đăng ký test trình độ ngay!
-    </div>
-
-    <!-- Header Navigation -->
-    <header>
-        <div class="logo">
-            <img src="https://images.squarespace-cdn.com/content/v1/5e7300f2e043186fa884be5e/1601362624508-41K0B36Y72WOKT2YAGY8/LOGO+DOL+IELTS+DINH+LUC+RGB+01.png" alt="DOL English">
-        </div>
-        <nav>
-            <div class="nav-item"><a href="#">Về DOL</a></div>
-            <div class="nav-item">
-                <a href="#">Khóa học ▼</a>
-                <div class="dropdown">
-                    <a href="#">IELTS Người Lớn</a>
-                    <a href="#">IELTS Học Sinh Cấp 2-3</a>
-                    <a href="#">Khóa học SAT Tư Duy</a>
-                    <a href="#">Khóa học TOEIC Đột Phá</a>
-                </div>
-            </div>
-            <div class="nav-item">
-                <a href="#">Linearthinking ▼</a>
-                <div class="dropdown">
-                    <a href="#">Hệ thống phương pháp độc quyền</a>
-                    <a href="#">Chứng nhận quốc tế (Mỹ & Ấn Độ)</a>
-                    <a href="#">Sách bản quyền độc quyền</a>
-                </div>
-            </div>
-            <div class="nav-item"><a href="#">Lịch khai giảng</a></div>
-            <div class="nav-item"><a href="#">Đội ngũ giáo viên</a></div>
-        </nav>
-        <a href="#registerSection" class="cta-header-btn">Tư vấn lộ trình</a>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="hero-content">
-            <div class="hero-badge">⚡ ĐỘC QUYỀN LINEARTHINKING</div>
-            <h1>Học viện Tiếng Anh<br>Tư Duy <span>DOL English</span></h1>
-            <p>Hệ thống phương pháp học tiếng Anh tư duy logic toán học giúp rút ngắn 1/2 thời gian ôn luyện, cam kết bứt phá band điểm tối ưu.</p>
-            
-            <div class="hero-actions">
-                <a href="#registerSection" class="cta-header-btn">Đăng Ký Học Ngay</a>
-                <a href="#quickTestSection" class="btn-test-scroll">🎮 Thử Thách Trắc Nghiệm</a>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <strong>4,000+</strong>
-                    <span>Học viên đạt 7.0+ IELTS</span>
-                </div>
-                <div class="stat-card">
-                    <strong>13+</strong>
-                    <span>Cơ sở hiện đại toàn quốc</span>
-                </div>
-            </div>
-        </div>
-        <div class="hero-visual">
-            <!-- Vị trí Ảnh Banner cấu trúc cao cấp đầy chuyên nghiệp -->
-            <img src="https://images.squarespace-cdn.com/content/v1/5e7300f2e043186fa884be5e/1601362624508-41K0B36Y72WOKT2YAGY8/LOGO+DOL+IELTS+DINH+LUC+RGB+01.png" alt="DOL Main Banner" class="banner-img">
-        </div>
-    </section>
-
-    <!-- CHUC NANG 1: APP MINI TRAC NGHIEM TEST NHANH MIEN PHI -->
-    <section class="quick-test-section" id="quickTestSection">
-        <div class="section-title">⚡ Kiểm tra nhanh <span>Tư Duy Anh Ngữ</span></div>
-        <div class="test-app-container">
-            <div class="test-progress">
-                <div class="test-progress-bar" id="testProgressBar"></div>
-            </div>
-            
-            <div id="testQuestionBox">
-                <div class="question-title" id="qTitle">Câu hỏi 1: Đâu là thói quen khiến bạn mất nhiều thời gian nhất khi làm bài Reading?</div>
-                <div class="options-list">
-                    <div class="option-item" onclick="submitQuizAnswer(this, false, 'Dịch từng từ sẽ làm bạn cạn kiệt thời gian! Hãy áp dụng Linearthinking để đơn giản cấu trúc câu.')">
-                        <span>A. Dịch word-by-word từng từ đơn lẻ sang tiếng Việt</span>
-                        <span>❌</span>
-                    </div>
-                    <div class="option-item" onclick="submitQuizAnswer(this, true, 'Chuẩn xác! Tìm cấu trúc trục S-V-O của Linearthinking giúp bạn hiểu đúng 100% ý chính câu dài mà không cần dịch hết.')">
-                        <span>B. Tìm cấu trúc cốt lõi (Chủ ngữ - Động từ) của câu</span>
-                        <span>✨</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="test-result-box" id="testResultBox">
-                <h4>🎉 Chúc mừng bạn hoàn thành thử thách!</h4>
-                <p style="color: var(--text-secondary); font-weight: 600; margin-bottom: 20px;" id="resultExplanationText"></p>
-                <a href="#registerSection" class="cta-header-btn" style="display:inline-block;">Nhận Quà & Lộ Trình Chi Tiết</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Bento Grid Layout -->
-    <section class="bento-section">
-        <div class="section-title">Hệ sinh thái học thuật <span>thông minh</span></div>
-        <div class="bento-grid">
-            <div class="bento-card double-width">
-                <h3>Phương pháp Linearthinking bản quyền</h3>
-                <p>Giải pháp loại bỏ hoàn toàn thói quen dịch thô word-by-word, học vẹt bài mẫu. Tư duy cụ thể hóa cấu trúc trục câu cốt lõi giúp tối ưu hóa điểm số Writing và Reading vượt trội.</p>
-                <div class="tag-list">
-                    <span class="tag-item">Cấu trúc S-V-O</span>
-                    <span class="tag-item">Logic liên kết</span>
-                    <span class="tag-item">Chứng nhận quốc tế</span>
-                </div>
-            </div>
-            <div class="bento-card">
-                <h3>App thông minh Super LMS</h3>
-                <p>Nền tảng ứng dụng độc quyền tích hợp trí tuệ nhân tạo (AI) hỗ trợ tự động chấm chữa bài tập về nhà chính xác, theo dõi tiến độ chi tiết.</p>
-            </div>
-            <div class="bento-card">
-                <h3>Đội ngũ giáo viên Đỉnh Cao</h3>
-                <p>100% giảng viên tại DOL sở hữu chứng chỉ IELTS từ 8.0 - 8.5, xuất thân từ các trường đại học danh tiếng hàng đầu, tận tâm đồng hành sát sao.</p>
-            </div>
-            <div class="bento-card double-width">
-                <h3>Lộ trình cá nhân hóa tinh gọn</h3>
-                <p>Xây dựng kế hoạch học tập độc bản dựa trên kết quả kiểm tra năng lực đầu vào đầu tiên một cách chính xác, bám sát mục tiêu của từng học viên.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- CHUC NANG 2: KHUNG CHAY NGANG TU DONG FEEDBACK SINH VIEN -->
-    <section class="marquee-section">
-        <div class="section-title">Bảng Vàng <span>Vinh Danh</span> Học Viên Xuất Sắc</div>
-        <div class="marquee-wrapper">
-            <!-- Cụm thẻ gốc -->
-            <div class="fb-marquee-card">
-                <div class="fb-user-info">
-                    <div class="fb-avatar">HA</div>
-                    <div class="fb-details">
-                        <h5>Nguyễn Hoàng Anh</h5>
-                        <span>Đạt 8.0 IELTS</span>
-                    </div>
-                </div>
-                <p style="font-size:14px; color:var(--text-secondary); font-weight:500;">"Nhờ Linearthinking giúp mình quản lý cấu trúc bài Writing siêu đỉnh, không còn bơi trong đống từ vựng nữa!"</p>
-            </div>
-            <div class="fb-marquee-card">
-                <div class="fb-user-info">
-                    <div class="fb-avatar">MT</div>
-                    <div class="fb-details">
-                        <h5>Lê Minh Triết</h5>
-                        <span>Đạt 7.5 IELTS</span>
-                    </div>
-                </div>
-                <p style="font-size:14px; color:var(--text-secondary); font-weight:500;">"App Super LMS chấm bài AI siêu tiện. Sửa lỗi sai tư duy Reading cực sâu, tiết kiệm được một nửa thời gian học."</p>
-            </div>
-            <div class="fb-marquee-card">
-                <div class="fb-user-info">
-                    <div class="fb-avatar">NK</div>
-                    <div class="fb-details">
-                        <h5>Phạm Ngọc Khánh</h5>
-                        <span>Đạt 8.5 IELTS</span>
-                    </div>
-                </div>
-                <p style="font-size:14px; color:var(--text-secondary); font-weight:500;">"Phương pháp tư duy logic toán của thầy Lực chuẩn không cần chỉnh. Giúp mình tư duy câu ngắn gọn mạch lạc!"</p>
-            </div>
-            <!-- Nhân bản cụm thẻ để tạo hiệu ứng chạy vòng lặp vô tận không vết ghép -->
-            <div class="fb-marquee-card">
-                <div class="fb-user-info">
-                    <div class="fb-avatar">HA</div>
-                    <div class="fb-details">
-                        <h5>Nguyễn Hoàng Anh</h5>
-                        <span>Đạt 8.0 IELTS</span>
-                    </div>
-                </div>
-                <p style="font-size:14px; color:var(--text-secondary); font-weight:500;">"Nhờ Linearthinking giúp mình quản lý cấu trúc bài Writing siêu đỉnh, không còn bơi trong đống từ vựng nữa!"</p>
-            </div>
-            <div class="fb-marquee-card">
-                <div class="fb-user-info">
-                    <div class="fb-avatar">MT</div>
-                    <div class="fb-details">
-                        <h5>Lê Minh Triết</h5>
-                        <span>Đạt 7.5 IELTS</span>
-                    </div>
-                </div>
-                <p style="font-size:14px; color:var(--text-secondary); font-weight:500;">"App Super LMS chấm bài AI siêu tiện. Sửa lỗi sai tư duy Reading cực sâu, tiết kiệm được một nửa thời gian học."</p>
-            </div>
-            <div class="fb-marquee-card">
-                <div class="fb-user-info">
-                    <div class="fb-avatar">NK</div>
-                    <div class="fb-details">
-                        <h5>Phạm Ngọc Khánh</h5>
-                        <span>Đạt 8.5 IELTS</span>
-                    </div>
-                </div>
-                <p style="font-size:14px; color:var(--text-secondary); font-weight:500;">"Phương pháp tư duy logic toán của thầy Lực chuẩn không cần chỉnh. Giúp mình tư duy câu ngắn gọn mạch lạc!"</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Biểu Mẫu Đăng Ký -->
-    <section class="register-section" id="registerSection">
-        <div class="section-title">Nhận <span>lộ trình tối ưu</span> miễn phí</div>
-        <div class="form-container">
-            <form action="#" method="POST">
-                <input type="text" placeholder="Họ và tên học viên" required>
-                <input type="email" placeholder="Địa chỉ Email" required>
-                <input type="tel" placeholder="Số điện thoại liên hệ" required>
-                <button type="submit">ĐĂNG KÝ XẾP LỚP NGAY</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- KHUNG CHATBOX AI TỰ ĐỘNG ĐỘC QUYỀN -->
-    <div class="chat-widget-container">
-        <div class="chat-btn-toggle" id="chatToggleBtn">💬</div>
+<!-- saved from url=(0034)https://anh-ngu-40.hietek.asia/Dol -->
+<html lang="vi"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="preview" content="false">
+    <title>Anh Ngữ 4.0: Luyện Thi Tiếng Anh Online Theo LinearThinking</title>
+    <meta name="theme-color" content="#000000">
+<meta name="description" content="Nền tảng luyện thi IELTS, TOEIC, SAT &amp; giao tiếp online Anh Ngữ 4.0. Học theo LinearThinking, lộ trình cá nhân, AI sửa lỗi, cam kết band. Test nhanh 5 phút.">
+<meta name="keywords" content="luyện thi ielts,luyện thi toeic,luyện thi sat,tiếng anh giao tiếp,học tiếng anh online,LinearThinking,Anh Ngữ 4.0,lộ trình cá nhân hóa,sửa lỗi tiếng anh,test tiếng anh miễn phí">
+<meta name="author" content="Vy Nguyen">
+<meta name="generator" content="HieTek">
+<meta name="robots" content="index, follow">
+<meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1 ">
+<link rel="canonical" href="https://anh-ngu-40.hietek.asia/Dol">
+<meta property="og:title" content="Anh Ngữ 4.0: Luyện Thi Tiếng Anh Online Theo LinearThinking">
+<meta property="og:locale" content="vi-VN">
+<meta property="og:image" content="https://anh-ngu-40.hietek.asia/file?id=6a3526df526c8350291132f4">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://anh-ngu-40.hietek.asia/Dol">
+<meta property="article:published_time" content="2026-06-19T11:16:35.127Z">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Anh Ngữ 4.0: Luyện Thi Tiếng Anh Online Theo LinearThinking">
+<meta name="twitter:description" content="Nền tảng luyện thi IELTS, TOEIC, SAT &amp; giao tiếp online Anh Ngữ 4.0. Học theo LinearThinking, lộ trình cá nhân, AI sửa lỗi, cam kết band. Test nhanh 5 phút.">
+<meta name="twitter:image" content="https://anh-ngu-40.hietek.asia/file?id=6a3526df526c8350291132f4">
+
+<link rel="icon" href="https://anh-ngu-40.hietek.asia/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="https://anh-ngu-40.hietek.asia/favicon.png" type="image/png">
+
+<script src="./Anh Ngữ 4.0_ Luyện Thi Tiếng Anh Online Theo LinearThinking_files/js" async=""></script><script src="./Anh Ngữ 4.0_ Luyện Thi Tiếng Anh Online Theo LinearThinking_files/https-upgrade.js"></script>
+<link rel="stylesheet" href="./Anh Ngữ 4.0_ Luyện Thi Tiếng Anh Online Theo LinearThinking_files/all.min.css">
+<script src="./Anh Ngữ 4.0_ Luyện Thi Tiếng Anh Online Theo LinearThinking_files/saved_resource"></script>
+<script src="./Anh Ngữ 4.0_ Luyện Thi Tiếng Anh Online Theo LinearThinking_files/wow.min.js"></script>
+<link rel="stylesheet" href="./Anh Ngữ 4.0_ Luyện Thi Tiếng Anh Online Theo LinearThinking_files/animate.min.css">
+<script src="./Anh Ngữ 4.0_ Luyện Thi Tiếng Anh Online Theo LinearThinking_files/page-loader.js"></script>
+<script src="./Anh Ngữ 4.0_ Luyện Thi Tiếng Anh Online Theo LinearThinking_files/page-config.js"></script>
+<script>
+    (function(w,cf){
+        w.__csrf_token = cf;
+    })(window, '0tT2rMKaLP1Hb37DM6hNHwdCJSjyJ33juRJ0tGqp');
+</script>
+
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Anh Ngữ 4.0: Luyện Thi Tiếng Anh Online Theo LinearThinking",
+      "author": {
+        "@type": "Person",
+        "name": "Vy Nguyen"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Vy Nguyen",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://anh-ngu-40.hietek.asia/favicon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://anh-ngu-40.hietek.asia/Dol"
+      },
+      "datePublished": "2026-06-19"
+    }
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "HieTek",
+  "url": "https://hietek.com",
+  "logo": "https://anh-ngu-40.hietek.asia/favicon.png",
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+84349223010",
+      "contactType": "product service",
+      "areaServed": "VN"
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "+84822222217",
+      "contactType": "customer service",
+      "areaServed": "VN"
+    }
+  ],
+  "sameAs": [
+    "https://hotai.dev",
+    "https://shorto.asia"
+  ]
+}
+</script>
+    <style>html{background: black;}</style>
         
-        <div class="chat-window" id="chatWindow">
-            <div class="chat-header">
-                <span>Trợ lý Đào tạo DOL AI</span>
-                <span class="close-btn" id="chatCloseBtn">✖</span>
+            <script>
+    (function(w,d,s,u,pid,cf){
+        w.__analytics_start = performance && performance.now ? performance.now() : Date.now();
+        w.__analytics_pid = pid;
+        w.__analytics_cf = cf;
+        var js = d.createElement(s);
+        js.src = u + '?pid=' + pid;
+        js.async = true;
+        var f = d.getElementsByTagName(s)[0];
+        f.parentNode.insertBefore(js, f);
+    })(window, document, 'script', '/htag/js', '38448ef7-91cf-4e4c-bb4f-4f470f180609', '0tT2rMKaLP1Hb37DM6hNHwdCJSjyJ33juRJ0tGqp');
+</script>
+                <style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.-bottom-5{bottom:-1.25rem}.bottom-24{bottom:6rem}.bottom-5{bottom:1.25rem}.left-0{left:0px}.left-4{left:1rem}.right-0{right:0px}.right-4{right:1rem}.right-5{right:1.25rem}.top-0{top:0px}.top-20{top:5rem}.top-full{top:100%}.z-40{z-index:40}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mr-2{margin-right:0.5rem}.mt-1{margin-top:0.25rem}.mt-10{margin-top:2.5rem}.mt-2{margin-top:0.5rem}.mt-3{margin-top:0.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-6{margin-top:1.5rem}.mt-8{margin-top:2rem}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-10{height:2.5rem}.h-11{height:2.75rem}.h-12{height:3rem}.h-14{height:3.5rem}.h-16{height:4rem}.h-20{height:5rem}.h-72{height:18rem}.h-\[360px\]{height:360px}.h-\[560px\]{height:560px}.h-full{height:100%}.min-h-\[360px\]{min-height:360px}.w-10{width:2.5rem}.w-11{width:2.75rem}.w-12{width:3rem}.w-14{width:3.5rem}.w-16{width:4rem}.w-72{width:18rem}.w-\[720px\]{width:720px}.w-\[calc\(100vw-2rem\)\]{width:calc(100vw - 2rem)}.w-full{width:100%}.min-w-0{min-width:0px}.max-w-2xl{max-width:42rem}.max-w-3xl{max-width:48rem}.max-w-4xl{max-width:56rem}.max-w-5xl{max-width:64rem}.max-w-7xl{max-width:80rem}.max-w-\[85\%\]{max-width:85%}.max-w-sm{max-width:24rem}.max-w-xl{max-width:36rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.cursor-pointer{cursor:pointer}.list-none{list-style-type:none}.grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-10{gap:2.5rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-6{gap:1.5rem}.gap-7{gap:1.75rem}.gap-8{gap:2rem}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-\[1\.5rem\]{border-radius:1.5rem}.rounded-\[2rem\]{border-radius:2rem}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:0.75rem}.rounded-tl-md{border-top-left-radius:0.375rem}.border{border-width:1px}.border-0{border-width:0px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-gray-200{--tw-border-opacity:1;border-color:rgb(229 231 235 / var(--tw-border-opacity, 1))}.border-red-100{--tw-border-opacity:1;border-color:rgb(254 226 226 / var(--tw-border-opacity, 1))}.border-red-200{--tw-border-opacity:1;border-color:rgb(254 202 202 / var(--tw-border-opacity, 1))}.border-white\/10{border-color:rgb(255 255 255 / 0.1)}.border-white\/20{border-color:rgb(255 255 255 / 0.2)}.bg-gray-950{--tw-bg-opacity:1;background-color:rgb(3 7 18 / var(--tw-bg-opacity, 1))}.bg-red-100{--tw-bg-opacity:1;background-color:rgb(254 226 226 / var(--tw-bg-opacity, 1))}.bg-red-200\/40{background-color:rgb(254 202 202 / 0.4)}.bg-red-50{--tw-bg-opacity:1;background-color:rgb(254 242 242 / var(--tw-bg-opacity, 1))}.bg-red-50\/50{background-color:rgb(254 242 242 / 0.5)}.bg-red-600{--tw-bg-opacity:1;background-color:rgb(220 38 38 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/15{background-color:rgb(255 255 255 / 0.15)}.bg-white\/5{background-color:rgb(255 255 255 / 0.05)}.bg-white\/95{background-color:rgb(255 255 255 / 0.95)}.bg-gradient-to-b{background-image:linear-gradient(to bottom, var(--tw-gradient-stops))}.from-white{--tw-gradient-from:#fff var(--tw-gradient-from-position);--tw-gradient-to:rgb(255 255 255 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-red-50\/50{--tw-gradient-to:rgb(254 242 242 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), rgb(254 242 242 / 0.5) var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-white{--tw-gradient-to:#fff var(--tw-gradient-to-position)}.object-cover{object-fit:cover}.p-2{padding:0.5rem}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-7{padding-left:1.75rem;padding-right:1.75rem}.px-8{padding-left:2rem;padding-right:2rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.py-14{padding-top:3.5rem;padding-bottom:3.5rem}.py-16{padding-top:4rem;padding-bottom:4rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-7{padding-top:1.75rem;padding-bottom:1.75rem}.pt-2{padding-top:0.5rem}.text-left{text-align:left}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-extrabold{font-weight:800}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-6{line-height:1.5rem}.leading-7{line-height:1.75rem}.leading-8{line-height:2rem}.tracking-\[\.18em\]{letter-spacing:.18em}.tracking-\[\.2em\]{letter-spacing:.2em}.tracking-tight{letter-spacing:-0.025em}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity, 1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55 / var(--tw-text-opacity, 1))}.text-gray-950{--tw-text-opacity:1;color:rgb(3 7 18 / var(--tw-text-opacity, 1))}.text-red-100{--tw-text-opacity:1;color:rgb(254 226 226 / var(--tw-text-opacity, 1))}.text-red-400{--tw-text-opacity:1;color:rgb(248 113 113 / var(--tw-text-opacity, 1))}.text-red-50{--tw-text-opacity:1;color:rgb(254 242 242 / var(--tw-text-opacity, 1))}.text-red-600{--tw-text-opacity:1;color:rgb(220 38 38 / var(--tw-text-opacity, 1))}.text-red-700{--tw-text-opacity:1;color:rgb(185 28 28 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-red-200{--tw-shadow-color:#fecaca;--tw-shadow:var(--tw-shadow-colored)}.shadow-red-300{--tw-shadow-color:#fca5a5;--tw-shadow:var(--tw-shadow-colored)}.shadow-red-950\/10{--tw-shadow-color:rgb(69 10 10 / 0.1);--tw-shadow:var(--tw-shadow-colored)}.shadow-red-950\/20{--tw-shadow-color:rgb(69 10 10 / 0.2);--tw-shadow:var(--tw-shadow-colored)}.shadow-red-950\/5{--tw-shadow-color:rgb(69 10 10 / 0.05);--tw-shadow:var(--tw-shadow-colored)}.outline-none{outline:2px solid transparent;outline-offset:2px}.ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.ring-transparent{--tw-ring-color:transparent}.blur-3xl{--tw-blur:blur(64px);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur{--tw-backdrop-blur:blur(8px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.hover\:border-red-300:hover{--tw-border-opacity:1;border-color:rgb(252 165 165 / var(--tw-border-opacity, 1))}.hover\:bg-black:hover{--tw-bg-opacity:1;background-color:rgb(0 0 0 / var(--tw-bg-opacity, 1))}.hover\:bg-red-50:hover{--tw-bg-opacity:1;background-color:rgb(254 242 242 / var(--tw-bg-opacity, 1))}.hover\:bg-red-700:hover{--tw-bg-opacity:1;background-color:rgb(185 28 28 / var(--tw-bg-opacity, 1))}.hover\:bg-white\/10:hover{background-color:rgb(255 255 255 / 0.1)}.hover\:text-red-600:hover{--tw-text-opacity:1;color:rgb(220 38 38 / var(--tw-text-opacity, 1))}.hover\:shadow-xl:hover{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.hover\:shadow-red-100:hover{--tw-shadow-color:#fee2e2;--tw-shadow:var(--tw-shadow-colored)}.focus\:border-red-400:focus{--tw-border-opacity:1;border-color:rgb(248 113 113 / var(--tw-border-opacity, 1))}.focus\:ring-red-200:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(254 202 202 / var(--tw-ring-opacity, 1))}.group[open] .group-open\:rotate-180{--tw-rotate:180deg;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@media (min-width: 640px){.sm\:left-8{left:2rem}.sm\:right-8{right:2rem}.sm\:h-\[460px\]{height:460px}.sm\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.sm\:flex-row{flex-direction:row}.sm\:items-center{align-items:center}.sm\:justify-between{justify-content:space-between}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}.sm\:text-5xl{font-size:3rem;line-height:1}}@media (min-width: 768px){.md\:flex{display:flex}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:items-center{align-items:center}.md\:justify-between{justify-content:space-between}.md\:p-10{padding:2.5rem}.md\:p-8{padding:2rem}.md\:py-20{padding-top:5rem;padding-bottom:5rem}.md\:py-24{padding-top:6rem;padding-bottom:6rem}}@media (min-width: 1024px){.lg\:flex{display:flex}.lg\:hidden{display:none}.lg\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.lg\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.lg\:grid-cols-\[\.9fr_1\.1fr\]{grid-template-columns:.9fr 1.1fr}.lg\:px-8{padding-left:2rem;padding-right:2rem}.lg\:text-6xl{font-size:3.75rem;line-height:1}}</style></head>
+<body>
+    <div id="app" data-editor-id="node-knmkk1iwf">
+  <header class="sticky top-0 z-40 border-b border-red-100 bg-white/95 backdrop-blur" data-editor-id="node-cg8vogz3z">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" data-editor-id="node-p4jvabeez">
+      <div class="flex h-20 items-center justify-between gap-4" data-editor-id="node-h7j0uvbi5">
+        <a href="https://anh-ngu-40.hietek.asia/Dol#" class="flex items-center gap-3" aria-label="DOL Linear English" data-editor-id="node-ibithlghx">
+          <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-red-600 text-white shadow-lg shadow-red-200" data-editor-id="node-o4yv9myea">
+            <i class="fa-solid fa-layer-group text-lg" data-editor-id="node-nmdbpegi5"></i>
+          </div>
+          <div data-editor-id="node-q14s2ne7w">
+            <div class="text-xl font-extrabold tracking-tight text-gray-950" data-editor-id="node-vs5lkva8z">DOL Linear</div>
+            <div class="text-xs font-semibold uppercase tracking-[.18em] text-red-600" data-editor-id="node-9056u7zzn">English Center</div>
+          </div>
+        </a>
+
+        <nav class="hidden items-center gap-7 lg:flex" data-editor-id="node-6zxqhxoe5">
+          <div class="nav-item relative py-7" data-editor-id="node-2mrgl8xce">
+            <button class="flex items-center gap-2 font-semibold text-gray-800 hover:text-red-600" data-editor-id="node-fqeh1az2y">
+              Khóa học <i class="fa-solid fa-chevron-down text-xs" data-editor-id="node-sfrb66xzq"></i>
+            </button>
+            <div class="nav-drop absolute left-0 top-full w-[720px] rounded-3xl border border-red-100 bg-white p-4 shadow-2xl shadow-red-950/10" data-editor-id="node-qcz0uz7go">
+              <div class="grid grid-cols-3 gap-3" data-editor-id="node-3yq621q2y">
+                <a class="rounded-2xl p-4 hover:bg-red-50" href="https://anh-ngu-40.hietek.asia/Dol#courses" data-editor-id="node-pt4vwnivw">
+                  <div class="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-red-100 text-red-700" data-editor-id="node-irwokakt6"><i class="fa-solid fa-graduation-cap" data-editor-id="node-2382wok09"></i></div>
+                  <div class="font-bold text-gray-950" data-editor-id="node-jd1x3p3pn">IELTS</div>
+                  <p class="mt-1 text-sm text-gray-600" data-editor-id="node-tt4noht3z">Lộ trình 0-7.5+, Speaking/Writing chữa bài 1-1.</p>
+                </a>
+                <a class="rounded-2xl p-4 hover:bg-red-50" href="https://anh-ngu-40.hietek.asia/Dol#courses" data-editor-id="node-1ssxvohy1">
+                  <div class="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-red-100 text-red-700" data-editor-id="node-tkvdh3v8a"><i class="fa-solid fa-briefcase" data-editor-id="node-0qpd6mtfk"></i></div>
+                  <div class="font-bold text-gray-950" data-editor-id="node-jws1299kg">TOEIC</div>
+                  <p class="mt-1 text-sm text-gray-600" data-editor-id="node-ciqnblwfr">Tăng tốc 450-850+, chiến thuật Part 5-7.</p>
+                </a>
+                <a class="rounded-2xl p-4 hover:bg-red-50" href="https://anh-ngu-40.hietek.asia/Dol#courses" data-editor-id="node-yesxkmw89">
+                  <div class="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-red-100 text-red-700" data-editor-id="node-u63ctjlfr"><i class="fa-solid fa-school" data-editor-id="node-72g5kmgi3"></i></div>
+                  <div class="font-bold text-gray-950" data-editor-id="node-wqxp662br">SAT</div>
+                  <p class="mt-1 text-sm text-gray-600" data-editor-id="node-q2zzz7lda">Reading, Writing, Math theo tư duy tuyến tính.</p>
+                </a>
+                <a class="rounded-2xl p-4 hover:bg-red-50" href="https://anh-ngu-40.hietek.asia/Dol#courses" data-editor-id="node-qumqyqe5v">
+                  <div class="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-red-100 text-red-700" data-editor-id="node-25nira2p9"><i class="fa-solid fa-comments" data-editor-id="node-mwtz6xueh"></i></div>
+                  <div class="font-bold text-gray-950" data-editor-id="node-g72ngw32k">Giao tiếp</div>
+                  <p class="mt-1 text-sm text-gray-600" data-editor-id="node-34g0bcetq">Phản xạ nói, phát âm, thuyết trình học thuật.</p>
+                </a>
+                <a class="rounded-2xl p-4 hover:bg-red-50" href="https://anh-ngu-40.hietek.asia/Dol#courses" data-editor-id="node-dtdvzrrfi">
+                  <div class="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-red-100 text-red-700" data-editor-id="node-1prn4ygby"><i class="fa-solid fa-child-reaching" data-editor-id="node-f10robd33"></i></div>
+                  <div class="font-bold text-gray-950" data-editor-id="node-rc1shnn0u">Junior</div>
+                  <p class="mt-1 text-sm text-gray-600" data-editor-id="node-tya6us3bk">Nền tảng tiếng Anh cho học sinh THCS/THPT.</p>
+                </a>
+                <a class="rounded-2xl p-4 hover:bg-red-50" href="https://anh-ngu-40.hietek.asia/Dol#courses" data-editor-id="node-aot2ttvck">
+                  <div class="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-red-100 text-red-700" data-editor-id="node-ge93shr1k"><i class="fa-solid fa-laptop-code" data-editor-id="node-8l0j3abh2"></i></div>
+                  <div class="font-bold text-gray-950" data-editor-id="node-3mjjr8ak5">Online 1-1</div>
+                  <p class="mt-1 text-sm text-gray-600" data-editor-id="node-ss14s8des">Cá nhân hóa giáo trình theo mục tiêu điểm số.</p>
+                </a>
+              </div>
             </div>
-            <div class="chat-messages-box" id="chatMessagesBox">
-                <div class="msg-bubble bot">
-                    Xin chào! Mình là trợ lý AI thông minh của học viện DOL English. Bạn đang cần tư vấn lộ trình học IELTS, SAT hay phương pháp Linearthinking độc quyền ạ?
-                </div>
-            </div>
-            <div class="chat-footer-input">
-                <input type="text" id="chatInputField" placeholder="Nhập câu hỏi của bạn...">
-                <button id="chatSendBtn">Gửi</button>
-            </div>
+          </div>
+          <a href="https://anh-ngu-40.hietek.asia/Dol#linear" class="font-semibold text-gray-800 hover:text-red-600" data-editor-id="node-pd6l8azor">LinearThinking</a>
+          <a href="https://anh-ngu-40.hietek.asia/Dol#test" class="font-semibold text-gray-800 hover:text-red-600" data-editor-id="node-edyaeokt7" hie-linker="{}">Test miễn phí</a>
+          <a href="https://anh-ngu-40.hietek.asia/Dol#center" class="font-semibold text-gray-800 hover:text-red-600" data-editor-id="node-znkfohp70">Trung tâm</a>
+          <a href="https://anh-ngu-40.hietek.asia/Dol#stories" class="font-semibold text-gray-800 hover:text-red-600" data-editor-id="node-o3bgrnrat">Học viên</a>
+          <a href="https://anh-ngu-40.hietek.asia/Dol#faq" class="font-semibold text-gray-800 hover:text-red-600" data-editor-id="node-yvwaez1xr">FAQ</a>
+        </nav>
+
+        <div class="items-center gap-3 md:flex" data-editor-id="node-no3b6x8kg">
+          <a href="https://anh-ngu-40.hietek.asia/Dol#test" class="rounded-full border border-red-200 px-5 py-3 font-bold text-red-700 hover:bg-red-50" data-editor-id="node-cnqaom45d" hie-linker="{&quot;value&quot;:&quot;https://1f348b8e.dol-landingpage.pages.dev/#quickTestSection&quot;}">Test nhanh</a>
+          <a href="https://anh-ngu-40.hietek.asia/Dol#consult" class="rounded-full bg-red-600 px-5 py-3 font-bold text-white shadow-lg shadow-red-200 hover:bg-red-700" data-editor-id="node-kh9nv00f6">Đăng ký tư vấn</a>
         </div>
+        <button id="mobileMenuBtn" class="rounded-xl border border-red-100 p-3 text-red-700 lg:hidden" aria-label="Mở menu" data-editor-id="node-cx7ofqae0"><i class="fa-solid fa-bars" data-editor-id="node-3g89h00an"></i></button>
+      </div>
+      <div id="mobileMenu" class="hidden border-t border-red-100 py-4 lg:hidden" data-editor-id="node-31inco6wd">
+        <div class="grid gap-2" data-editor-id="node-wjulol8vs">
+          <a class="rounded-xl px-4 py-3 font-semibold hover:bg-red-50" href="https://anh-ngu-40.hietek.asia/Dol#courses" data-editor-id="node-qze6wij49">Khóa học: IELTS, TOEIC, SAT, Giao tiếp</a>
+          <a class="rounded-xl px-4 py-3 font-semibold hover:bg-red-50" href="https://anh-ngu-40.hietek.asia/Dol#linear" data-editor-id="node-hghf1lq7s">LinearThinking</a>
+          <a class="rounded-xl px-4 py-3 font-semibold hover:bg-red-50" href="https://anh-ngu-40.hietek.asia/Dol#test" data-editor-id="node-18hul52r9">Test trình độ miễn phí</a>
+          <a class="rounded-xl px-4 py-3 font-semibold hover:bg-red-50" href="https://anh-ngu-40.hietek.asia/Dol#center" data-editor-id="node-mzk68ilxn">Khu vực trung tâm</a>
+        </div>
+      </div>
     </div>
+  </header>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 DOL English - Đình Lực. Học Viện Tiếng Anh Tư Duy Đầu Tiên Tại Việt Nam. Bảo lưu mọi quyền.</p>
-    </footer>
+  <main data-editor-id="node-kqofn9sli">
+    <section class="relative overflow-hidden bg-gradient-to-b from-white via-red-50/50 to-white" data-editor-id="node-6ygdufppk">
+      <div class="absolute right-0 top-20 h-72 w-72 rounded-full bg-red-200/40 blur-3xl" data-editor-id="node-nznplgvtb"></div>
+      <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 md:py-20 lg:grid-cols-2 lg:px-8" data-editor-id="node-iuavv7u1m">
+        <div data-editor-id="node-xkdz9a9ye">
+          <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-red-200 bg-white px-4 py-2 text-sm font-bold text-red-700 shadow-sm" data-editor-id="node-8yylpn6nl">
+            <i class="fa-solid fa-wand-magic-sparkles" data-editor-id="node-l1zyfnofu"></i>
+            Cá nhân hóa lộ trình bằng AI + LinearThinking
+          </div>
+          <h1 class="max-w-2xl text-4xl font-extrabold tracking-tight text-gray-950 sm:text-5xl lg:text-6xl" data-editor-id="node-mvjdhxucl">Chọn đúng khóa, rút ngắn đường đến band mục tiêu.</h1>
+          <p class="mt-6 max-w-xl text-lg leading-8 text-gray-700" data-editor-id="node-efyuj9dvw">
+            Nền tảng luyện IELTS, TOEIC, SAT và tiếng Anh giao tiếp theo phương pháp LinearThinking: hiểu logic đề, xử lý nhanh, sửa lỗi tận gốc và có AI tutor theo sát mỗi ngày.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row" data-editor-id="node-y8jzncgcu">
+            <a href="https://anh-ngu-40.hietek.asia/Dol#test" class="inline-flex items-center justify-center gap-2 rounded-full bg-red-600 px-7 py-4 text-base font-extrabold text-white shadow-xl shadow-red-200 hover:bg-red-700" data-editor-id="node-ib3g0bor5">
+              Đăng ký test trình độ miễn phí <i class="fa-solid fa-arrow-right" data-editor-id="node-o3dn1ktlz"></i>
+            </a>
+            <button id="openChatHero" class="inline-flex items-center justify-center gap-2 rounded-full border border-red-200 bg-white px-7 py-4 text-base font-extrabold text-red-700 hover:bg-red-50" data-editor-id="node-e3juujpgk">
+              Hỏi AI tư vấn lộ trình <i class="fa-solid fa-robot" data-editor-id="node-mgnp72jv3"></i>
+            </button>
+          </div>
+          <div class="mt-8 grid max-w-xl grid-cols-3 gap-3" data-editor-id="node-gyqfvr73k">
+            <div class="rounded-2xl border border-red-100 bg-white p-4" data-editor-id="node-5levy9bmm">
+              <div class="text-2xl font-extrabold text-gray-950" data-editor-id="node-fokizyg7r">40.000+</div>
+              <div class="mt-1 text-sm font-medium text-gray-600" data-editor-id="node-lhtbf3st0">học viên đã học</div>
+            </div>
+            <div class="rounded-2xl border border-red-100 bg-white p-4" data-editor-id="node-fzvr1eswd">
+              <div class="text-2xl font-extrabold text-gray-950" data-editor-id="node-ln7912xfy">7.5+</div>
+              <div class="mt-1 text-sm font-medium text-gray-600" data-editor-id="node-6d9pxl2j5">mục tiêu IELTS</div>
+            </div>
+            <div class="rounded-2xl border border-red-100 bg-white p-4" data-editor-id="node-1ioq8c5c7">
+              <div class="text-2xl font-extrabold text-gray-950" data-editor-id="node-v7vhlkwkd">1-1</div>
+              <div class="mt-1 text-sm font-medium text-gray-600" data-editor-id="node-9se5o0ekv">chữa bài cá nhân</div>
+            </div>
+          </div>
+        </div>
 
-    <!-- LOGIC JAVASCRIPT XỬ LÝ CHATBOX & TRẮC NGHIỆM -->
-    <script>
-        // LOGIC TRẮC NGHIỆM
-        function submitQuizAnswer(element, isCorrect, explanation) {
-            // Vô hiệu hóa việc bấm lại
-            const options = element.parentElement.querySelectorAll('.option-item');
-            options.forEach(opt => opt.style.pointerEvents = 'none');
+        <div class="relative" data-editor-id="node-5bz7kh0q1">
+          <div class="rounded-[2rem] border border-red-100 bg-white p-4 shadow-2xl shadow-red-950/10" data-editor-id="node-6mui0jnom">
+            <img class="h-[360px] w-full rounded-[1.5rem] object-cover sm:h-[460px]" src="./Anh Ngữ 4.0_ Luyện Thi Tiếng Anh Online Theo LinearThinking_files/gen-image" alt="Lớp học tiếng Anh hiện đại với AI tutor" data-editor-id="node-i8ff5fbc2" srcset="/gen-image?prompt=maxresdefault&amp;width=1280&amp;height=720&amp;orientation=landscape&amp;seed=0.6926846607323045&amp;id=6a3526df526c8350291132f4" style="object-fit: contain;">
+            <div class="absolute -bottom-5 left-4 right-4 rounded-3xl border border-red-100 bg-white p-4 shadow-xl sm:left-8 sm:right-8" data-editor-id="node-gogkvrcsj">
+              <div class="flex items-start gap-3" data-editor-id="node-b4gg89rcf">
+                <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-red-600 text-white" data-editor-id="node-pgwbep20e"><i class="fa-solid fa-robot" data-editor-id="node-8zarcfmde"></i></div>
+                <div data-editor-id="node-rhldkmmky">
+                  <div class="font-extrabold text-gray-950" data-editor-id="node-voygn2o9n">AI Tutor vừa phân tích</div>
+                  <p class="mt-1 text-sm leading-6 text-gray-600" data-editor-id="node-3so569fbg">Bạn mạnh ở Vocabulary, cần tăng Reading inference. Gợi ý: học IELTS Foundation 6 tuần + mini test mỗi ngày.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="courses" class="py-16 md:py-24" data-editor-id="node-x0i3u6k4j">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" data-editor-id="node-3d0mwhw2x">
+        <div class="mx-auto max-w-3xl text-center" data-editor-id="node-cf9nm2wec">
+          <p class="font-extrabold uppercase tracking-[.2em] text-red-600" data-editor-id="node-prhotm8j0">Khóa học trọng tâm</p>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-gray-950 sm:text-4xl" data-editor-id="node-mp0kw83hy">Chọn đúng mục tiêu. Học đúng lộ trình.</h2>
+          <p class="mt-4 text-lg leading-8 text-gray-700" data-editor-id="node-la2ilp8r8">Mỗi khóa có bài kiểm tra đầu vào, giáo trình cá nhân hóa, dashboard tiến độ và chatbot AI nhắc học.</p>
+        </div>
+        <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4" data-editor-id="node-rp0vzg943">
+          <div class="rounded-3xl border border-red-100 bg-white p-6 shadow-sm hover:shadow-xl hover:shadow-red-100" data-editor-id="node-1r6sox5sj">
+            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-red-100 text-red-700" data-editor-id="node-mim79qkje"><i class="fa-solid fa-chart-line text-xl" data-editor-id="node-6mb1o2apb"></i></div>
+            <h3 class="text-xl font-extrabold" data-editor-id="node-oawlwgbpz">IELTS Linear</h3>
+            <p class="mt-3 leading-7 text-gray-600" data-editor-id="node-l2eezc8ti">Từ mất gốc đến 7.5+, tập trung Reading logic, Listening keywords, Speaking framework và Writing chữa chi tiết.</p>
+            <ul class="mt-5 space-y-2 text-sm font-semibold text-gray-700" data-editor-id="node-wrzqmn001">
+              <li data-editor-id="node-lp2694quf"><i class="fa-solid fa-check mr-2 text-red-600" data-editor-id="node-85mc3jt7c"></i>Cam kết band theo đầu vào</li>
+              <li data-editor-id="node-2mu9ipdha"><i class="fa-solid fa-check mr-2 text-red-600" data-editor-id="node-35t638l1y"></i>Mock test định kỳ</li>
+            </ul>
+          </div>
+          <div class="rounded-3xl border border-red-100 bg-white p-6 shadow-sm hover:shadow-xl hover:shadow-red-100" data-editor-id="node-qpp2klrk3">
+            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-red-100 text-red-700" data-editor-id="node-n017k1t6b"><i class="fa-solid fa-headphones text-xl" data-editor-id="node-93xvu8qfi"></i></div>
+            <h3 class="text-xl font-extrabold" data-editor-id="node-qi8jico8w">TOEIC Sprint</h3>
+            <p class="mt-3 leading-7 text-gray-600" data-editor-id="node-mznio8jsc">Lộ trình 450-650-850+, tối ưu chiến thuật nghe nhanh, đọc nhanh, bẫy ngữ pháp và quản trị thời gian.</p>
+            <ul class="mt-5 space-y-2 text-sm font-semibold text-gray-700" data-editor-id="node-coznhdkz2">
+              <li data-editor-id="node-9u67e3yyb"><i class="fa-solid fa-check mr-2 text-red-600" data-editor-id="node-p1p9zh9k5"></i>Ngân hàng đề sát thật</li>
+              <li data-editor-id="node-apzse5qho"><i class="fa-solid fa-check mr-2 text-red-600" data-editor-id="node-vqpcke0q2"></i>Phân tích lỗi bằng AI</li>
+            </ul>
+          </div>
+          <div class="rounded-3xl border border-red-100 bg-white p-6 shadow-sm hover:shadow-xl hover:shadow-red-100" data-editor-id="node-jclpu2k0e">
+            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-red-100 text-red-700" data-editor-id="node-8mpzhvu93"><i class="fa-solid fa-square-root-variable text-xl" data-editor-id="node-iq74xefsx"></i></div>
+            <h3 class="text-xl font-extrabold" data-editor-id="node-q9cxydyes">SAT Mastery</h3>
+            <p class="mt-3 leading-7 text-gray-600" data-editor-id="node-286lxxddg">Reading &amp; Writing theo cấu trúc lập luận, Math theo dạng bài, phù hợp học sinh định hướng du học.</p>
+            <ul class="mt-5 space-y-2 text-sm font-semibold text-gray-700" data-editor-id="node-r6id08csf">
+              <li data-editor-id="node-i57lcrul2"><i class="fa-solid fa-check mr-2 text-red-600" data-editor-id="node-w9cd50m1e"></i>Diagnostic report</li>
+              <li data-editor-id="node-edfky1r8g"><i class="fa-solid fa-check mr-2 text-red-600" data-editor-id="node-9gfeuwnqg"></i>Lộ trình từng tuần</li>
+            </ul>
+          </div>
+          <div class="rounded-3xl border border-red-100 bg-white p-6 shadow-sm hover:shadow-xl hover:shadow-red-100" data-editor-id="node-ggvuf1idi">
+            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-red-100 text-red-700" data-editor-id="node-oe8b2kcqp"><i class="fa-solid fa-microphone-lines text-xl" data-editor-id="node-e5mx7jnq5"></i></div>
+            <h3 class="text-xl font-extrabold" data-editor-id="node-dwmosvez5">Giao tiếp Pro</h3>
+            <p class="mt-3 leading-7 text-gray-600" data-editor-id="node-h7kbvzlca">Nói tự nhiên trong công việc, phỏng vấn, thuyết trình; sửa phát âm, nối âm và phản xạ hội thoại.</p>
+            <ul class="mt-5 space-y-2 text-sm font-semibold text-gray-700" data-editor-id="node-826caafiu">
+              <li data-editor-id="node-o3sxhef6z"><i class="fa-solid fa-check mr-2 text-red-600" data-editor-id="node-xk91m7b5o"></i>Role-play thực tế</li>
+              <li data-editor-id="node-ckxfv7jlt"><i class="fa-solid fa-check mr-2 text-red-600" data-editor-id="node-jovfv4ck9"></i>AI luyện nói 24/7</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            if (isCorrect) {
-                element.classList.add('correct');
-            } else {
-                element.classList.add('wrong');
-            }
+    <section id="linear" class="bg-gray-950 py-16 text-white md:py-24" data-editor-id="node-k2yyqvudx">
+      <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:px-8" data-editor-id="node-3r2585m2i">
+        <div data-editor-id="node-ylcmp7w88">
+          <p class="font-extrabold uppercase tracking-[.2em] text-red-400" data-editor-id="node-hrpt0ja5v">Phương pháp độc quyền</p>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl" data-editor-id="node-8xjdghbbs">LinearThinking: học bằng logic, không học vẹt.</h2>
+          <p class="mt-5 text-lg leading-8 text-gray-300" data-editor-id="node-wfbmkxkql">Thay vì ghi nhớ rời rạc, học viên được huấn luyện cách nhìn cấu trúc câu, quan hệ ý, tín hiệu lập luận và mô hình đáp án. Cách học này giúp xử lý bài thi nhanh hơn và dùng tiếng Anh tự nhiên hơn.</p>
+          <div class="mt-8 grid gap-4 sm:grid-cols-2" data-editor-id="node-6so6rzce1">
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-5" data-editor-id="node-ygperkj0g">
+              <i class="fa-solid fa-diagram-project text-2xl text-red-400" data-editor-id="node-adhgfz0ge"></i>
+              <h3 class="mt-4 font-extrabold" data-editor-id="node-svt4tt2fb">Tách ý tuyến tính</h3>
+              <p class="mt-2 leading-7 text-gray-300" data-editor-id="node-h7q8vs1oc">Xác định main idea, supporting idea, contrast và cause-effect trong từng đoạn.</p>
+            </div>
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-5" data-editor-id="node-4j9fykvet">
+              <i class="fa-solid fa-brain text-2xl text-red-400" data-editor-id="node-3cdomcnwc"></i>
+              <h3 class="mt-4 font-extrabold" data-editor-id="node-sy18zow3k">Sửa lỗi tận gốc</h3>
+              <p class="mt-2 leading-7 text-gray-300" data-editor-id="node-ymgxnfury">AI report chỉ rõ lỗi từ vựng, ngữ pháp, logic và thói quen làm bài.</p>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-[2rem] border border-white/10 bg-white p-3 text-gray-950" data-editor-id="node-x95bya823">
+          <div class="rounded-[1.5rem] bg-red-50 p-6" data-editor-id="node-qbdsviwsp">
+            <div class="mb-4 flex items-center justify-between" data-editor-id="node-a6pxgxvut">
+              <div class="font-extrabold" data-editor-id="node-f7hn6k1pw">Bảng phân tích Reading</div>
+              <span class="rounded-full bg-red-600 px-3 py-1 text-xs font-bold text-white" data-editor-id="node-8rv657wz4">AI Report</span>
+            </div>
+            <div class="space-y-3" data-editor-id="node-16bkbihut">
+              <div class="rounded-2xl bg-white p-4 shadow-sm" data-editor-id="node-rhmnrqwag">
+                <div class="text-sm font-bold text-red-700" data-editor-id="node-j1if6uklj">Câu hỏi 12: Inference</div>
+                <p class="mt-2 text-sm leading-6 text-gray-700" data-editor-id="node-my7acwflu">Bạn chọn theo keyword giống nhau, nhưng chưa kiểm tra quan hệ “however”. Cần đọc câu trước và sau đáp án.</p>
+              </div>
+              <div class="rounded-2xl bg-white p-4 shadow-sm" data-editor-id="node-44h79y53b">
+                <div class="text-sm font-bold text-red-700" data-editor-id="node-qkiqir8uw">Gợi ý học hôm nay</div>
+                <p class="mt-2 text-sm leading-6 text-gray-700" data-editor-id="node-nz3x7y6re">Luyện 10 câu contrast signals + xem lại bài giảng “paraphrase theo cụm ý”.</p>
+              </div>
+              <div class="grid grid-cols-3 gap-3 pt-2" data-editor-id="node-fmn8rejfb">
+                <div class="rounded-2xl bg-white p-4 text-center" data-editor-id="node-h1fwyws22">
+                  <div class="text-2xl font-extrabold text-red-600" data-editor-id="node-2xmp0at6c">82%</div>
+                  <div class="text-xs font-semibold text-gray-600" data-editor-id="node-7hi0t6djc">Logic câu</div>
+                </div>
+                <div class="rounded-2xl bg-white p-4 text-center" data-editor-id="node-8ni8gb4xh">
+                  <div class="text-2xl font-extrabold text-red-600" data-editor-id="node-5dlxksiix">68%</div>
+                  <div class="text-xs font-semibold text-gray-600" data-editor-id="node-acf1endey">Tốc độ</div>
+                </div>
+                <div class="rounded-2xl bg-white p-4 text-center" data-editor-id="node-1qhgqb635">
+                  <div class="text-2xl font-extrabold text-red-600" data-editor-id="node-y07yf08d9">+0.5</div>
+                  <div class="text-xs font-semibold text-gray-600" data-editor-id="node-54034167c">Dự báo band</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="test" class="py-16 md:py-24" data-editor-id="node-sgfxzkwe1">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" data-editor-id="node-dqqqiy1lp">
+        <div class="grid gap-8 lg:grid-cols-[.9fr_1.1fr]" data-editor-id="node-bqg0nqbcj">
+          <div class="rounded-[2rem] bg-red-600 p-8 text-white md:p-10" data-editor-id="node-kapw8jsn2">
+            <p class="font-extrabold uppercase tracking-[.2em] text-red-100" data-editor-id="node-spfhpi08o">Test trình độ miễn phí</p>
+            <h2 class="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl" data-editor-id="node-4hx5gnti0">Biết level trong 5 phút.</h2>
+            <p class="mt-5 leading-8 text-red-50" data-editor-id="node-9pf5rqck3">Làm mini test nhanh để nhận gợi ý khóa phù hợp. Sau đó, cố vấn học thuật sẽ gửi lộ trình chi tiết theo mục tiêu IELTS, TOEIC, SAT hoặc giao tiếp.</p>
+            <form id="leadForm" class="mt-8 space-y-3" data-editor-id="node-22l088iw3">
+              <input class="w-full rounded-2xl border-0 px-5 py-4 font-semibold text-gray-950 outline-none ring-2 ring-transparent focus:ring-red-200" placeholder="Họ và tên" required="" data-editor-id="node-p43sx8q9i" name="ho_va_ten">
+              <input class="w-full rounded-2xl border-0 px-5 py-4 font-semibold text-gray-950 outline-none ring-2 ring-transparent focus:ring-red-200" placeholder="Số điện thoại" required="" data-editor-id="node-zjxp8h6ic" name="so_dien_thoai">
+              <select class="w-full rounded-2xl border-0 px-5 py-4 font-semibold text-gray-950 outline-none ring-2 ring-transparent focus:ring-red-200" data-editor-id="node-y719w9qv1">
+                <option data-editor-id="node-hv26oma71">Mục tiêu: IELTS</option>
+                <option data-editor-id="node-djp8x3h5g">Mục tiêu: TOEIC</option>
+                <option data-editor-id="node-22vflrpje">Mục tiêu: SAT</option>
+                <option data-editor-id="node-vbttewenw">Mục tiêu: Giao tiếp</option>
+              </select>
+              <button class="w-full rounded-2xl bg-gray-950 px-6 py-4 font-extrabold text-white hover:bg-black" data-editor-id="node-hcu37fdkg">Nhận lộ trình cá nhân hóa</button>
+              <p id="leadMsg" class="hidden rounded-2xl bg-white/15 p-3 text-sm font-semibold" data-editor-id="node-9ml3hesiw">Đã ghi nhận thông tin. AI Tutor sẽ tư vấn lộ trình phù hợp cho bạn.</p>
+            </form>
+          </div>
 
-            setTimeout(() => {
-                document.getElementById('testProgressBar').style.width = '100%';
-                document.getElementById('testQuestionBox').style.display = 'none';
-                document.getElementById('testResultBox').style.display = 'block';
-                document.getElementById('resultExplanationText').innerText = explanation;
-            }, 1000);
+          <div class="rounded-[2rem] border border-red-100 bg-white p-6 shadow-xl shadow-red-950/5 md:p-8" data-editor-id="node-ybjramww0">
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between" data-editor-id="node-l9gedb2c8">
+              <div data-editor-id="node-sif6j4spa">
+                <h3 class="text-2xl font-extrabold text-gray-950" data-editor-id="node-mh3jsidjx">Mini test nhanh</h3>
+                <p class="mt-1 text-gray-600" data-editor-id="node-bzh6lp4ja">Chọn đáp án đúng nhất. Kết quả hiển thị ngay.</p>
+              </div>
+              <div class="rounded-full bg-red-50 px-4 py-2 text-sm font-extrabold text-red-700" data-editor-id="node-fz3mb9fks">3 câu hỏi</div>
+            </div>
+            <div id="quiz" class="mt-6 space-y-6" data-editor-id="node-k1tzuyvn5">
+              <div class="quiz-q" data-answer="B" data-editor-id="node-vjniucex2">
+                <p class="font-bold text-gray-950" data-editor-id="node-w1jkpbhi9">1. “Although the task was difficult, she completed it on time.” Từ “Although” thể hiện quan hệ gì?</p>
+                <div class="mt-3 grid gap-2" data-editor-id="node-lu2o59447">
+                  <button class="quiz-option rounded-2xl border border-gray-200 p-4 text-left font-semibold hover:border-red-300" data-value="A" data-editor-id="node-s8nzttc4b">A. Nguyên nhân - kết quả</button>
+                  <button class="quiz-option rounded-2xl border border-gray-200 p-4 text-left font-semibold hover:border-red-300" data-value="B" data-editor-id="node-r512814st">B. Tương phản</button>
+                  <button class="quiz-option rounded-2xl border border-gray-200 p-4 text-left font-semibold hover:border-red-300" data-value="C" data-editor-id="node-8g6qon4xs">C. Liệt kê</button>
+                </div>
+              </div>
+              <div class="quiz-q" data-answer="A" data-editor-id="node-tduzn741a">
+                <p class="font-bold text-gray-950" data-editor-id="node-4rlc4x80v">2. TOEIC Part 5: “The report must be submitted ____ Friday.”</p>
+                <div class="mt-3 grid gap-2" data-editor-id="node-jvimy1xpb">
+                  <button class="quiz-option rounded-2xl border border-gray-200 p-4 text-left font-semibold hover:border-red-300" data-value="A" data-editor-id="node-eu49c5fd7">A. by</button>
+                  <button class="quiz-option rounded-2xl border border-gray-200 p-4 text-left font-semibold hover:border-red-300" data-value="B" data-editor-id="node-fnkrwr3gc">B. at</button>
+                  <button class="quiz-option rounded-2xl border border-gray-200 p-4 text-left font-semibold hover:border-red-300" data-value="C" data-editor-id="node-kl9l8t7yi">C. on time</button>
+                </div>
+              </div>
+              <div class="quiz-q" data-answer="C" data-editor-id="node-vk9mk90ey">
+                <p class="font-bold text-gray-950" data-editor-id="node-u0nw4oosu">3. IELTS Writing Task 2 cần ưu tiên điều gì để tăng Coherence &amp; Cohesion?</p>
+                <div class="mt-3 grid gap-2" data-editor-id="node-kz8bd8a0j">
+                  <button class="quiz-option rounded-2xl border border-gray-200 p-4 text-left font-semibold hover:border-red-300" data-value="A" data-editor-id="node-othkg7ihw">A. Dùng thật nhiều từ khó</button>
+                  <button class="quiz-option rounded-2xl border border-gray-200 p-4 text-left font-semibold hover:border-red-300" data-value="B" data-editor-id="node-03zav42hi">B. Viết câu càng dài càng tốt</button>
+                  <button class="quiz-option rounded-2xl border border-gray-200 p-4 text-left font-semibold hover:border-red-300" data-value="C" data-editor-id="node-dbabdj73e">C. Ý chính rõ, liên kết logic giữa các đoạn</button>
+                </div>
+              </div>
+              <button id="submitQuiz" class="w-full rounded-2xl bg-red-600 px-6 py-4 font-extrabold text-white hover:bg-red-700" data-editor-id="node-id9et1lpm">Xem kết quả mini test</button>
+              <div id="quizResult" class="hidden rounded-3xl bg-red-50 p-5" data-editor-id="node-ty0m8c3v7"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="center" class="bg-red-50 py-16 md:py-24" data-editor-id="node-qihy9rxsl">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" data-editor-id="node-q06jdtwoi">
+        <div class="grid gap-10 lg:grid-cols-2" data-editor-id="node-gzdn5u3c5">
+          <div data-editor-id="node-d4nbclpc0">
+            <p class="font-extrabold uppercase tracking-[.2em] text-red-600" data-editor-id="node-ct8eov735">Khu vực trung tâm</p>
+            <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-gray-950 sm:text-4xl" data-editor-id="node-2ewz6kp49">Không gian học tập tập trung, hiện đại.</h2>
+            <p class="mt-5 text-lg leading-8 text-gray-700" data-editor-id="node-coui3ydwy">Lớp nhỏ, giáo viên theo sát, phòng học tối ưu tương tác và khu vực tự học có cố vấn trực. Học viên có thể học offline tại trung tâm hoặc online qua nền tảng AI.</p>
+            <div class="mt-8 grid gap-4 sm:grid-cols-2" data-editor-id="node-umccxtb6b">
+              <div class="rounded-3xl bg-white p-5" data-editor-id="node-8rtrasx85">
+                <i class="fa-solid fa-location-dot text-2xl text-red-600" data-editor-id="node-qz58vn28n"></i>
+                <h3 class="mt-3 font-extrabold" data-editor-id="node-4verz615m">Cơ sở trung tâm</h3>
+                <p class="mt-2 leading-7 text-gray-600" data-editor-id="node-oxc3wgd70">Dễ di chuyển, lịch học linh hoạt, hỗ trợ đổi ca khi bận.</p>
+              </div>
+              <div class="rounded-3xl bg-white p-5" data-editor-id="node-2v84lbvdd">
+                <i class="fa-solid fa-user-group text-2xl text-red-600" data-editor-id="node-opkmh7x8l"></i>
+                <h3 class="mt-3 font-extrabold" data-editor-id="node-kr6aqxs25">Lớp sĩ số tối ưu</h3>
+                <p class="mt-2 leading-7 text-gray-600" data-editor-id="node-zg63ze1kj">Giáo viên nắm rõ điểm mạnh, điểm yếu của từng học viên.</p>
+              </div>
+            </div>
+          </div>
+          <img loading="lazy" class="h-full min-h-[360px] w-full rounded-[2rem] object-cover shadow-xl shadow-red-950/10" src="./Anh Ngữ 4.0_ Luyện Thi Tiếng Anh Online Theo LinearThinking_files/gen-image(1)" alt="Khu vực trung tâm tiếng Anh hiện đại" data-editor-id="node-rkf0yt8pv">
+        </div>
+      </div>
+    </section>
+
+    <section id="stories" class="py-16 md:py-24" data-editor-id="node-1npujm27w">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" data-editor-id="node-h2v44ae3d">
+        <div class="mx-auto max-w-3xl text-center" data-editor-id="node-7fkhr64xu">
+          <p class="font-extrabold uppercase tracking-[.2em] text-red-600" data-editor-id="node-cr0bmc5bz">Kết quả học viên</p>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-gray-950 sm:text-4xl" data-editor-id="node-ty3o7ctte">Tăng điểm nhờ học đúng lỗi.</h2>
+        </div>
+        <div class="mt-10 grid gap-5 md:grid-cols-3" data-editor-id="node-vknldfzp9">
+          <div class="rounded-3xl border border-red-100 bg-white p-6 shadow-sm" data-editor-id="node-szgcwcw9w">
+            <div class="flex items-center gap-4" data-editor-id="node-shyr56xgg">
+              <img loading="lazy" class="h-14 w-14 rounded-full object-cover" src="./Anh Ngữ 4.0_ Luyện Thi Tiếng Anh Online Theo LinearThinking_files/gen-image(2)" alt="Học viên IELTS" data-editor-id="node-lvsyxidzo">
+              <div data-editor-id="node-ezahkch5g"><div class="font-extrabold" data-editor-id="node-27z71z786">Minh Anh</div><div class="text-sm font-semibold text-red-600" data-editor-id="node-9ez37n288">IELTS 5.5 → 7.5</div></div>
+            </div>
+            <p class="mt-5 leading-7 text-gray-700" data-editor-id="node-z5n12q18e">“Mình không còn học mẹo rời rạc. LinearThinking giúp mình hiểu vì sao sai Reading và biết cách triển khai Writing rõ hơn.”</p>
+          </div>
+          <div class="rounded-3xl border border-red-100 bg-white p-6 shadow-sm" data-editor-id="node-tedg0w7zv">
+            <div class="flex items-center gap-4" data-editor-id="node-u47nfafxr">
+              <img loading="lazy" class="h-14 w-14 rounded-full object-cover" src="./Anh Ngữ 4.0_ Luyện Thi Tiếng Anh Online Theo LinearThinking_files/gen-image(3)" alt="Học viên TOEIC" data-editor-id="node-lez42sv5k">
+              <div data-editor-id="node-pd9y0a01t"><div class="font-extrabold" data-editor-id="node-bz0g2gbp6">Hoàng Nam</div><div class="text-sm font-semibold text-red-600" data-editor-id="node-2cn3uzrj7">TOEIC 510 → 835</div></div>
+            </div>
+            <p class="mt-5 leading-7 text-gray-700" data-editor-id="node-u0xcfbavp">“AI report chỉ đúng dạng lỗi mình hay mắc ở Part 5 và Part 7. Học rất tiết kiệm thời gian.”</p>
+          </div>
+          <div class="rounded-3xl border border-red-100 bg-white p-6 shadow-sm" data-editor-id="node-0ysei1j47">
+            <div class="flex items-center gap-4" data-editor-id="node-np2fux9lt">
+              <img loading="lazy" class="h-14 w-14 rounded-full object-cover" src="./Anh Ngữ 4.0_ Luyện Thi Tiếng Anh Online Theo LinearThinking_files/gen-image(4)" alt="Học viên SAT" data-editor-id="node-jytb8msnk">
+              <div data-editor-id="node-cpgwdo5oq"><div class="font-extrabold" data-editor-id="node-2hut73ghx">Khánh Linh</div><div class="text-sm font-semibold text-red-600" data-editor-id="node-vjxnn7k8r">SAT 1280 → 1480</div></div>
+            </div>
+            <p class="mt-5 leading-7 text-gray-700" data-editor-id="node-rhfba39b3">“Phần Reading dễ hơn khi mình biết nhận diện lập luận. Lộ trình từng tuần rất rõ nên không bị rối.”</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="consult" class="bg-gray-950 py-16 text-white md:py-20" data-editor-id="node-crf5un0el">
+      <div class="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8" data-editor-id="node-qzxcbhaj0">
+        <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl" data-editor-id="node-5n8embfma">Sẵn sàng biết lộ trình phù hợp?</h2>
+        <p class="mx-auto mt-5 max-w-2xl text-lg leading-8 text-gray-300" data-editor-id="node-lyeip9kfv">Làm test miễn phí, nhận phân tích điểm mạnh - điểm yếu và đề xuất khóa học IELTS, TOEIC, SAT hoặc giao tiếp phù hợp nhất.</p>
+        <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row" data-editor-id="node-q9j6uux3l">
+          <a href="https://anh-ngu-40.hietek.asia/Dol#test" class="rounded-full bg-red-600 px-8 py-4 font-extrabold text-white hover:bg-red-700" data-editor-id="node-lt0pkyczi">Đăng ký test miễn phí</a>
+          <button id="openChatCta" class="rounded-full border border-white/20 px-8 py-4 font-extrabold text-white hover:bg-white/10" data-editor-id="node-31jhrz9n3">Chat với AI tư vấn</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="py-16 md:py-24" data-editor-id="node-7urco831s">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8" data-editor-id="node-66fvu9i5o">
+        <div class="text-center" data-editor-id="node-2fgwxmav0">
+          <p class="font-extrabold uppercase tracking-[.2em] text-red-600" data-editor-id="node-5z6b6lc7l">Câu hỏi thường gặp</p>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-gray-950 sm:text-4xl" data-editor-id="node-9nyf1udlh">Bạn cần biết gì trước khi học?</h2>
+        </div>
+        <div class="mt-10 space-y-4" data-editor-id="node-jt2petvyl">
+          <details class="group rounded-3xl border border-red-100 bg-white p-6" data-editor-id="node-nooodamug">
+            <summary class="flex cursor-pointer list-none items-center justify-between font-extrabold text-gray-950" data-editor-id="node-trnrip9v6">Em mất gốc có học IELTS được không?<i class="fa-solid fa-chevron-down text-red-600 group-open:rotate-180" data-editor-id="node-4o6v1172n"></i></summary>
+            <p class="mt-4 leading-7 text-gray-700" data-editor-id="node-onf98xls7">Có. Bạn sẽ làm bài test đầu vào để xác định nền tảng ngữ pháp, từ vựng, nghe đọc. Từ đó hệ thống đề xuất lớp Foundation trước khi vào luyện đề.</p>
+          </details>
+          <details class="group rounded-3xl border border-red-100 bg-white p-6" data-editor-id="node-6zqqctsi8">
+            <summary class="flex cursor-pointer list-none items-center justify-between font-extrabold text-gray-950" data-editor-id="node-7c9f7q6dq">Chatbot AI tư vấn làm được gì?<i class="fa-solid fa-chevron-down text-red-600 group-open:rotate-180" data-editor-id="node-cs8xzlsq4"></i></summary>
+            <p class="mt-4 leading-7 text-gray-700" data-editor-id="node-13acejy9e">AI Tutor gợi ý khóa học, giải thích lỗi sai mini test, nhắc lịch học và đề xuất bài luyện theo mục tiêu điểm số của bạn.</p>
+          </details>
+          <details class="group rounded-3xl border border-red-100 bg-white p-6" data-editor-id="node-zqg14pkmg">
+            <summary class="flex cursor-pointer list-none items-center justify-between font-extrabold text-gray-950" data-editor-id="node-rszmexraw">Có học online được không?<i class="fa-solid fa-chevron-down text-red-600 group-open:rotate-180" data-editor-id="node-mce9xfdy8"></i></summary>
+            <p class="mt-4 leading-7 text-gray-700" data-editor-id="node-qmgeywewi">Có. Bạn có thể học online, offline tại trung tâm hoặc kết hợp. Tài liệu, bài tập, dashboard tiến độ và chữa bài đều được đồng bộ trên nền tảng.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-red-100 bg-white py-10" data-editor-id="node-cis1kouou">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8" data-editor-id="node-2dock37c0">
+      <div class="flex items-center gap-3" data-editor-id="node-qggq9jsvu">
+        <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-red-600 text-white" data-editor-id="node-jm8yd9sti"><i class="fa-solid fa-layer-group" data-editor-id="node-bfj0n3u7o"></i></div>
+        <div data-editor-id="node-k15xpp6sc">
+          <div class="font-extrabold" data-editor-id="node-4e59e5puc">DOL Linear English</div>
+          <div class="text-sm text-gray-600" data-editor-id="node-pybkqtsin">IELTS • TOEIC • SAT • Giao tiếp • AI Tutor</div>
+        </div>
+      </div>
+      <div class="flex gap-4 text-xl text-red-700" data-editor-id="node-6cxpyagj7">
+        <a href="https://anh-ngu-40.hietek.asia/Dol#" aria-label="Facebook" data-editor-id="node-v2o7h551l"><i class="fa-brands fa-facebook" data-editor-id="node-mtv8qdypr"></i></a>
+        <a href="https://anh-ngu-40.hietek.asia/Dol#" aria-label="Youtube" data-editor-id="node-6wg6fhypi"><i class="fa-brands fa-youtube" data-editor-id="node-iszwmfgcp"></i></a>
+        <a href="https://anh-ngu-40.hietek.asia/Dol#" aria-label="Tiktok" data-editor-id="node-7j9ny4wzy"><i class="fa-brands fa-tiktok" data-editor-id="node-2llchhhzv"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <button id="chatToggle" class="fixed bottom-5 right-5 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-red-600 text-2xl text-white shadow-2xl shadow-red-300 hover:bg-red-700" aria-label="Mở chatbot AI" data-editor-id="node-ax6mgru7a">
+    <i class="fa-solid fa-robot" data-editor-id="node-m1fci04p9"></i>
+  </button>
+
+  <div id="chatPanel" class="chat-panel fixed bottom-24 right-4 z-50 h-[560px] w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-[2rem] border border-red-100 bg-white shadow-2xl shadow-red-950/20" data-editor-id="node-1qjidbz52">
+    <div class="flex items-center justify-between bg-red-600 p-4 text-white" data-editor-id="node-tnvgenu31">
+      <div class="flex items-center gap-3" data-editor-id="node-q1m4q3ri9">
+        <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/15" data-editor-id="node-1r8xqcb4r"><i class="fa-solid fa-robot" data-editor-id="node-bno5n8cy9"></i></div>
+        <div data-editor-id="node-lydnqjolj">
+          <div class="font-extrabold" data-editor-id="node-0pnnxby1b">AI Tư vấn lộ trình</div>
+          <div class="text-xs text-red-100" data-editor-id="node-pbcdhe5mi">Phản hồi mẫu tức thì</div>
+        </div>
+      </div>
+      <button id="chatClose" class="rounded-xl p-2 hover:bg-white/10" aria-label="Đóng chatbot" data-editor-id="node-xmundvtc1"><i class="fa-solid fa-xmark" data-editor-id="node-z0n2y04zi"></i></button>
+    </div>
+    <div id="chatMessages" class="flex-1 space-y-3 overflow-y-auto bg-red-50/50 p-4" data-editor-id="node-83lqs7him">
+      <div class="max-w-[85%] rounded-3xl rounded-tl-md bg-white p-4 text-sm leading-6 shadow-sm" data-editor-id="node-ank5o9byb">
+        Chào bạn! Bạn đang nhắm IELTS, TOEIC, SAT hay giao tiếp? Mình có thể gợi ý lộ trình và bài test nhanh phù hợp.
+      </div>
+      <div class="flex gap-2" data-editor-id="node-j7m63bs0g">
+        <button class="quickChat rounded-full bg-white px-3 py-2 text-xs font-bold text-red-700 shadow-sm" data-msg="Tôi muốn học IELTS 6.5" data-editor-id="node-cpss5k6zm">IELTS 6.5</button>
+        <button class="quickChat rounded-full bg-white px-3 py-2 text-xs font-bold text-red-700 shadow-sm" data-msg="Tôi muốn TOEIC 800" data-editor-id="node-u3m84zgrm">TOEIC 800</button>
+        <button class="quickChat rounded-full bg-white px-3 py-2 text-xs font-bold text-red-700 shadow-sm" data-msg="Tư vấn SAT" data-editor-id="node-m9b5mfbgb">SAT</button>
+      </div>
+    </div>
+    <form id="chatForm" class="flex gap-2 border-t border-red-100 bg-white p-3" data-editor-id="node-ntif0tqth">
+      <input id="chatInput" class="min-w-0 flex-1 rounded-2xl border border-red-100 px-4 py-3 text-sm font-semibold outline-none focus:border-red-400" placeholder="Nhập mục tiêu của bạn..." data-editor-id="node-ij6kqf221" name="nhap_muc_tieu_cua_ban">
+      <button class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-red-600 text-white" data-editor-id="node-b1jn092yu"><i class="fa-solid fa-paper-plane" data-editor-id="node-bmomw9xz1"></i></button>
+    </form>
+  </div>
+
+  <script data-editor-id="node-nisqbht7o">
+    const mobileBtn=document.getElementById('mobileMenuBtn'), mobileMenu=document.getElementById('mobileMenu');
+    mobileBtn.addEventListener('click',()=>mobileMenu.classList.toggle('hidden'));
+
+    const chatPanel=document.getElementById('chatPanel');
+    const openChat=()=>chatPanel.classList.add('open');
+    document.getElementById('chatToggle').addEventListener('click',openChat);
+    document.getElementById('openChatHero').addEventListener('click',openChat);
+    document.getElementById('openChatCta').addEventListener('click',openChat);
+    document.getElementById('chatClose').addEventListener('click',()=>chatPanel.classList.remove('open'));
+
+    const chatMessages=document.getElementById('chatMessages');
+    function addMsg(text,user=false){
+      const div=document.createElement('div');
+      div.className=user?'ml-auto max-w-[85%] rounded-3xl rounded-tr-md bg-red-600 p-4 text-sm leading-6 text-white':'max-w-[85%] rounded-3xl rounded-tl-md bg-white p-4 text-sm leading-6 shadow-sm';
+      div.textContent=text; chatMessages.appendChild(div); chatMessages.scrollTop=chatMessages.scrollHeight;
+    }
+    function botReply(msg){
+      const typing=document.createElement('div');
+      typing.className='max-w-[85%] rounded-3xl rounded-tl-md bg-white p-4 shadow-sm';
+      typing.innerHTML='<span class="typing-dot"></span> <span class="typing-dot"></span> <span class="typing-dot"></span>';
+      chatMessages.appendChild(typing); chatMessages.scrollTop=chatMessages.scrollHeight;
+      setTimeout(()=>{
+        typing.remove();
+        let r='Mình đề xuất bạn làm test đầu vào miễn phí trước. Sau đó hệ thống sẽ chia lộ trình theo nền tảng, mục tiêu điểm và thời gian học mỗi tuần.';
+        if(msg.toLowerCase().includes('ielts')) r='Với mục tiêu IELTS, bạn nên test 4 kỹ năng. Nếu đang dưới 5.5, lộ trình tốt là Foundation → Linear Reading/Writing → Mock test hằng tuần.';
+        if(msg.toLowerCase().includes('toeic')) r='Với TOEIC, mình sẽ kiểm tra nhanh Part 5 và Part 7 trước. Nếu mục tiêu 800+, cần tối ưu ngữ pháp bẫy, tốc độ đọc và nghe keywords.';
+        if(msg.toLowerCase().includes('sat')) r='Với SAT, cần diagnostic Reading/Writing và Math. LinearThinking sẽ giúp bạn nhận diện claim, evidence, transition và dạng câu hỏi.';
+        addMsg(r,false);
+      },700);
+    }
+    document.getElementById('chatForm').addEventListener('submit',e=>{
+      e.preventDefault(); const input=document.getElementById('chatInput'); const msg=input.value.trim(); if(!msg)return; addMsg(msg,true); input.value=''; botReply(msg);
+    });
+    document.querySelectorAll('.quickChat').forEach(b=>b.addEventListener('click',()=>{addMsg(b.dataset.msg,true);botReply(b.dataset.msg)}));
+
+    document.querySelectorAll('.quiz-option').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const parent=btn.closest('.quiz-q');
+        parent.querySelectorAll('.quiz-option').forEach(x=>x.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+    document.getElementById('submitQuiz').addEventListener('click',()=>{
+      let score=0,total=0;
+      document.querySelectorAll('.quiz-q').forEach(q=>{
+        total++; const picked=q.querySelector('.quiz-option.active');
+        if(picked&&picked.dataset.value===q.dataset.answer) score++;
+      });
+      const box=document.getElementById('quizResult');
+      let level=score===3?'Nền tảng tốt - phù hợp lớp tăng tốc':score===2?'Nền tảng khá - cần củng cố logic và tốc độ':'Nên bắt đầu từ lớp Foundation';
+      box.className='rounded-3xl bg-red-50 p-5';
+      box.innerHTML='<div class="text-xl font-extrabold text-gray-950">Bạn đúng '+score+'/'+total+' câu</div><p class="mt-2 leading-7 text-gray-700">'+level+'. Hãy để lại thông tin để nhận bài test đầy đủ và lộ trình cá nhân hóa.</p>';
+    });
+    document.getElementById('leadForm').addEventListener('submit',e=>{e.preventDefault();document.getElementById('leadMsg').classList.remove('hidden')});
+  </script>
+</div><link rel="stylesheet" href="./Anh Ngữ 4.0_ Luyện Thi Tiếng Anh Online Theo LinearThinking_files/all(1).min.css" data-editor-id="node-rw51515da"><style data-editor-id="node-qxuxag8je">
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+:root{
+  --primary-50:#fff1f2;
+  --primary-100:#ffe4e6;
+  --primary-200:#fecdd3;
+  --primary-300:#fda4af;
+  --primary-400:#fb7185;
+  --primary-500:#ef4444;
+  --primary-600:#dc2626;
+  --primary-700:#b91c1c;
+  --primary-800:#991b1b;
+  --primary-900:#7f1d1d;
+  --font-family:'Inter',sans-serif;
+}
+#app{font-family:var(--font-family);color:#111827;background:#fff}
+h1,h2,h3,h4{line-height:1.25}
+.nav-drop{opacity:0;visibility:hidden;transform:translateY(10px);transition:.2s}
+.nav-item:hover .nav-drop{opacity:1;visibility:visible;transform:translateY(0)}
+.chat-panel{display:none}
+.chat-panel.open{display:flex}
+.quiz-option.active{border-color:#dc2626;background:#fff1f2;color:#991b1b}
+.typing-dot{width:6px;height:6px;border-radius:50%;background:#dc2626;display:inline-block;animation:pulse 1s infinite}
+.typing-dot:nth-child(2){animation-delay:.15s}.typing-dot:nth-child(3){animation-delay:.3s}
+@keyframes pulse{0%,80%,100%{opacity:.25;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+html{scroll-behavior:smooth}
+</style>
+    <style>:root {--primary-50:#FFFFFF;--primary-100:#C0C0C0;--primary-200:#858585;--primary-300:#4E4E4E;--primary-400:#1E1E1E;--primary-500:#000000;--primary-600:#000000;--primary-700:#000000;--primary-800:#000000;--primary-900:#000000;}</style>
+<div id="sponsored-by"><template shadowrootmode="closed"><style>
+        *, *::before, *::after { box-sizing: border-box; }
+        :host, .container {
+          all: initial;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                       Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+          border-radius: 9999px;
         }
 
-        // LOGIC CHATBOX
-        const chatToggleBtn = document.getElementById('chatToggleBtn');
-        const chatWindow = document.getElementById('chatWindow');
-        const chatCloseBtn = document.getElementById('chatCloseBtn');
-        const chatSendBtn = document.getElementById('chatSendBtn');
-        const chatInputField = document.getElementById('chatInputField');
-        const chatMessagesBox = document.getElementById('chatMessagesBox');
-
-        chatToggleBtn.addEventListener('click', () => {
-            if (chatWindow.style.display === 'flex') {
-                chatWindow.style.display = 'none';
-            } else {
-                chatWindow.style.display = 'flex';
-                chatInputField.focus();
-            }
-        });
-
-        chatCloseBtn.addEventListener('click', () => {
-            chatWindow.style.display = 'none';
-        });
-
-        function handleSendMessage() {
-            const userText = chatInputField.value.trim();
-            if (userText === "") return;
-
-            const userBubble = document.createElement('div');
-            userBubble.className = 'msg-bubble user';
-            userBubble.innerText = userText;
-            chatMessagesBox.appendChild(userBubble);
-
-            chatInputField.value = "";
-            chatMessagesBox.scrollTop = chatMessagesBox.scrollHeight;
-
-            setTimeout(() => {
-                const botBubble = document.createElement('div');
-                botBubble.className = 'msg-bubble bot';
-                botBubble.innerText = "Cảm ơn bạn đã kết nối với DOL! Câu hỏi của bạn đã được chuyển đến bộ phận cố vấn học vụ. Bạn vui lòng để lại số điện thoại tại form đăng ký phía bên dưới trang web để thầy cô inbox gọi điện tư vấn lộ trình Linearthinking phù hợp nhất cho mình nhé! ✨";
-                chatMessagesBox.appendChild(botBubble);
-                chatMessagesBox.scrollTop = chatMessagesBox.scrollHeight;
-            }, 1000);
+        .container {
+          width: fit-content;
+          position: fixed;
+          bottom: 12px;
+          right: 12px;
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 0.75rem;
+          box-shadow:
+            0 25px 50px -12px rgba(0,0,0,.30),
+            0 10px 15px -3px rgba(0,0,0,.20);
+          pointer-events: auto;
+        }
+        @media (min-width: 1024px) {
+          .container { bottom: 20px; left: 20px; }
         }
 
-        chatSendBtn.addEventListener('click', handleSendMessage);
-        chatInputField.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                handleSendMessage();
-            }
+        .badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          text-decoration: none;
+          background: #ffffff;
+          color: #111827;
+          font-size: 0.75rem;
+          line-height: 1;
+          font-weight: 500;
+          padding: 0.25rem 0.5rem;
+          border-radius: 9999px;
+          border: 2px solid #d1d5db;
+          box-shadow: 0 1px 3px rgba(0,0,0,.1);
+          transition: filter .3s ease, transform .3s ease;
+          cursor: pointer;
+        }
+        .badge:hover { filter: brightness(1.5); }
+
+        @media (min-width: 1024px) {
+          .badge {
+            background: #0a0a0a;
+            color: #ffffff;
+            font-size: 0.875rem;
+            border-color: #374151;
+          }
+        }
+
+        .badge span { font-weight: 500; padding-left: 5px; }
+
+        .logo-wrap { position: relative; width: 24px; height: 24px; }
+        .logo, .logo-ping {
+          width: 100%; height: 100%;
+          object-fit: contain;
+          display: block;
+          border-radius: 9999px;
+        }
+        .logo-ping {
+          position: absolute; inset: 0;
+          opacity: .8;
+          animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes ping {
+          0%   { transform: scale(1);   opacity: .8; }
+          75%  { transform: scale(2);   opacity: 0;  }
+          100% { transform: scale(2.5); opacity: 0;  }
+        }
+
+        .badge:focus-visible {
+          outline: 2px solid #60a5fa;
+          outline-offset: 2px;
+        }
+      </style><div class="container"><a class="badge" href="https://hietek.com/?pref=38448ef7-91cf-4e4c-bb4f-4f470f180609" target="_blank" aria-label="Được tài trợ bởi HieTek"><span>Được tài trợ bởi</span><div class="logo-wrap" title="HieTek"><img class="logo" src="https://anh-ngu-40.hietek.asia/favicon.png" alt="HieTek"><img class="logo-ping" src="https://anh-ngu-40.hietek.asia/favicon.png" alt="" aria-hidden="true"></div></a></div></template></div>
+<script>
+    function createSponsoredByShadow(hostEl, opts) {
+        if (!hostEl) return;
+        const {
+            href,
+            title = 'HieTek',
+            imgSrc = '/favicon.ico',
+            label = 'Được tài trợ bởi'
+        } = opts || {};
+        if (!href) {
+            return;
+        }
+        const shadow = hostEl.attachShadow({ mode: 'closed' });
+        const style = document.createElement('style');
+        style.textContent = `
+        *, *::before, *::after { box-sizing: border-box; }
+        :host, .container {
+          all: initial;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                       Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+          border-radius: 9999px;
+        }
+
+        .container {
+          width: fit-content;
+          position: fixed;
+          bottom: 12px;
+          right: 12px;
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 0.75rem;
+          box-shadow:
+            0 25px 50px -12px rgba(0,0,0,.30),
+            0 10px 15px -3px rgba(0,0,0,.20);
+          pointer-events: auto;
+        }
+        @media (min-width: 1024px) {
+          .container { bottom: 20px; left: 20px; }
+        }
+
+        .badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          text-decoration: none;
+          background: #ffffff;
+          color: #111827;
+          font-size: 0.75rem;
+          line-height: 1;
+          font-weight: 500;
+          padding: 0.25rem 0.5rem;
+          border-radius: 9999px;
+          border: 2px solid #d1d5db;
+          box-shadow: 0 1px 3px rgba(0,0,0,.1);
+          transition: filter .3s ease, transform .3s ease;
+          cursor: pointer;
+        }
+        .badge:hover { filter: brightness(1.5); }
+
+        @media (min-width: 1024px) {
+          .badge {
+            background: #0a0a0a;
+            color: #ffffff;
+            font-size: 0.875rem;
+            border-color: #374151;
+          }
+        }
+
+        .badge span { font-weight: 500; padding-left: 5px; }
+
+        .logo-wrap { position: relative; width: 24px; height: 24px; }
+        .logo, .logo-ping {
+          width: 100%; height: 100%;
+          object-fit: contain;
+          display: block;
+          border-radius: 9999px;
+        }
+        .logo-ping {
+          position: absolute; inset: 0;
+          opacity: .8;
+          animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes ping {
+          0%   { transform: scale(1);   opacity: .8; }
+          75%  { transform: scale(2);   opacity: 0;  }
+          100% { transform: scale(2.5); opacity: 0;  }
+        }
+
+        .badge:focus-visible {
+          outline: 2px solid #60a5fa;
+          outline-offset: 2px;
+        }
+      `;
+        const container = document.createElement('div');
+        container.className = 'container';
+        const a = document.createElement('a');
+        a.className = 'badge';
+        a.href = href;
+        a.target = '_blank';
+        a.setAttribute('aria-label', `${label} ${title}`);
+        const span = document.createElement('span');
+        span.textContent = label;
+        const logoWrap = document.createElement('div');
+        logoWrap.className = 'logo-wrap';
+        logoWrap.title = title;
+        const img = document.createElement('img');
+        img.className = 'logo';
+        img.src = imgSrc;
+        img.alt = title;
+        const ping = document.createElement('img');
+        ping.className = 'logo-ping';
+        ping.src = imgSrc;
+        ping.alt = '';
+        ping.setAttribute('aria-hidden', 'true');
+        logoWrap.appendChild(img);
+        logoWrap.appendChild(ping);
+        a.appendChild(span);
+        a.appendChild(logoWrap);
+        container.appendChild(a);
+        shadow.appendChild(style);
+        shadow.appendChild(container);
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        const host = document.getElementById('sponsored-by');
+        createSponsoredByShadow(host, {
+            href: `https://hietek.com?pref=38448ef7-91cf-4e4c-bb4f-4f470f180609`,
+            title: 'HieTek',
+            imgSrc: '/favicon.png',
+            label: 'Được tài trợ bởi'
         });
-    </script>
-</body>
-</html>
+    });
+</script>
+    <script defer="" src="./Anh Ngữ 4.0_ Luyện Thi Tiếng Anh Online Theo LinearThinking_files/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;2a68297a3e48414d970e65a53f5fd95d&quot;,&quot;r&quot;:1,&quot;server_timing&quot;:{&quot;name&quot;:{&quot;cfCacheStatus&quot;:true,&quot;cfEdge&quot;:true,&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfOrigin&quot;:true,&quot;cfSpeedBrain&quot;:true},&quot;location_startswith&quot;:null}}" crossorigin="anonymous"></script>
+
+
+<div id="global-loading-overlay" style="position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: none; align-items: center; justify-content: center; z-index: 9999; color: rgb(255, 255, 255); font-size: 20px; font-family: sans-serif;"><div class="loader">Đang gửi...</div></div><div id="global-toast" style="position: fixed; top: 20px; right: 20px; min-width: 220px; padding: 12px 16px; border-radius: 8px; color: rgb(255, 255, 255); font-size: 14px; font-family: sans-serif; z-index: 10000; opacity: 0; transition: 0.4s; transform: translateY(-100px);"></div></body></html>
